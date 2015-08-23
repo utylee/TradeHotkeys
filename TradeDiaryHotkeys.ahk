@@ -162,7 +162,8 @@ return
 
 LWin & E::
 {
-	Run explorer F:\
+	;Run explorer F:\
+	Run explorer c:\Users\seoru 
 	return
 }
 
@@ -402,6 +403,7 @@ return
 NumpadAdd::Send {NumpadAdd}
 */
 
+
 ;가격데이터 시뮬레이션 일봉
 F12::
 {
@@ -425,7 +427,8 @@ F12::
 	; 추가+
 	MouseMove, -4000, -4000, R
 	Sleep 20
-	MouseMove, 1298 + 1920, 694, 2, R
+	;MouseMove, 1298 + 1920, 694, 2, R
+	MouseMove, 1920 + 50, 680, 2, R
 	Sleep 50
 	Send {LButton}
 	Sleep 50
@@ -433,7 +436,8 @@ F12::
 	; 상태유지
 	MouseMove, -4000, -4000, R
 	Sleep 20
-	MouseMove, 1482 + 1920, 637, 2, R
+	;MouseMove, 1482 + 1920, 637, 2, R
+	MouseMove, 1920 + 240, 625, 2, R
 	Sleep 50
 	Send {LButton}
 	Sleep 50
@@ -441,7 +445,8 @@ F12::
 	; 이틀치 추가
 	MouseMove, -4000, -4000, R
 	Sleep 20
-	MouseMove, 1597, 637, 2, R
+	MouseMove, 1920 + 360, 625, 2, R
+	;MouseMove, 1597, 637, 2, R
 	Sleep 50
 	Send {LButton}
 	Sleep 50
@@ -451,7 +456,8 @@ F12::
 	; 닫기
 	MouseMove, -4000, -4000, R
 	Sleep 20
-	MouseMove, 1684, 637, 2, R
+	;MouseMove, 1684, 637, 2, R
+	MouseMove, 1920 + 450, 625, 2, R
 	Sleep 50
 	Send {LButton}
 	Sleep 50
@@ -459,7 +465,8 @@ F12::
 	;확인(닫기)
 	MouseMove, -4000, -4000, R
 	Sleep 20
-	MouseMove, 1753, 736, 2, R
+	;MouseMove, 1753, 736, 2, R
+	MouseMove, 1920 + 510, 725, 2, R
 	Sleep 50
 	Send {LButton}
 	Sleep 50
