@@ -959,8 +959,10 @@ return
 	Send {LButton}
 	Sleep 1200
 
-	WinWait, 열기
-	IfWinExist, 열기
+	WinWait, blog.upphoto 
+	;WinWait, 열기
+	IfWinExist, blog.upphoto
+	;IfWinExist, 열기
 		WinActivate
 	Sleep 700
 	
@@ -1148,8 +1150,10 @@ return
 	Send {LButton}
 	Sleep 1200
 
-	WinWait, 열기
-	IfWinExist, 열기
+	WinWait, blog.upphoto
+	;WinWait, 열기
+	IfWinExist, blog.upphoto 
+	;IfWinExist, 열기
 		WinActivate
 	Sleep 700
 	
@@ -1271,8 +1275,10 @@ return
 	Send {LButton}
 	Sleep 1200
 
-	WinWait, 열기
-	IfWinExist, 열기
+	WinWait, blog.upphoto
+	;WinWait, 열기
+	IfWinExist, blog.upphoto 
+	;IfWinExist, 열기
 		WinActivate
 	Sleep 700
 	
@@ -1392,8 +1398,11 @@ return
 	Send {LButton}
 	Sleep 1200
 
-	WinWait, 열기
-	IfWinExist, 열기
+	
+	WinWait, blog.upphoto
+	;WinWait, 열기
+	IfWinExist, blog.upphoto
+	;IfWinExist, 열기
 		WinActivate
 	Sleep 700
 	
@@ -1511,8 +1520,10 @@ return
 	Send {LButton}
 	Sleep 1200
 
-	WinWait, 열기
-	IfWinExist, 열기
+	WinWait, blog.upphoto
+	;WinWait, 열기
+	IfWinExist, blog.upphoto
+	;IfWinExist, 열기
 		WinActivate
 	Sleep 700
 	
@@ -1630,8 +1641,10 @@ return
 	Send {LButton}
 	Sleep 1200
 
-	WinWait, 열기
-	IfWinExist, 열기
+	WinWait, blog.upphoto
+	;WinWait, 열기
+	IfWinExist, blog.upphoto
+	;IfWinExist, 열기
 		WinActivate
 	Sleep 1000
 	
@@ -1750,8 +1763,8 @@ return
 	Send {LButton}
 	Sleep 1200
 
-	WinWait, 열기
-	IfWinExist, 열기
+	WinWait, blog.upphoto
+	IfWinExist, blog.upphoto
 		WinActivate
 	Sleep 700
 	
@@ -1873,8 +1886,8 @@ return
 	Send {LButton}
 	Sleep 1200
 
-	WinWait, 열기
-	IfWinExist, 열기
+	WinWait, blog.upphoto
+	IfWinExist, blog.upphoto
 		WinActivate
 	Sleep 700
 	
@@ -1993,8 +2006,8 @@ return
 	Send {LButton}
 	Sleep 1200
 
-	WinWait, 열기
-	IfWinExist, 열기
+	WinWait, blog.upphoto
+	IfWinExist, blog.upphoto
 		WinActivate
 	Sleep 700
 	
@@ -2115,8 +2128,8 @@ return
 	Send {LButton}
 	Sleep 1200
 
-	WinWait, 열기
-	IfWinExist, 열기
+	WinWait, blog.upphoto
+	IfWinExist, blog.upphoto
 		WinActivate
 	Sleep 1000
 	
