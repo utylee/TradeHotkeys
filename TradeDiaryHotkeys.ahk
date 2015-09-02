@@ -768,7 +768,8 @@ return
 	Sleep 200
 	;MouseClick, Left, 1600 + 1920, 1114 
 	;살짝윗쪽으로 변경합니다.
-	MouseClick, Left, 1600 + 1920, 1000 
+	;MouseClick, Left, 1600 + 1920, 1000 
+	MouseClick, Left, 1580 + 1920, 1080 
 
 	return
 }
