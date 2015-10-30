@@ -996,6 +996,7 @@ return
 	Sleep 50
 	
 	;지수분봉에서 십자선 지우기 프로세스
+/*
 	MouseMove, -4000, -4000, 0, R 
 	Sleep 20
 	MouseMove, 521 + 1920 , 1084, 2, R
@@ -1013,6 +1014,7 @@ return
 	Sleep 20
 	MouseMove, 0, -120, 5, R
 	Sleep 20
+*/
 
 	;캡쳐 시작
 	Send {LShift Down}
@@ -1765,7 +1767,9 @@ return
 	Sleep 1200
 
 	WinWait, blog.upphoto
+	;WinWait, 열기 
 	IfWinExist, blog.upphoto
+	;IfWinExist, 열기
 		WinActivate
 	Sleep 700
 	
@@ -1887,7 +1891,9 @@ return
 	Send {LButton}
 	Sleep 1200
 
+	WinWait, 열기
 	WinWait, blog.upphoto
+	;IfWinExist, 열기
 	IfWinExist, blog.upphoto
 		WinActivate
 	Sleep 700
@@ -2007,7 +2013,9 @@ return
 	Send {LButton}
 	Sleep 1200
 
+	WinWait, 열기
 	WinWait, blog.upphoto
+	;IfWinExist, 열기
 	IfWinExist, blog.upphoto
 		WinActivate
 	Sleep 700
@@ -2129,7 +2137,9 @@ return
 	Send {LButton}
 	Sleep 1200
 
+	;WinWait, 열기
 	WinWait, blog.upphoto
+	;IfWinExist, 열기
 	IfWinExist, blog.upphoto
 		WinActivate
 	Sleep 1000
