@@ -1016,6 +1016,24 @@ return
 	Sleep 20
 */
 
+	MouseMove, -4000, -4000, 0, R 
+	Sleep 20
+	MouseMove, 1850 + 1920 , 100, 2, R
+	Sleep 20
+	MouseMove, 40, 0, 5, R
+	Sleep 20
+	MouseMove, 0, -100, 5, R
+	Sleep 20
+
+	MouseMove, -4000, -4000, 0, R 
+	Sleep 20
+	MouseMove, 1850 + 1920, 343, 0, R
+	Sleep 20
+	MouseMove, 220, 0, 2, R
+	Sleep 20
+	MouseMove, 0, -120, 5, R
+	Sleep 20
+
 	;캡쳐 시작
 	Send {LShift Down}
 	Send {PrintScreen Down}
@@ -1024,6 +1042,7 @@ return
 	Send {PrintScreen Up}
 	Sleep 700
 
+	/* 우측상단으로 지수 분봉을 옮겼기에 수정함
 	MouseMove, -4000, -4000, 0, R 
 	Sleep 20
 	MouseMove, 1920 + 80, 984, 2, R
@@ -1032,6 +1051,19 @@ return
 	Send {LButton Down}
 	Sleep 100
 	MouseMove, 1013, 172, 5, R
+	Sleep 100 
+	Send {LButton Up}
+	*/
+
+	MouseMove, -4000, -4000, 0, R 
+	Sleep 20
+	MouseMove, 1920 + 1480, 100, 2, R
+	Sleep 20
+
+
+	Send {LButton Down}
+	Sleep 100
+	MouseMove, 400, 436, 5, R
 	Sleep 100 
 	Send {LButton Up}
 	
