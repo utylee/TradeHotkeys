@@ -526,6 +526,45 @@ F9::
 }
 return
 
+;작은 타원그리기
+F8::
+{
+	IfWinExist, ahk_class _KiWoomClass
+		WinActivate
+	Sleep 100
+	;우클릭
+	Send {RButton}
+	Sleep 500
+	
+	;l 누르기
+	Send {l}
+	Sleep 50
+
+	;up key 세번
+	Send {Up}
+	Sleep 20	
+	Send {Up}
+	Sleep 20	
+	Send {Up}
+	Sleep 20	
+	Send {Enter}
+	Sleep 100
+
+	;조그마하게 원 드래그
+	Send {LButton Down}
+	Sleep 20
+	MouseMove, 12, 12, 5, R
+	Sleep 20
+	Send {LButton Up}
+	Sleep 100
+
+	;우클릭 눌러서 펜 모드 취소
+	Send {RButton}
+	
+	return
+}
+return
+
 ;사각형그리기
 F10::
 {
