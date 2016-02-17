@@ -526,6 +526,28 @@ F9::
 }
 return
 
+
+; 테스트용 임시 단축키
+F7::
+{
+	IfWinExist, ahk_class _KiWoomClass
+		WinActivate
+	Sleep 100
+	MouseClick, Left, 1630 + 1920, 43 
+	Sleep 100
+	MouseClick, Left, 1870 + 1920, 55 
+
+	Sleep 100
+
+	MouseClick, Left, 1525 + 1920, 528
+	Sleep 100
+	MouseClick, Left, 1865 + 1920, 294
+	Sleep 100
+	MouseClick, Left, 607 + 1920, 47
+	Sleep 100
+}
+return
+
 ;작은 타원그리기
 F8::
 {

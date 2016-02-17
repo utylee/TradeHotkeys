@@ -58,6 +58,9 @@ Sleep 200
 MouseClick, Left, 74 + 1920 - 1200, 274 
 Sleep 200
 
+
+/*
+; 밑에 새로 작성하는 바람에 일단 생략
 ;MouseMove, 2043 - 1200, 160 - 80
 ;왼쪽창으로 옮기기 위해 수정
 MouseMove, 833, 83 
@@ -76,12 +79,46 @@ MouseMove, -100, 0, 5, R
 Sleep 50
 Send {LButton Up}
 Sleep 200
+*/
+
+;매매동향 창들 포커싱 클릭
+;MouseClick, Left, 823, 83 
+MouseMove, 823, 83 
+Send {LButton down}
+Sleep 50
+MouseMove, -100, 0, 5, R
+Sleep 50
+Send {LButton up}
+Sleep 200
+
+;MouseClick, Left, 823, 299 
+MouseMove, 823, 299 
+Send {LButton down}
+Sleep 50
+MouseMove, -100, 0, 5, R
+Sleep 50
+Send {LButton up}
+Sleep 200
+
+;선물/코스닥 분봉 5분으로 변경
+Sleep 100
+MouseClick, Left, 1630 + 1920, 43 
+Sleep 100
+MouseClick, Left, 1870 + 1920, 55 
+Sleep 100
+MouseClick, Left, 1525 + 1920, 528
+Sleep 100
+MouseClick, Left, 1865 + 1920, 294
+Sleep 100
+;일봉 메인차트 클릭해서 최상위로 올림
+MouseClick, Left, 607 + 1920, 47
+Sleep 10
 
 ;매매동향 선물 버튼 클릭
-MouseClick, Left, 1838 - 1190, 152 
+MouseClick, Left, 1838 - 1190 - 50, 152 
 Sleep 200
 ;매매동향 코스닥 버튼 클릭
-MouseClick, Left, 1838 - 1190, 340 
+MouseClick, Left, 1838 - 1190 - 50, 340 
 Sleep 200
 ;해외증시차트 한번 찍어줌
 MouseClick, Left, 1571 - 1190, 55 
