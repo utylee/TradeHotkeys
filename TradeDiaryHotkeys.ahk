@@ -528,6 +528,7 @@ return
 
 
 ; 테스트용 임시 단축키
+/*
 F7::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -547,6 +548,7 @@ F7::
 	Sleep 100
 }
 return
+*/
 
 ;작은 타원그리기
 F8::

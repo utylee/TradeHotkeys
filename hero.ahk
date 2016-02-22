@@ -30,6 +30,8 @@ Sleep 30
 ;MouseClick, Left, 2110, 25 
 ;Sleep 100
 ; 티커툴바- 신호대기 클릭
+
+/*
 MouseMove, 2330, 880
 Send {LButton down}
 Send {LButton down}
@@ -44,10 +46,10 @@ Send {LButton up}
 sleep 200
 MouseClick, Left, 2200, 123
 sleep 100
-
 MouseClick, Left, 730, 70
 Sleep 200
 MouseClick, Left, 210, 400
+*/
 
 Sleep 1500
 
@@ -102,13 +104,13 @@ Sleep 200
 
 ;선물/코스닥 분봉 5분으로 변경
 Sleep 100
-MouseClick, Left, 1630 + 1920, 43 
-Sleep 100
-MouseClick, Left, 1870 + 1920, 55 
-Sleep 100
 MouseClick, Left, 1525 + 1920, 528
 Sleep 100
 MouseClick, Left, 1865 + 1920, 294
+Sleep 100
+MouseClick, Left, 1630 + 1920, 43 
+Sleep 100
+MouseClick, Left, 1870 + 1920, 55 
 Sleep 100
 ;일봉 메인차트 클릭해서 최상위로 올림
 MouseClick, Left, 607 + 1920, 47
@@ -126,9 +128,16 @@ Sleep 200
 ;계좌정보 창 한번 찍어줌
 MouseClick, Left, 2400 - 1190, 80 
 Sleep 200
-;선물 창 한번 찍어줌
-MouseClick, Left, 784, 609 
-Sleep 200
+
+;;선물 창 한번 찍어줌
+;MouseClick, Left, 784, 609 
+;Sleep 200
+
+;영웅문4 이용안내창 닫기
+MouseClick, Left, 462, 53
+Sleep 100
+MouseClick, Left, 512, 53
+Sleep 100
 
 IfWinExist, ahk_class _KiWoomClass
 	WinActivate
