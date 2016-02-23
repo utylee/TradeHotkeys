@@ -1290,6 +1290,373 @@ return
 
 return
 
+;추가
+; 15분봉 및 일봉 축소 업로드 시퀀스 세트 (스캘핑 일지 쓰면서 추가함)
+#!F5::
+{
+	;넓은 15분 축소캡쳐/업로드
+	;F11
+	;캡쳐 버튼을 누르고 영역 선택을 한다
+	IfWinExist, ahk_class _KiWoomClass
+		WinActivate
+	Sleep 50
+
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1109, 663, 5, R
+	MouseMove, 775, -80, 2, R
+
+	Send {LShift Down}
+	Send {PrintScreen Down}
+	Sleep 50
+	Send {LShift Up}
+	Send {PrintScreen Up}
+
+	Sleep 700
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1009 + 350, 613, 5, R  ;350 픽셀줄임
+	Sleep 100
+	Send {LButton Down}
+	Sleep 100
+	MouseMove, 895 - 350, 357, 5, R ;350 픽셀줄임
+	Sleep 100
+	Send {LButton Up}
+
+	;Snag It 이 떴을 때 Ctrl S 를 눌러서 저장하고 Ctrl W로 닫는다
+	; 축소와 샤픈을 추가함
+	;IfWinExist, Snagit Editor
+	WinWait, Snagit Editor
+		WinActivate
+	Sleep 500
+
+	;snag it editor 내의 리사이즈 단축키 누름 r
+	Send {r}	
+	Sleep 50
+
+	WinWait, Resize Image
+		WinActivate
+	Sleep 100
+
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+
+	Send {7}{0}
+	Sleep 2000 
+
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Enter}
+	Sleep 200 
+
+	;75%로 샤픈을 때림 단축키 s
+	Send {s}
+	Sleep 50	
+	WinWait, Sharpen 
+		WinActivate
+	Sleep 200
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {7}{5}
+	Sleep 50
+	Send {Enter}
+	Sleep 500 
+
+	Send {LCtrl Down}
+	Send {s Down}
+	Sleep 50
+	Send {LCtrl Up}
+	Send {s Up}
+
+	WinWait, Save As
+	WinMove, Save As,,0, 0
+	IfWinExist, Save As
+		WinActivate
+	Sleep 500
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2332, 357, 0, R
+	Sleep 300
+	Send {LButton Down}
+	Sleep 20
+	MouseMove, -200, 0, 5, R
+	Sleep 100
+	Send {LButton Up}
+	Sleep 100
+
+	Send {1}
+	Sleep 20
+	Send {Enter}
+	Sleep 300 
+	Send {Enter}
+
+	Sleep 1000
+	Send {LCtrl Down}
+	Sleep 20
+	Send {w Down}
+	Sleep 20
+
+	Send {LCtrl Up}
+	Sleep 20
+	Send {w Up}
+	Sleep 2000 
+
+	;파폭으로 전환하여 사진/열기 1.png / 올리기 를 누른다
+	IfWinExist, ahk_class MozillaWindowClass
+		WinActivate
+	Sleep 100
+	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
+	Sleep 100
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2555, 130, 5, R
+	Send {LButton}
+
+	WinWait, 네이버 포토업로더 - Mozilla Firefox
+	IfWinExist, 네이버 포토업로더 - Mozilla Firefox
+		WinActivate
+	Sleep 100
+	WinMove, 네이버 포토업로더 - Mozilla Firefox, 0, 0 
+	Sleep 2000
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2495, 130, 5, R
+	Send {LButton}
+	Sleep 1200
+
+	;WinWait, blog.upphoto
+	WinWait, 열기|blog.upphoto
+	;IfWinExist, blog.upphoto
+	IfWinExist, 열기|blog.upphoto
+		WinActivate
+	Sleep 700
+	
+	Send {1}{.}{p}{n}{g}{Enter}
+	Sleep 800
+
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1957, 17, 5, R
+	Sleep 100
+	Send {LButton}
+	Sleep 500
+
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2707, 690, 5, R
+	Sleep 100
+	Send {LButton}
+	IfWinExist, ahk_class MozillaWindowClass
+		WinActivate
+	Sleep 800
+
+	;옆에 일봉도 올려야 하므로 라인을 넘기지 않는다
+	;Send {Enter}
+
+
+
+
+
+
+
+	;F9 일봉 파트
+
+	;캡쳐 버튼을 누르고 영역 선택을 한다
+	IfWinExist, ahk_class _KiWoomClass
+		WinActivate
+	Sleep 50
+
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2590, 350, 5, R
+	;MouseMove, 779, -320, 2, R
+
+	Send {LShift Down}
+	Send {PrintScreen Down}
+	Sleep 50
+	Send {LShift Up}
+	Send {PrintScreen Up}
+
+	Sleep 700
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2490 + 200, 50, 5, R ; 200픽셀 가로 줄임
+	Sleep 100
+	Send {LButton Down}
+	Sleep 100
+	MouseMove, 899 - 200, 463, 5, R ; 가로 200픽셀 줄임
+	Sleep 100
+	Send {LButton Up}
+
+
+
+	;Snag It 이 떴을 때 Ctrl S 를 눌러서 저장하고 Ctrl W로 닫는다
+	; 축소와 샤픈을 추가함
+	;IfWinExist, Snagit Editor
+	WinWait, Snagit Editor
+		WinActivate
+	Sleep 500
+
+	;snag it editor 내의 리사이즈 단축키 누름 r
+	Send {r}	
+	Sleep 50
+
+	WinWait, Resize Image
+		WinActivate
+	Sleep 100
+
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+
+	Send {7}{0}
+	Sleep 2000 
+
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Enter}
+	Sleep 200 
+
+	;75%로 샤픈을 때림 단축키 s
+	Send {s}
+	Sleep 50	
+	WinWait, Sharpen 
+		WinActivate
+	Sleep 200
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {7}{5}
+	Sleep 50
+	Send {Enter}
+	Sleep 500 
+
+
+	;Snag It 이 떴을 때 Ctrl S 를 눌러서 저장하고 Ctrl W로 닫는다
+	;IfWinExist, Snagit Editor
+	Send {LCtrl Down}
+	Send {s Down}
+	Sleep 50
+	Send {LCtrl Up}
+	Send {s Up}
+
+	WinWait, Save As
+	WinMove, Save As,,0, 0
+	IfWinExist, Save As
+		WinActivate
+	Sleep 500
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2332, 357, 0, R
+	Sleep 300
+	Send {LButton Down}
+	Sleep 20
+	MouseMove, -200, 0, 5, R
+	Sleep 100
+	Send {LButton Up}
+	Sleep 100
+
+	Send {1}
+	Sleep 20
+	Send {Enter}
+	Sleep 300
+	Send {Enter}
+
+	Sleep 500
+	Send {LCtrl Down}
+	Sleep 20
+	Send {w Down}
+	Sleep 20
+
+	Send {LCtrl Up}
+	Sleep 20
+	Send {w Up}
+	Sleep 2000 
+
+	;파폭으로 전환하여 사진/열기 1.png / 올리기 를 누른다
+	IfWinExist, ahk_class MozillaWindowClass
+		WinActivate
+	Sleep 100
+	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
+	Sleep 100
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2555, 130, 5, R
+	Send {LButton}
+
+	WinWait, 네이버 포토업로더 - Mozilla Firefox
+	IfWinExist, 네이버 포토업로더 - Mozilla Firefox
+		WinActivate
+	Sleep 100
+	WinMove, 네이버 포토업로더 - Mozilla Firefox, 0, 0 
+	Sleep 2000
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2495, 130, 5, R
+	Send {LButton}
+	Sleep 1200
+
+	;WinWait, blog.upphoto
+	WinWait, 열기|blog.upphoto
+	;IfWinExist, blog.upphoto 
+	IfWinExist, 열기|blog.upphoto
+		WinActivate
+	Sleep 700
+	
+	Send {1}{.}{p}{n}{g}{Enter}
+	Sleep 800
+
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1957, 17, 5, R
+	Sleep 100
+	Send {LButton}
+	Sleep 500
+
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2707, 690, 5, R
+	Sleep 100
+	Send {LButton}
+	IfWinExist, ahk_class MozillaWindowClass
+		WinActivate
+	Sleep 800
+	Send {Enter}
+
+	Sleep 800
+	
+
+	return
+
+}
 ; 일15분1분 모든 봉 캡쳐 업로드 시퀀스 세트
 #!F8::
 {
