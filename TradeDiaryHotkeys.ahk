@@ -1313,7 +1313,7 @@ return
 
 	Sleep 700
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1009 + 350, 613, 5, R  ;350 픽셀줄임
+	MouseMove, 1009 + 350 - 137, 613, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
