@@ -146,5 +146,21 @@ Sleep 100
 
 MouseClick, Left, 2200, 123
 
+;주식Stop주문 자동주문으로 변경하는 프로세스 추가
+IfWinExist, ahk_class _KiWoomClass
+	WinActivate
+Sleep 100
+MouseClick, Left, 725 + 1920, 1040 
+Sleep 300
+MouseClick, Left, 118 + 1920, 1043 
+Sleep 300
+MouseClick, Left, 27 + 1920, 902 
+Sleep 1000
+Send {Enter}
+Sleep 200
+MouseClick, Left, 430 + 1920, 1000 
+
+
+
 return
 
