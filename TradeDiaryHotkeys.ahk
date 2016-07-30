@@ -2,6 +2,26 @@ SetTitleMatchMode, RegEx
 
 ;SetDefaultMouseSpeed, 0
 
+/*
+; 오버워치 뒤로 돌기 매크로 테스트
+IfWinExist, 오버워치
+{
+	XButton1::
+		
+	;IfWinExist, 오버워치 
+	{
+		WinActivate
+		;MouseMove, -100, 0, , R
+		Loop, 10
+		{
+			DllCall("mouse_event", uint, 1, int, 300, int, 0, uint, 0, int, 0)
+			Sleep 15	
+		}
+	}
+	return
+}
+return
+*/
 
 ;stockstory 크기세팅
 #!Up::
