@@ -4,6 +4,7 @@ SetTitleMatchMode, RegEx
 
 
 ; 오버워치 뒤로 돌기 매크로 테스트
+/*
 XButton1::
 {
 	IfWinExist, 오버워치
@@ -23,6 +24,7 @@ XButton1::
 }
 
 return
+*/
 
 ;stockstory 크기세팅
 #!Up::
@@ -652,7 +654,7 @@ return
 
 ;수평선그리기
 F5::
-XButton1::
+XButton2:::
 {
 
 	IfWinExist, 오버워치
@@ -706,7 +708,7 @@ return
 
 ; 직선추세선
 F6::
-XButton2::
+XButton1::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
