@@ -654,7 +654,7 @@ return
 
 ;수평선그리기
 F5::
-XButton2:::
+XButton2::
 {
 
 	IfWinExist, 오버워치
@@ -712,20 +712,20 @@ XButton1::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
-	Sleep 100
+	Sleep 80
 	;우클릭
 	Send {RButton}
-	Sleep 500
+	Sleep 50
 	
 	;l 누르기
 	Send {l}
-	Sleep 50
+	Sleep 30
 
 	;up key 세번
 	Send {Down}
 	Sleep 20	
 	Send {Enter}
-	Sleep 100
+	Sleep 30
 
 	;살짝 커서 흔들어줌
 	MouseMove, 5, 5, 2, R
