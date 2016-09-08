@@ -537,7 +537,8 @@ F9::
 	;조그마하게 원 드래그
 	Send {LButton Down}
 	Sleep 20
-	MouseMove, 35, 35, 5, R
+	;MouseMove, 35, 35, 5, R
+	MouseMove, 18, 18, 5, R
 	Sleep 20
 	Send {LButton Up}
 	Sleep 100
@@ -640,7 +641,8 @@ F10::
 	;조그마하게 사각형 드래그
 	Send {LButton Down}
 	Sleep 20
-	MouseMove, 50, 35, 5, R
+	;MouseMove, 50, 35, 5, R
+	MouseMove, 27, 12, 5, R
 	Sleep 20
 	Send {LButton Up}
 	Sleep 100
