@@ -898,6 +898,59 @@ return
 	return
 }
 
+; 그냥 1.png 업로드 
+#!F1::
+{
+
+	;파폭으로 전환하여 사진/열기 1.png / 올리기 를 누른다
+	IfWinExist, ahk_class MozillaWindowClass
+		WinActivate
+	Sleep 100
+	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
+	Sleep 100
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2555, 130, 5, R
+	Send {LButton}
+
+	WinWait, 네이버 포토업로더 - Mozilla Firefox
+	IfWinExist, 네이버 포토업로더 - Mozilla Firefox
+		WinActivate
+	Sleep 100
+	WinMove, 네이버 포토업로더 - Mozilla Firefox, 0, 0 
+	Sleep 2000
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2495, 130, 5, R
+	Send {LButton}
+	Sleep 1200
+
+	;WinWait, blog.upphoto 
+	WinWait, 열기|blog.upphoto
+	;IfWinExist, blog.upphoto
+	IfWinExist, 열기|blog.upphoto
+		WinActivate
+	Sleep 700
+	
+	Send {1}{.}{p}{n}{g}{Enter}
+	Sleep 800
+
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1957, 17, 5, R
+	Sleep 100
+	Send {LButton}
+	Sleep 500
+
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2707, 690, 5, R
+	Sleep 100
+	Send {LButton}
+	IfWinExist, ahk_class MozillaWindowClass
+		WinActivate
+	Sleep 800
+	Send {Enter}
+
+    return
+}
+
 ; 지수 캡쳐 및 업로드 (축소 70%)
 #!F4::
 {
@@ -1488,7 +1541,8 @@ return
 
 	Sleep 700
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1009 + 350 - 137, 613, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동
+	;MouseMove, 1009 + 350 - 137, 613, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동
+	MouseMove, 1009 + 350 - 137, 516, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동 + 호가창녹화버전으로 인해 위로 좀 올림
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100

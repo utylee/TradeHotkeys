@@ -83,6 +83,8 @@ Send {LButton Up}
 Sleep 200
 */
 
+
+/* 일단 매매동향이 작아져서 잘 안보여서 임시로 프로세스 빼놓겠음
 ;매매동향 창들 포커싱 클릭
 ;MouseClick, Left, 823, 83 
 MouseMove, 823, 83 
@@ -122,6 +124,8 @@ Sleep 200
 ;매매동향 코스닥 버튼 클릭
 MouseClick, Left, 1838 - 1190 - 50, 340 
 Sleep 200
+*/
+
 ;해외증시차트 한번 찍어줌
 MouseClick, Left, 1571 - 1190, 55 
 Sleep 200
@@ -133,10 +137,15 @@ Sleep 200
 ;MouseClick, Left, 784, 609 
 ;Sleep 200
 
+
 ;영웅문4 이용안내창 닫기
 MouseClick, Left, 462, 53
 Sleep 100
 MouseClick, Left, 512, 53
+Sleep 100
+
+;현재가창2 차트탭 찍어주기
+MouseClick, Left, 1920 - 1092, 232
 Sleep 100
 
 IfWinExist, ahk_class _KiWoomClass
