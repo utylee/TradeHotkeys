@@ -753,28 +753,35 @@ NumpadAdd & Numpad7::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
-	Sleep 100
+	;Sleep 100
+	Sleep 30
 	;우클릭
 	Send {RButton}
-	Sleep 500
+	;Sleep 500
+	Sleep 20
 	
 	;l 누르기
 	Send {l}
-	Sleep 50
+	;Sleep 50
+	Sleep 8 
 
 	;up key 세번
 	Send {Up}
-	Sleep 20	
+	;Sleep 20	
+	Sleep 8	
 	Send {Up}
-	Sleep 20	
+	;Sleep 20	
+	Sleep 8	
 	Send {Enter}
-	Sleep 100
+	;Sleep 100
+	Sleep 8 
 
 	;조그마하게 원 드래그
 	Send {LButton}
+    return
 	
 }
-#IfWinActive
+;#IfWinActive
 
 ;신호검색된 종목 클릭
 #!n::
