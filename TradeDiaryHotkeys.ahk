@@ -781,7 +781,7 @@ NumpadAdd & Numpad7::
     return
 	
 }
-;#IfWinActive
+#IfWinActive
 
 ;신호검색된 종목 클릭
 #!n::
