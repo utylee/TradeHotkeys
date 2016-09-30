@@ -659,6 +659,7 @@ F5::
 XButton2::
 {
 
+    /*
 	IfWinExist, 오버워치
 	{
 
@@ -673,25 +674,26 @@ XButton2::
 		return
 	
 	}
+    */
 
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
-	Sleep 100
+	Sleep 50
 	;우클릭
 	Send {RButton}
-	Sleep 500
+	Sleep 50 
 	
 	;l 누르기
 	Send {l}
-	Sleep 50
+	Sleep 10
 
 	;up key 세번
 	Send {Down}
-	Sleep 20	
+	Sleep 10	
 	Send {Down}
-	Sleep 20	
+	Sleep 10	
 	Send {Enter}
-	Sleep 100
+	Sleep 20
 
 	;조그마하게 원 드래그
 	; 살짝 마우스 흔들어줌. 커서가 활성화안되서리..
@@ -699,7 +701,7 @@ XButton2::
 	MouseMove, 5, 5, 2, R
 
 	Send {LButton}
-	Sleep 100
+	Sleep 20
 
 	;우클릭 눌러서 펜 모드 취소
 	Send {RButton}

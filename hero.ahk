@@ -55,33 +55,51 @@ Sleep 1500
 
 ;매매동향 정상화
 ;왼쪽창으로 옮기기 위해 수정
-MouseClick, Left, 74 + 1920 - 1200, 58 
+;MouseClick, Left, 74 + 1920 - 1200, 58 
+MouseClick, Left, 1920 - 1200, 58 
 Sleep 200
-MouseClick, Left, 74 + 1920 - 1200, 274 
+;MouseClick, Left, 74 + 1920 - 1200, 274 
+MouseClick, Left, 1920 - 1200, 315 
 Sleep 200
 
 
-/*
 ; 밑에 새로 작성하는 바람에 일단 생략
 ;MouseMove, 2043 - 1200, 160 - 80
 ;왼쪽창으로 옮기기 위해 수정
-MouseMove, 833, 83 
+;MouseMove, 833, 83 
+MouseMove, 764, 87 
 Send {LButton Down}
-Sleep 50
+;Sleep 50
+Sleep 10
 MouseMove, -100, 0, 5, R
-Sleep 50
+;Sleep 50
+Sleep 10
 Send {LButton Up}
-Sleep 200
+;Sleep 200
+Sleep 100
 ;MouseMove, 2043 - 1200, 360 - 65
 ;왼쪽창으로 옮기기 위해 수정
-MouseMove, 835, 296 
+;MouseMove, 835, 296 
+MouseMove, 763, 293 
 Send {LButton Down}
 Sleep 50
 MouseMove, -100, 0, 5, R
 Sleep 50
 Send {LButton Up}
-Sleep 200
-*/
+;Sleep 200
+Sleep 100
+
+;매매동향 선물 버튼 클릭
+;MouseClick, Left, 1838 - 1190 - 50, 152 
+MouseClick, Left, 538, 154 
+
+;Sleep 100
+Sleep 100
+;매매동향 코스닥 버튼 클릭
+;MouseClick, Left, 1838 - 1190 - 50, 340 
+MouseClick, Left, 538, 345 
+;Sleep 200
+Sleep 100
 
 
 /* 일단 매매동향이 작아져서 잘 안보여서 임시로 프로세스 빼놓겠음
@@ -129,9 +147,12 @@ Sleep 200
 ;해외증시차트 한번 찍어줌
 MouseClick, Left, 1571 - 1190, 55 
 Sleep 200
+
+/*-160921-잔고창 하단으로의 위치 변경으로 인해 일단 제거
 ;계좌정보 창 한번 찍어줌
 MouseClick, Left, 2400 - 1190, 80 
 Sleep 200
+*/
 
 ;;선물 창 한번 찍어줌
 ;MouseClick, Left, 784, 609 
@@ -144,9 +165,11 @@ Sleep 100
 MouseClick, Left, 512, 53
 Sleep 100
 
+/* 일단 변경되어 제거함
 ;현재가창2 차트탭 찍어주기
 MouseClick, Left, 1920 - 1092, 232
 Sleep 100
+*/
 
 IfWinExist, ahk_class _KiWoomClass
 	WinActivate
