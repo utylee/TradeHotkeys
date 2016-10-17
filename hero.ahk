@@ -193,6 +193,33 @@ Sleep 200
 MouseClick, Left, 430 + 1920, 1000 
 
 
+; 161017 하락장세에서 자꾸 수익실현을 못하고 고꾸라짐 방지를 위해 스탑주문을 자동실행하도록
+
+; Ctrl W 누름
+Send {LCtrl Down}
+Sleep 20
+Send {w Down}
+
+Send {LCtrl Up}
+Sleep 20
+Send {w up}
+Sleep 2300
+
+
+;잔고편입 스탑로스 탭 누름
+MouseClick, Left, 460, 85
+Sleep 100
+
+;1,2,3 조건 순차적으로 클릭
+MouseClick, Left, 68, 560
+Sleep 100
+MouseClick, Left, 68, 580
+Sleep 100
+MouseClick, Left, 68, 600
+
+; 잠시후 스탑로스 설정 창 닫기
+Sleep 500
+MouseClick, Left, 937, 51
 
 return
 
