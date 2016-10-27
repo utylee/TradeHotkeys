@@ -1037,7 +1037,9 @@ return
 
 	Send {LButton Down}
 	Sleep 100
-	MouseMove, 779, 764, 5, R
+    ;ÀÏºÀ Ä¸ÃÄ °¡·ÎÆø ¼öÁ¤
+	;MouseMove, 779, 764, 5, R
+	MouseMove, 709, 764, 5, R
 	Sleep 100 
 	Send {LButton Up}
 	
