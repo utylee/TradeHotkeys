@@ -26,6 +26,7 @@ XButton1::
 return
 */
 
+
 ;stockstory 크기세팅
 #!Up::
 {
@@ -426,8 +427,82 @@ return
 	return
 }
 
+
+
+
+
+
+
+
+
+
+
+;영웅문이 틀어져있을 경우
 #IfWinActive ahk_class _KiWoomClass
 
+
+F1::
+{
+	IfWinExist, ahk_class _KiWoomClass
+		WinActivate
+        ;MsgBox, "헤헤헤" 
+        ;MouseMove, -5000, -5000, R
+        ;MouseMove, 1920 + 1044, 606, R
+        MouseClick, Right, 1920 + 1044, 606
+        Sleep 10
+        Send {s}
+        Sleep 10
+        Send {s}
+        Sleep 10
+        Send {Enter}
+        Sleep 30
+
+        ;추가 + 버튼 클릭
+        MouseClick, Left, 1920 + 58, 683
+        Sleep 100
+
+        
+        ; 상태유지 버튼 누르고
+        MouseMove, 55, 116, R
+        Send {LButton}
+        Sleep 30
+
+        
+        ; 두개 캔들 추가 
+        MouseMove, 178 , 116, R
+        Send {LButton}
+        Sleep 10
+        Send {LButton}
+        Sleep 10
+        
+        MouseMove, 178 + 88, 116, R
+        Sleep 10
+        Send {LButton}
+        Sleep 90
+        
+        
+        ;확인 버튼
+        MouseMove, 514, 319, R
+        Send {LButton}
+        */
+        
+        /* 
+        MouseClick, Left, 1920 + 354, 627
+        Sleep 20
+        
+        ;MouseClick, Left, 1920 + 450, 630 
+        ;Sleep 20
+        MouseClick, Left, 1920 + 516, 726
+        */
+
+        /*
+        Send {LButton Down}
+        Sleep 30
+        Send {LButton Up}
+        */
+        return
+}
+return
 
 ;Numpad Add 기능 살려두기
 /*
@@ -504,7 +579,6 @@ F12::
 
 	return
 }
-return
 
 
 ;타원그리기
@@ -548,7 +622,6 @@ F9::
 	
 	return
 }
-return
 
 
 ; test테스트용 임시 단축키
@@ -591,9 +664,9 @@ F7::
 	Sleep 200
 	MouseClick, Left, 430 + 1920, 1000 
     */
+    return
 
 }
-return
 
 
 ;작은 타원그리기
@@ -633,7 +706,6 @@ F8::
 	
 	return
 }
-return
 
 ;사각형그리기
 F10::
@@ -675,7 +747,6 @@ F10::
 	
 	return
 }
-return
 
 ;수평선그리기
 F5::
@@ -731,7 +802,6 @@ XButton2::
 	
 	return
 }
-return
 
 ; 직선추세선
 F6::
@@ -915,7 +985,8 @@ return
 	;MouseClick, Left, 1600 + 1920, 1114 
 	;살짝윗쪽으로 변경합니다.
 	;MouseClick, Left, 1600 + 1920, 1000 
-	MouseClick, Left, 1580 + 1920, 1080 
+	;MouseClick, Left, 1580 + 1920, 1080 
+	MouseClick, Left, 1580 + 1920, 1100 
 
 	return
 }
@@ -1576,7 +1647,8 @@ return
 	Sleep 700
 	MouseMove, -4000, -4000, 0, R
 	;MouseMove, 1009 + 350 - 137, 613, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동
-	MouseMove, 1009 + 350 - 137, 516, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동 + 호가창녹화버전으로 인해 위로 좀 올림
+	;MouseMove, 1009 + 350 - 137, 516, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동 + 호가창녹화버전으로 인해 위로 좀 올림
+	MouseMove, 1920 + 1340 , 580, 5, R  ;호가거래 세팅으로서 우측 모니터로 옮김
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
@@ -1942,7 +2014,8 @@ return
 
 	Sleep 700
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1009 + 350 - 137, 613, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동
+	;MouseMove, 1009 + 350 - 137, 613, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동
+	MouseMove, 1920 + 1340 , 580, 5, R  ;호가거래 세팅으로서 우측 모니터로 옮김
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
@@ -3043,7 +3116,8 @@ return
 
 	Sleep 700
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1009, 613, 5, R
+	;MouseMove, 1009, 613, 5, R
+	MouseMove, 1920 + 1340 , 580, 5, R  ;호가거래 세팅으로서 우측 모니터로 옮김
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
