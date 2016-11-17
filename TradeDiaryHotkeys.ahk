@@ -448,18 +448,21 @@ F1::
         ;MsgBox, "헤헤헤" 
         ;MouseMove, -5000, -5000, R
         ;MouseMove, 1920 + 1044, 606, R
-        MouseClick, Right, 1920 + 1044, 606
+        MouseClick, Right, 1920 + 1044 + 20, 606
         Sleep 10
         Send {s}
         Sleep 10
         Send {s}
         Sleep 10
         Send {Enter}
-        Sleep 30
+        ;오류가 종종 생겨서 시뮬레이션 설정 창 뜰 때까지 충분히 기다려줌
+        Sleep 300
 
         ;추가 + 버튼 클릭
-        MouseClick, Left, 1920 + 58, 683
-        Sleep 100
+        ;MouseClick, Left, 1920 + 58, 683
+        MouseMove, 57, 273, R
+        Send {LButton}
+        Sleep 90
 
         
         ; 상태유지 버튼 누르고
@@ -484,6 +487,7 @@ F1::
         ;확인 버튼
         MouseMove, 514, 319, R
         Send {LButton}
+        Sleep 20
         */
         
         /* 
