@@ -440,8 +440,73 @@ return
 ;영웅문이 틀어져있을 경우
 #IfWinActive ahk_class _KiWoomClass
 
-
+;F1~F4까지 1,2,3,5분봉 클릭 등을 할당
 F1::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        MouseClick, Left, 1920 + 453, 563
+    return
+}
+
+F2::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        MouseClick, Left, 1920 + 453 + 18, 563
+    return
+}
+
+F3::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        MouseClick, Left, 1920 + 453 + 18 +18, 563
+    return
+}
+
+F4::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        MouseClick, Left, 1920 + 453 + 18 + 18 + 18, 563
+    return
+}
+
+F5::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        MouseClick, Left, 1920 + 453 + 18 + 18 + 18 + 18, 563
+    return
+}
+
+
+F6::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        MouseClick, Left, 1920 + 453 + 18 + 18 + 18 + 18 + 18, 563
+    return
+}
+
+F8::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        MouseClick, Left, 1215, 206 
+    return
+}
+
+F7::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        MouseClick, Left, 1920 + 1568, 1094
+    return
+}
+
+F12::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
@@ -515,6 +580,8 @@ NumpadAdd::Send {NumpadAdd}
 
 
 ;가격데이터 시뮬레이션 일봉
+;일단 일봉 시뮬레이션은 제거, F1에 할당한 분봉 시뮬레이션에 할당
+/*
 F12::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -584,6 +651,7 @@ F12::
 	return
 }
 
+*/
 
 ;타원그리기
 /*
@@ -629,7 +697,7 @@ F9::
 
 
 ; test테스트용 임시 단축키
-
+/*
 F7::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -655,25 +723,14 @@ F7::
 
     Sleep 500
     MouseClick, Left, 937, 51
-    /*
-	Sleep 100
-	MouseClick, Left, 725 + 1920, 1040 
-	Sleep 300
-	MouseClick, Left, 118 + 1920, 1043 
-	Sleep 300
-	MouseClick, Left, 27 + 1920, 902 
-	Sleep 1000
-	Send {Enter}
-
-	Sleep 200
-	MouseClick, Left, 430 + 1920, 1000 
-    */
     return
 
 }
 
+*/
 
 ;작은 타원그리기
+/*
 F8::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -710,6 +767,7 @@ F8::
 	
 	return
 }
+*/
 
 ;사각형그리기
 F10::
@@ -753,8 +811,11 @@ F10::
 }
 
 ;수평선그리기
+/* 일단F5를 분봉 캔들 선택으로 바꿈
 F5::
+*/
 XButton2::
+
 {
 
     /*
@@ -808,7 +869,9 @@ XButton2::
 }
 
 ; 직선추세선
+/*
 F6::
+*/
 XButton1::
 {
 	IfWinExist, ahk_class _KiWoomClass
