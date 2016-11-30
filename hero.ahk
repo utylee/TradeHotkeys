@@ -213,9 +213,11 @@ Sleep 100
 ;1,2,3 조건 순차적으로 클릭
 MouseClick, Left, 68, 560
 Sleep 100
+/* 실현 스탑주문은 일단 다시 빼겠다
 MouseClick, Left, 68, 580
 Sleep 100
 MouseClick, Left, 68, 600
+*/
 
 ; 잠시후 스탑로스 설정 창 닫기
 Sleep 500
