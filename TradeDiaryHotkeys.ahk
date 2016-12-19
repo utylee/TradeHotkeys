@@ -1278,6 +1278,10 @@ return
 	Send {w Up}
 	Sleep 2000 
 
+
+
+
+
 	;파폭으로 전환하여 사진/열기 1.png / 올리기 를 누른다
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
@@ -1288,6 +1292,9 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
+
+    ;<--새탭에 띄우기로 바뀌면서 임시로 변경
+    /*
 	WinWait, 네이버 포토업로더 - Mozilla Firefox
 	IfWinExist, 네이버 포토업로더 - Mozilla Firefox
 		WinActivate
@@ -1298,6 +1305,14 @@ return
 	MouseMove, 2495, 130, 5, R
 	Send {LButton}
 	Sleep 1200
+    */
+    ; 새탭으로 열린 올리기 버튼 누르기
+    Sleep 2400 
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
 
 	;WinWait, blog.upphoto 
 	WinWait, 열기|blog.upphoto
@@ -1309,6 +1324,10 @@ return
 	Send {1}{.}{p}{n}{g}{Enter}
 	Sleep 800
 
+
+
+    ;<-- 새탭으로 열기로 변경되면서 임시 교체
+    /*
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1957, 17, 5, R
 	Sleep 100
@@ -1319,6 +1338,14 @@ return
 	MouseMove, 2707, 690, 5, R
 	Sleep 100
 	Send {LButton}
+    */
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1190, 732, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+
+
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 800
@@ -1326,6 +1353,8 @@ return
 
 
 	Sleep 800
+
+
 
 
 	;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1513,6 +1542,12 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
+
+
+
+
+    ;<--새탭에 띄우기로 바뀌면서 임시로 변경
+    /*
 	WinWait, 네이버 포토업로더 - Mozilla Firefox
 	IfWinExist, 네이버 포토업로더 - Mozilla Firefox
 		WinActivate
@@ -1523,6 +1558,15 @@ return
 	MouseMove, 2495, 130, 5, R
 	Send {LButton}
 	Sleep 1200
+    */
+    ; 새탭으로 열린 올리기 버튼 누르기
+    Sleep 2400 
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+
 
 	;WinWait, blog.upphoto
 	WinWait, 열기|blog.upphoto
@@ -1534,6 +1578,8 @@ return
 	Send {1}{.}{p}{n}{g}{Enter}
 	Sleep 800
 
+    ;<-- 새탭으로 열기로 변경되면서 임시 교체
+    /*
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1957, 17, 5, R
 	Sleep 100
@@ -1544,6 +1590,14 @@ return
 	MouseMove, 2707, 690, 5, R
 	Sleep 100
 	Send {LButton}
+    */
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1190, 732, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+
+
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 800
@@ -1551,6 +1605,8 @@ return
 
 
 	return
+
+
 }
 
 return
@@ -1645,6 +1701,9 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
+
+    ;<--새탭에 띄우기로 바뀌면서 임시로 변경
+    /*
 	WinWait, 네이버 포토업로더 - Mozilla Firefox
 	IfWinExist, 네이버 포토업로더 - Mozilla Firefox
 		WinActivate
@@ -1655,6 +1714,14 @@ return
 	MouseMove, 2495, 130, 5, R
 	Send {LButton}
 	Sleep 1200
+    */
+    ; 새탭으로 열린 올리기 버튼 누르기
+    Sleep 2400 
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
 
 	WinWait, 열기|blog.upphoto
 	;WinWait, blog.upphoto
@@ -1666,6 +1733,8 @@ return
 	Send {1}{.}{p}{n}{g}{Enter}
 	Sleep 800
 
+    ;<-- 새탭으로 열기로 변경되면서 임시 교체
+    /*
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1957, 17, 5, R
 	Sleep 100
@@ -1676,6 +1745,15 @@ return
 	MouseMove, 2707, 690, 5, R
 	Sleep 100
 	Send {LButton}
+    */
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1190, 732, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+
+
+
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 800
@@ -1832,6 +1910,11 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
+
+
+
+    ;<--새탭에 띄우기로 바뀌면서 임시로 변경
+    /*
 	WinWait, 네이버 포토업로더 - Mozilla Firefox
 	IfWinExist, 네이버 포토업로더 - Mozilla Firefox
 		WinActivate
@@ -1842,6 +1925,15 @@ return
 	MouseMove, 2495, 130, 5, R
 	Send {LButton}
 	Sleep 1200
+    */
+    ; 새탭으로 열린 올리기 버튼 누르기
+    Sleep 2400 
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+
 
 	;WinWait, blog.upphoto
 	WinWait, 열기|blog.upphoto
@@ -1853,6 +1945,8 @@ return
 	Send {1}{.}{p}{n}{g}{Enter}
 	Sleep 800
 
+    ;<-- 새탭으로 열기로 변경되면서 임시 교체
+    /*
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1957, 17, 5, R
 	Sleep 100
@@ -1863,6 +1957,13 @@ return
 	MouseMove, 2707, 690, 5, R
 	Sleep 100
 	Send {LButton}
+    */
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1190, 732, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 800
@@ -2017,6 +2118,12 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
+
+
+
+
+    ;<--새탭에 띄우기로 바뀌면서 임시로 변경
+    /*
 	WinWait, 네이버 포토업로더 - Mozilla Firefox
 	IfWinExist, 네이버 포토업로더 - Mozilla Firefox
 		WinActivate
@@ -2027,6 +2134,14 @@ return
 	MouseMove, 2495, 130, 5, R
 	Send {LButton}
 	Sleep 1200
+    */
+    ; 새탭으로 열린 올리기 버튼 누르기
+    Sleep 2400 
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
 
 	;WinWait, blog.upphoto
 	WinWait, 열기|blog.upphoto
@@ -2038,6 +2153,8 @@ return
 	Send {1}{.}{p}{n}{g}{Enter}
 	Sleep 800
 
+    ;<-- 새탭으로 열기로 변경되면서 임시 교체
+    /*
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1957, 17, 5, R
 	Sleep 100
@@ -2048,6 +2165,13 @@ return
 	MouseMove, 2707, 690, 5, R
 	Sleep 100
 	Send {LButton}
+    */
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1190, 732, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 800
@@ -2056,6 +2180,7 @@ return
 	Sleep 800
 
 	return
+
 }
 	
 ;추가
@@ -3369,6 +3494,10 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
+
+
+    ;<--새탭에 띄우기로 바뀌면서 임시로 변경
+    /*
 	WinWait, 네이버 포토업로더 - Mozilla Firefox
 	IfWinExist, 네이버 포토업로더 - Mozilla Firefox
 		WinActivate
@@ -3379,6 +3508,16 @@ return
 	MouseMove, 2495, 130, 5, R
 	Send {LButton}
 	Sleep 1200
+    */
+    ; 새탭으로 열린 올리기 버튼 누르기
+    Sleep 2400 
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+
+
 
 	WinWait, 열기|blog.upphoto
 	;WinWait, blog.upphoto
@@ -3390,6 +3529,11 @@ return
 	Send {1}{.}{p}{n}{g}{Enter}
 	Sleep 800
 
+
+
+
+    ;<-- 새탭으로 열기로 변경되면서 임시 교체
+    /*
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1957, 17, 5, R
 	Sleep 100
@@ -3400,6 +3544,17 @@ return
 	MouseMove, 2707, 690, 5, R
 	Sleep 100
 	Send {LButton}
+    */
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1190, 732, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+
+
+
+
+
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 800
