@@ -445,15 +445,31 @@ F1::
 {
     IfWinExist, ahk_class _KiWoomClass
         WinActivate
+        /* 170104-분봉클릭에서 각 호가창 드래그로 변경
         MouseClick, Left, 1920 + 453, 563
-    return
+        */
+	    MouseMove, 508, 484
+	    Send {LButton Down}
+	    Sleep 20
+	    MouseMove, 1585, -180, 2, R
+	    Send {LButton Up}
+        ;-->
+        return
 }
 
 F2::
 {
     IfWinExist, ahk_class _KiWoomClass
         WinActivate
+        /* 170104-분봉클릭에서 각 호가창 드래그로 변경
         MouseClick, Left, 1920 + 453 + 18, 563
+        */
+	    MouseMove, 817, 484
+	    Send {LButton Down}
+	    Sleep 20
+	    MouseMove, 1275, -180, 2, R
+	    Send {LButton Up}
+        ;-->
     return
 }
 
@@ -461,7 +477,15 @@ F3::
 {
     IfWinExist, ahk_class _KiWoomClass
         WinActivate
+        /* 170104-분봉클릭에서 각 호가창 드래그로 변경
         MouseClick, Left, 1920 + 453 + 18 +18, 563
+        */
+	    MouseMove, 1135, 484
+	    Send {LButton Down}
+	    Sleep 20
+	    MouseMove,  957, -180, 2, R
+	    Send {LButton Up}
+        ;-->
     return
 }
 
@@ -469,7 +493,15 @@ F4::
 {
     IfWinExist, ahk_class _KiWoomClass
         WinActivate
+        /* 170104-분봉클릭에서 각 호가창 드래그로 변경
         MouseClick, Left, 1920 + 453 + 18 + 18 + 18, 563
+        */
+	    MouseMove, 1440, 484
+	    Send {LButton Down}
+	    Sleep 20
+	    MouseMove,  657, -180, 2, R
+	    Send {LButton Up}
+        ;-->
     return
 }
 
@@ -477,7 +509,15 @@ F5::
 {
     IfWinExist, ahk_class _KiWoomClass
         WinActivate
+        /* 170104-분봉클릭에서 각 호가창 드래그로 변경
         MouseClick, Left, 1920 + 453 + 18 + 18 + 18 + 18, 563
+        */
+	    MouseMove, 775, 53
+	    Send {LButton Down}
+	    Sleep 20
+	    MouseMove,  1260, 265, 2, R
+	    Send {LButton Up}
+        ;-->
     return
 }
 
@@ -1043,6 +1083,22 @@ return
 	return
 }
 
+;조건검색식 중 하단쪽 클릭도 추가
+#!r::
+{
+	IfWinExist, ahk_class _KiWoomClass
+		WinActivate
+
+	Sleep 200
+	;MouseClick, Left, 1600 + 1920, 1114 
+	;살짝윗쪽으로 변경합니다.
+	;MouseClick, Left, 1600 + 1920, 1000 
+	;MouseClick, Left, 1580 + 1920, 1080 
+	MouseClick, Left, 1580 + 1920, 1100 + 45
+
+	return
+}
+
 #!q::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -1053,7 +1109,7 @@ return
 	;살짝윗쪽으로 변경합니다.
 	;MouseClick, Left, 1600 + 1920, 1000 
 	;MouseClick, Left, 1580 + 1920, 1080 
-	MouseClick, Left, 1580 + 1920, 1100 
+	MouseClick, Left, 1580 + 1920, 1100 - 18 
 
 	return
 }
