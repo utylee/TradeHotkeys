@@ -452,7 +452,7 @@ F1::
 	    Send {LButton Down}
 	    Sleep 20
 	    ;MouseMove, 1585, -180, 2, R
-	    MouseMove, 1910, 35, 2, R
+	    MouseMove, 1910, 35 - 70, 2, R
 	    Send {LButton Up}
         ;-->
         return
@@ -468,7 +468,7 @@ F2::
 	    MouseMove, 817, 484
 	    Send {LButton Down}
 	    Sleep 20
-	    MouseMove, 1275 + 335, 35, 2, R
+	    MouseMove, 1275 + 335, 35 - 70, 2, R
 	    Send {LButton Up}
         ;-->
     return
@@ -484,7 +484,7 @@ F3::
 	    MouseMove, 1135, 484
 	    Send {LButton Down}
 	    Sleep 20
-	    MouseMove,  957+ 335, 35, 2, R
+	    MouseMove,  957+ 335, 35 - 70, 2, R
 	    Send {LButton Up}
         ;-->
     return
@@ -500,7 +500,7 @@ F4::
 	    MouseMove, 1440, 484
 	    Send {LButton Down}
 	    Sleep 20
-	    MouseMove,  657+ 335, 35, 2, R
+	    MouseMove,  657+ 335, 35 - 70, 2, R
 	    Send {LButton Up}
         ;-->
     return
@@ -516,7 +516,7 @@ F5::
 	    MouseMove, 775, 53
 	    Send {LButton Down}
 	    Sleep 20
-	    MouseMove,  1260+ 335, 470, 2, R
+	    MouseMove,  1260+ 335, 470 - 70, 2, R
 	    Send {LButton Up}
         ;-->
     return
