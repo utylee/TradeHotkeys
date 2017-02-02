@@ -53,6 +53,8 @@ MouseClick, Left, 210, 400
 
 Sleep 1500
 
+
+/* 호가매매로 가상화면3에서 주로 연습하기로 해서 임시로 제거
 ;매매동향 정상화
 ;왼쪽창으로 옮기기 위해 수정
 ;MouseClick, Left, 74 + 1920 - 1200, 58 
@@ -100,7 +102,7 @@ Sleep 100
 MouseClick, Left, 538, 345 
 ;Sleep 200
 Sleep 100
-
+*/
 
 /* 일단 매매동향이 작아져서 잘 안보여서 임시로 프로세스 빼놓겠음
 ;매매동향 창들 포커싱 클릭
@@ -178,6 +180,8 @@ Sleep 100
 
 MouseClick, Left, 2200, 123
 
+
+/* stop주문 창 호가주문 위주로 가상화면3이라 제거 
 ;주식Stop주문 자동주문으로 변경하는 프로세스 추가
 IfWinExist, ahk_class _KiWoomClass
 	WinActivate
@@ -191,6 +195,7 @@ Sleep 1000
 Send {Enter}
 Sleep 200
 MouseClick, Left, 430 + 1920, 1000 
+*/
 
 
 ; 161017 하락장세에서 자꾸 수익실현을 못하고 고꾸라짐 방지를 위해 스탑주문을 자동실행하도록

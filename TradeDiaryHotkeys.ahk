@@ -440,14 +440,161 @@ return
 ;영웅문이 틀어져있을 경우
 #IfWinActive ahk_class _KiWoomClass
 
+; [호가창만으로 거래] F1 키 등을 분봉 클릭에서 현재 커서의 종목을 각 호가창으로의 할당 드래그로 변경
+F1::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37, 60
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F2::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 320, 60
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F3::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 632, 60
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F4::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 949, 60
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F5::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 1262, 60
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F6::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 1577, 60
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F7::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37, 495
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F8::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 320, 495
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F9::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 632, 495
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F10::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 949, 495
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F11::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 1262, 495 
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F12::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 1577, 495
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+
+/*
 ;F1~F4까지 1,2,3,5분봉 클릭 등을 할당
 F1::
 {
     IfWinExist, ahk_class _KiWoomClass
         WinActivate
-        /* 170104-분봉클릭에서 각 호가창 드래그로 변경
-        MouseClick, Left, 1920 + 453, 563
-        */
+        ; 170104-분봉클릭에서 각 호가창 드래그로 변경
+        ;MouseClick, Left, 1920 + 453, 563
+        ;
 	    MouseMove, 508, 484
 	    Send {LButton Down}
 	    Sleep 20
@@ -462,9 +609,9 @@ F2::
 {
     IfWinExist, ahk_class _KiWoomClass
         WinActivate
-        /* 170104-분봉클릭에서 각 호가창 드래그로 변경
-        MouseClick, Left, 1920 + 453 + 18, 563
-        */
+        ; 170104-분봉클릭에서 각 호가창 드래그로 변경
+        ;MouseClick, Left, 1920 + 453 + 18, 563
+        ;
 	    MouseMove, 817, 484
 	    Send {LButton Down}
 	    Sleep 20
@@ -478,9 +625,9 @@ F3::
 {
     IfWinExist, ahk_class _KiWoomClass
         WinActivate
-        /* 170104-분봉클릭에서 각 호가창 드래그로 변경
-        MouseClick, Left, 1920 + 453 + 18 +18, 563
-        */
+        ; 170104-분봉클릭에서 각 호가창 드래그로 변경
+        ;MouseClick, Left, 1920 + 453 + 18 +18, 563
+        ;
 	    MouseMove, 1135, 484
 	    Send {LButton Down}
 	    Sleep 20
@@ -494,9 +641,9 @@ F4::
 {
     IfWinExist, ahk_class _KiWoomClass
         WinActivate
-        /* 170104-분봉클릭에서 각 호가창 드래그로 변경
-        MouseClick, Left, 1920 + 453 + 18 + 18 + 18, 563
-        */
+        ; 170104-분봉클릭에서 각 호가창 드래그로 변경
+        ;MouseClick, Left, 1920 + 453 + 18 + 18 + 18, 563
+        ;
 	    MouseMove, 1440, 484
 	    Send {LButton Down}
 	    Sleep 20
@@ -510,9 +657,9 @@ F5::
 {
     IfWinExist, ahk_class _KiWoomClass
         WinActivate
-        /* 170104-분봉클릭에서 각 호가창 드래그로 변경
-        MouseClick, Left, 1920 + 453 + 18 + 18 + 18 + 18, 563
-        */
+        ; 170104-분봉클릭에서 각 호가창 드래그로 변경
+        ;MouseClick, Left, 1920 + 453 + 18 + 18 + 18 + 18, 563
+        
 	    MouseMove, 775, 53
 	    Send {LButton Down}
 	    Sleep 20
@@ -527,7 +674,8 @@ F6::
 {
     IfWinExist, ahk_class _KiWoomClass
         WinActivate
-        MouseClick, Left, 1920 + 453 + 18 + 18 + 18 + 18 + 18, 563
+        ; 170104-분봉클릭에서 각 호가창 드래그로 변경
+        ;MouseClick, Left, 1920 + 453 + 18 + 18 + 18 + 18 + 18, 563
     return
 }
 
@@ -594,25 +742,25 @@ F12::
         MouseMove, 514, 319, R
         Send {LButton}
         Sleep 20
-        */
         
-        /* 
-        MouseClick, Left, 1920 + 354, 627
-        Sleep 20
         
-        ;MouseClick, Left, 1920 + 450, 630 
+         
+        ;MouseClick, Left, 1920 + 354, 627
         ;Sleep 20
-        MouseClick, Left, 1920 + 516, 726
-        */
+       ; 
+       ; ;MouseClick, Left, 1920 + 450, 630 
+       ; ;Sleep 20
+       ; MouseClick, Left, 1920 + 516, 726
+       
 
-        /*
-        Send {LButton Down}
-        Sleep 30
-        Send {LButton Up}
-        */
+       ;
+       ; Send {LButton Down}
+       ; Sleep 30
+       ; Send {LButton Up}
+       ; 
         return
 }
-return
+*/
 
 ;Numpad Add 기능 살려두기
 /*
@@ -698,6 +846,7 @@ F12::
 /*
 #,::
 */
+/* [호가창만으로 거래] 때문에 단축키 임시 제거
 F9::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -736,6 +885,7 @@ F9::
 	return
 }
 
+*/
 
 ; test테스트용 임시 단축키
 /*
@@ -810,6 +960,7 @@ F8::
 }
 */
 
+/* [호가창 만으로 거래] 때문에 단축키 임시 제거
 ;사각형그리기
 F10::
 {
@@ -850,31 +1001,32 @@ F10::
 	
 	return
 }
+*/
 
 ;수평선그리기
 /* 일단F5를 분봉 캔들 선택으로 바꿈
 F5::
 */
+/*
 XButton2::
 
 {
 
-    /*
-	IfWinExist, 오버워치
-	{
-
-		WinActivate, 오버워치
-	
-		;MouseMove, -100, 0, , R
-		Loop, 10
-		{
-			DllCall("mouse_event", uint, 1, int, 303, int, 0, uint, 0, int, 0)
-			Sleep 15	
-		}
-		return
-	
-	}
-    */
+    
+	;IfWinExist, 오버워치
+	;{
+;
+;		WinActivate, 오버워치
+;	
+;		;MouseMove, -100, 0, , R
+;		Loop, 10
+;		{
+;			DllCall("mouse_event", uint, 1, int, 303, int, 0, uint, 0, int, 0)
+;			Sleep 15	
+;		}
+;		return
+;	
+;	}
 
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
@@ -908,11 +1060,14 @@ XButton2::
 	
 	return
 }
+*/
 
 ; 직선추세선
 /*
 F6::
 */
+; 뒤로가기 버튼 마우스
+/*
 XButton1::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -948,10 +1103,212 @@ XButton1::
 	
 	return
 }
+*/
 
+;[호가만으로 거래] 현재 위치의 호가창을 본 창으로 드래그 한다
+XButton1::
+{
+	IfWinExist, ahk_class _KiWoomClass
+		WinActivate
+	Sleep 50
+
+    ; 마우스 커서의 포지션을 구합니다
+    MouseGetPos, posX, posY
+    Sleep, 10
+
+    ; 첫 호가창 위치일 경우
+    If (posX >= 1920) and ( posX <= 1920+ 320) and (posY <= 474)
+    {
+        MouseMove, 1920 + 37, 60
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 2nd 호가창 위치일 경우
+    If (posX >= 1920 + 321) and ( posX <= 1920+ 631) and (posY <= 474)
+    {
+        MouseMove, 1920 + 37 + 320, 60
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    ; 3rd 호가창 위치일 경우
+    If (posX >= 1920 + 632) and ( posX <= 1920+ 948) and (posY <= 474)
+    {
+        MouseMove, 1920 + 37 + 632, 60
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    ; 4th 호가창 위치일 경우
+    If (posX >= 1920 + 949) and ( posX <= 1920+ 1261) and (posY <= 474)
+    {
+        MouseMove, 1920 + 37 + 949, 60
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 5th 호가창 위치일 경우
+    If (posX >= 1920 + 1262) and ( posX <= 1920+ 1576) and (posY <= 474)
+    {
+        MouseMove, 1920 + 37 + 1262, 60
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 6th 호가창 위치일 경우
+    If (posX >= 1920 + 1577) and ( posX <= 1920+ 1891) and (posY <= 474)
+    {
+        MouseMove, 1920 + 37 + 1577, 60
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 7th 호가창 위치일 경우
+    If (posX >= 1920) and ( posX <= 1920+ 320) and (posY >= 475) and (posY <=909)
+    {
+        MouseMove, 1920 + 37, 495
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 8th 호가창 위치일 경우
+    If (posX >= 1920 + 321) and ( posX <= 1920+ 631) and (posY >= 475) and (posY <=909)
+    {
+        MouseMove, 1920 + 37 + 320, 495
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    ; 9th 호가창 위치일 경우
+    If (posX >= 1920 + 632) and ( posX <= 1920+ 948) and (posY >= 475) and (posY <=909)
+    {
+        MouseMove, 1920 + 37 + 632, 495
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    ; 10th 호가창 위치일 경우
+    If (posX >= 1920 + 949) and ( posX <= 1920+ 1261) and (posY >= 475) and (posY <=909)
+    {
+        MouseMove, 1920 + 37 + 949, 495
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 11th 호가창 위치일 경우
+    If (posX >= 1920 + 1262) and ( posX <= 1920+ 1576) and (posY >= 475) and (posY <=909) 
+    {
+        MouseMove, 1920 + 37 + 1262, 495 
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 6th 호가창 위치일 경우
+    If (posX >= 1920 + 1577) and ( posX <= 1920+ 1891) and (posY >= 475) and (posY <=909) 
+    {
+        MouseMove, 1920 + 37 + 1577, 495
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    return
+}
 
 ;텍스트 박스 그리기
+
+/* [호가창만으로 거래] 때문에 단축키 임시 제거
 F11::
+*/
 NumpadAdd & Numpad7::
 {
 	IfWinExist, ahk_class _KiWoomClass
