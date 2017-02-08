@@ -146,9 +146,25 @@ MouseClick, Left, 1838 - 1190 - 50, 340
 Sleep 200
 */
 
+
+; 0998 저장화면 눌러서 가상화면 세개를 모두 실행시켜줌, 처음 접속 시 초기는 가상화면 한 개 밖에 지원을 안하네
+MouseClick, Left, 48, 24
+Send {0}
+Sleep 10
+Send {9}
+Sleep 10
+Send {9}
+Sleep 10
+Send {8}
+
+;화면 생성 간 30초를 기다려 줌
+Sleep 30000
+
+/*
 ;해외증시차트 한번 찍어줌
 MouseClick, Left, 1571 - 1190, 55 
 Sleep 200
+*/
 
 /*-160921-잔고창 하단으로의 위치 변경으로 인해 일단 제거
 ;계좌정보 창 한번 찍어줌
@@ -178,7 +194,7 @@ IfWinExist, ahk_class _KiWoomClass
 
 Sleep 100
 
-MouseClick, Left, 2200, 123
+;MouseClick, Left, 2200, 123
 
 
 /* stop주문 창 호가주문 위주로 가상화면3이라 제거 
