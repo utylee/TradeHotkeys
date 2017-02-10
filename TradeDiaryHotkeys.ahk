@@ -1614,7 +1614,9 @@ return
 	Sleep 100
     ;일봉 캡쳐 가로폭 수정
 	;MouseMove, 779, 764, 5, R
-	MouseMove, 654, 823, 5, R
+    ;툴바를 하단으로 옮기면서 y좌표가 올라감
+	;MouseMove, 654, 823, 5, R
+	MouseMove, 654, 775, 5, R
 	Sleep 100 
 	Send {LButton Up}
 	
@@ -2282,7 +2284,9 @@ return
 
 	Sleep 700
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2110, 600, 5 , R
+    ;툴바를 하단으로 내리면서 y좌표 올림
+	;MouseMove, 2110, 600, 5 , R
+	MouseMove, 2110, 600 - 27, 5 , R
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
@@ -2435,7 +2439,9 @@ return
 	MouseMove, -4000, -4000, 0, R
 	;MouseMove, 1009 + 350 - 137, 613, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동
 	;MouseMove, 1009 + 350 - 137, 516, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동 + 호가창녹화버전으로 인해 위로 좀 올림
-	MouseMove, 1920 + 1340 , 580, 5, R  ;호가거래 세팅으로서 우측 모니터로 옮김
+    ;툴바 내림으로 인해 y축 올림
+	;MouseMove, 1920 + 1340 , 580, 5, R  ;호가거래 세팅으로서 우측 모니터로 옮김
+	MouseMove, 1920 + 1340 , 580 - 27, 5, R  ;호가거래 세팅으로서 우측 모니터로 옮김
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
@@ -2638,7 +2644,9 @@ return
 
 	Sleep 700
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2490 + 200, 50, 5, R ; 200픽셀 가로 줄임
+    ;툴바 내림으로 인해 y축 올림
+	;MouseMove, 2490 + 200, 50, 5, R ; 200픽셀 가로 줄임
+	MouseMove, 2490 + 200, 50 - 27, 5, R ; 200픽셀 가로 줄임
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
@@ -4075,7 +4083,9 @@ return
 
 	Sleep 700
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2110, 600, 5 , R
+    ;툴바 내림으로 인해 y축 올림
+	;MouseMove, 2110, 600, 5 , R
+	MouseMove, 2110, 600 - 27, 5 , R
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
