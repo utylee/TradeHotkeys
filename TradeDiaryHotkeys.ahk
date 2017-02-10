@@ -1461,9 +1461,27 @@ return
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
+    Sleep 150 
 
-	Sleep 200
-	MouseClick, Left, 2584, 60 
+    ;가상화면 1로 변경
+    Send {LCtrl Down}
+    Sleep 10
+    
+    Send {1 Down}
+    Sleep 10
+
+    Send {1 Up}
+    Sleep 10
+
+    Send {LCtrl Up}
+    Sleep 10
+
+
+    ;가상화면 변경 후 약간의 시간텀을 준다
+    Sleep 150
+    ;툴바 내림으로 y축 올림
+	;MouseClick, Left, 2584, 60 
+	MouseClick, Left, 2584, 60 - 27
 	return
 }
 
@@ -1529,9 +1547,29 @@ return
 	MouseClick, Left, 530, 836 
 	return
     */
-
+	IfWinExist, ahk_class _KiWoomClass
+    {
+		WinActivate
+        Sleep 150 
+    }
+    ;가상화면 3으로 변경
+    Send {LCtrl Down}
+    Sleep 10
     
-	MouseClick, Left, 1228, 77 
+    Send {3 Down}
+    Sleep 10
+
+    Send {3 Up}
+    Sleep 10
+
+    Send {LCtrl Up}
+    Sleep 10
+
+    ;가상화면 변경 후 약간의 시간텀을 준다
+    Sleep 150
+    ;툴바 내림으로 y축 올림    
+	;MouseClick, Left, 1228, 77 
+	MouseClick, Left, 1228, 77 - 27
     return
 
 }
