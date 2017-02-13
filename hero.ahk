@@ -254,6 +254,7 @@ Sleep 500
 ;MouseClick, Left, 937, 51
 MouseClick, Left, 937, 21
 
+/*
 ; 툴바 제거 (0999 호가거래 화면에선  0101 현재가창을 쓰다보니 세로가 부족해 극대화를 위해 세로를 최대한 확장하기 위함
 MouseClick, Right, 721, 1163
 Send {Down}
@@ -263,6 +264,8 @@ Send {Down}
 Sleep 10
 
 Send {Enter}
+*/
+
 
 return
 

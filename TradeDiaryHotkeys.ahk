@@ -1162,6 +1162,135 @@ XButton1::
     MouseGetPos, posX, posY
     Sleep, 10
 
+    ;###############################################3
+    ;0999때문에 0998 버전을 주석처리 해놓는다
+    ; 첫 호가창 위치일 경우 (0999 버전)
+
+    If (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
+    {
+        MouseMove, 1920 + 37, 28
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 2nd 호가창 위치일 경우
+    If (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY <= 410)
+    {
+        MouseMove, 1920 + 37 + 615, 28
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    ; 3rd 호가창 위치일 경우
+    If (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY <= 410)
+    {
+        MouseMove, 1920 + 37 + 1225, 28
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    ; 4th 호가창 위치일 경우
+    If (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 411) and (posY <= 812)
+    {
+        MouseMove, 1920 + 37, 428
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 5th 호가창 위치일 경우
+    If (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY >= 411) and (posY <= 812)
+    {
+        MouseMove, 1920 + 37 + 615, 428
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 6th 호가창 위치일 경우
+    If (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY >= 411) and (posY <= 812)
+    {
+        MouseMove, 1920 + 37 + 1225, 428
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 7th 호가창 위치일 경우
+    If (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 813)
+    {
+        MouseMove, 1920 + 37, 825
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 8th 호가창 위치일 경우
+    If (posX >= 1920 + 1226) and (posY >= 813) 
+    {
+        MouseMove, 1920 + 37 + 1225, 825
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;마우스커서의 위치를 원래 위치로 되돌립니다
+        MouseMove, posX, posY
+        ;-->
+    }
+
+
+
+    /*
     ; 첫 호가창 위치일 경우
     If (posX >= 1920) and ( posX <= 1920+ 320) and (posY <= 474)
     {
@@ -1346,6 +1475,7 @@ XButton1::
         MouseMove, posX, posY
         ;-->
     }
+    */
 
     return
 }
