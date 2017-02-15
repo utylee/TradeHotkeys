@@ -1152,15 +1152,29 @@ XButton1::
 */
 
 ;[호가만으로 거래] 현재 위치의 호가창을 본 창으로 드래그 한다
+; 거기에 8282 호가창 거래시 전체 모드로 변경도 이 단축키로 하기로
+~LButton & RButton::
+{
+    ;MsgBox, ㅎㅎㅎ
+    Send, {Space}
+    return
+}
+
+
 XButton1::
 {
-	IfWinExist, ahk_class _KiWoomClass
-		WinActivate
-	Sleep 50
-
     ; 마우스 커서의 포지션을 구합니다
     MouseGetPos, posX, posY
     Sleep, 10
+
+    ;#####
+    ; [8282] 호가창 전체버튼 누르기
+    If (posX >= 1192) and (posX <= 1720) and (posY >=5) and (posY <= 518)
+    {
+        MouseClick, Left, 1650, 50
+        Sleep, 50
+        MouseMove, posX, posY
+    }
 
     ;###############################################3
     ;0999때문에 0998 버전을 주석처리 해놓는다
