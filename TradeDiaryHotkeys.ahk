@@ -1,5 +1,8 @@
 SetTitleMatchMode, RegEx
 
+; 분봉<-->틱봉 간의 교환을 위한 변수
+toggle := 1
+
 ;SetDefaultMouseSpeed, 0
 
 
@@ -1166,6 +1169,29 @@ XButton1::
     ; 마우스 커서의 포지션을 구합니다
     MouseGetPos, posX, posY
     Sleep, 10
+
+    ;#####
+    ; [8282] 분틱차트 위치일 경우, 분<-->틱 상호교환
+    If (posX >= 671) and (posX <= 1193) and (posY >=9) and (posY <= 403)
+    {
+        global toggle
+
+        toggle := toggle * -1
+        cX := 1650
+
+        if(toggle == -1) 
+        {
+            cX := 1065
+        }
+        else
+        {
+            cX := 1085
+        }
+        
+        MouseClick, Left, cX, 30
+        Sleep, 50
+        MouseMove, posX, posY
+    }
 
     ;#####
     ; [8282] 호가창 전체버튼 누르기
