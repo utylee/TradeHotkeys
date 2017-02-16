@@ -489,6 +489,150 @@ return
 ;영웅문이 틀어져있을 경우
 #IfWinActive ahk_class _KiWoomClass
 
+; [호가창만으로 거래 0999저장화면 ver] 
+; alt 드래그 시 두 호가 상호 교환
+
+
+; 0999 저장화면에서 현재 커서의 위치가 어떤 호가를 가르키고 있는지 판단합니다
+CheckPos(posX, posY)
+{
+    ret := 0
+
+    ;첫번째 호가 위치일 경우  
+    If (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
+    {
+        ret := 1
+    }
+    ; 2nd 호가창 위치일 경우
+    If (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY <= 410)
+    {
+        ret := 2
+    }
+
+    ; 3rd 호가창 위치일 경우
+    If (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY <= 410)
+    {
+        ;-->
+        ret := 3
+    }
+
+    ; 4th 호가창 위치일 경우
+    If (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 411) and (posY <= 812)
+    {
+        ;-->
+        ret := 4
+    }
+    ; 5th 호가창 위치일 경우
+    If (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY >= 411) and (posY <= 812)
+    {
+        ;-->
+        ret := 5
+    }
+    ; 6th 호가창 위치일 경우
+    If (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY >= 411) and (posY <= 812)
+    {
+        ;-->
+        ret := 6
+    }
+    ; 7th 호가창 위치일 경우
+    If (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 813)
+    {
+        ;-->
+        ret := 7
+    }
+    ; 8th 호가창 위치일 경우
+    If (posX >= 1920 + 1226) and (posY >= 813) 
+    {
+        ;-->
+        ret := 8
+    }
+
+    return ret 
+}
+
+; [0999] 호가넘버를 전달받으면 해당 호가의 종목코드 위치의 x, y 좌표셋을 반납합니다
+NumToSubjectPos(N)
+{
+    Pos := {"x" : 0, "y" :0}
+
+    if (N == 1) 
+        Pos := {"x" : 1920 + 30, "y" : 25}
+    else if (N == 2)
+        Pos := {"x" : 1920 + 642, "y" : 25}
+    else if (N == 3)
+        Pos := {"x" : 1920 + 1260, "y" : 25}
+    else if (N == 4)
+        Pos := {"x" : 1920 + 30, "y" : 425}
+    else if (N == 5) 
+        Pos := {"x" : 1920 + 642, "y" : 425}
+    else if (N == 6) 
+        Pos := {"x" : 1920 + 1260, "y" : 425}
+    else if (N == 7) 
+        Pos := {"x" : 1920 + 30, "y" : 825}
+    else if (N == 8) 
+        Pos := {"x" : 1920 + 1260, "y" : 825}
+
+    return Pos
+}
+
+; [0999] A좌표셋에서 B좌표셋으로 드래그 합니다
+DragProc(A, B)
+{
+        MouseMove, A.x, A.y 
+	    Send {LButton Down}
+	    Sleep 20
+	    MouseMove, B.x, B.y
+	    Send {LButton Up}
+}
+
+; [0999] 저장화면에서 두 호가창의 위치를 변경하는 프로세스입니다
+SwapWinProc(A, B)
+{
+    pos_A := NumToSubjectPos(A)
+    pos_B := NumToSubjectPos(B)
+
+    ;최하단의 임시 창의 좌표입니다
+    pos_temp := {"x" : 1920 + 650, "y" : 1101}
+
+    ;A좌표에서 temp좌표(1920 + 756, 1128)로 드래그 합니다
+    DragProc(pos_A, pos_temp)
+    Sleep 20
+
+    ;B좌표에서 A좌표로 드래그 합니다
+    DragProc(pos_B, pos_A)
+    Sleep 20
+
+    ;temp좌표(1920 + 756, 1128)에서 B좌표로 드래그 합니다
+    DragProc(pos_temp, pos_B)
+    Sleep 20
+
+}
+
+LAlt & ~LButton::
+{   
+    MouseGetPos, posX, posY 
+    
+    ; 좌클릭이 눌려있는 동안 계속 이 loop 안에 머뭅니다
+    while GetKeyState("LButton", "P")
+    {
+        MouseGetPos, new_X, new_Y
+        ToolTip, % (posX - new_X)
+        ; cpu 100%를 막기위해 넣습니다
+        Sleep 10
+    }
+    
+    ; 툴팁 숫자를 제거하기 위해 빈란 표시를 넣습니다.
+    tooltip, 
+
+    start := CheckPos(posX, posY)
+    end := CheckPos(new_X, new_Y)
+
+    SwapWinProc(start, end)
+
+
+    return
+}
+
 ; [호가창만으로 거래] F1 키 등을 분봉 클릭에서 현재 커서의 종목을 각 호가창으로의 할당 드래그로 변경
 F1::
 {
