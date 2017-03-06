@@ -3,6 +3,18 @@ SetTitleMatchMode, RegEx
 ; 분봉<-->틱봉 간의 교환을 위한 변수
 toggle := 1
 
+; [0999] 각 0101호가창의 분<-->틱 교환을 위한 토글 플래그 변수들
+toggle0101 := Object() ;배열을 지원하지 않아 이렇게 해야한다고 합니다
+toggle0101[1] := 1
+toggle0101[2] := 1
+toggle0101[3] := 1
+toggle0101[4] := 1
+toggle0101[5] := 1
+toggle0101[6] := 1
+toggle0101[7] := 1
+toggle0101[8] := 1
+toggle0101[99] := 1 ;좌측 좀 큰차트에서의 토글을 위한 변수
+
 ;SetDefaultMouseSpeed, 0
 
 
@@ -497,6 +509,12 @@ return
 CheckPos(posX, posY)
 {
     ret := 0
+    
+    ;(추가)좌측 큰 차트일 경우
+    If (posX >= 671) and (posX <= 1193) and (posY >=9) and (posY <= 403)
+    {
+        ret := 99
+    }
 
     ;첫번째 호가 위치일 경우  
     If (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
@@ -574,6 +592,63 @@ NumToSubjectPos(N)
 
     return Pos
 }
+
+;[0999] 호가창 내 차트의 분<-->틱 교환을 위한 함수
+NumToTickPos(N)
+{
+    Pos := {"x" : 0, "y" : 0}
+
+    if (N == 1) 
+        Pos := {"x" : 1920 + 318, "y" : 215}
+    else if (N == 2)
+        Pos := {"x" : 1920 + 935, "y" : 215}
+    else if (N == 3)
+        Pos := {"x" : 1920 + 1550, "y" : 215}
+    else if (N == 4)
+        Pos := {"x" : 1920 + 318, "y" : 616}
+    else if (N == 5) 
+        Pos := {"x" : 1920 + 935, "y" : 616}
+    else if (N == 6) 
+        Pos := {"x" : 1920 + 1550, "y" : 616}
+    else if (N == 7) 
+        Pos := {"x" : 1920 + 318, "y" : 1012}
+    else if (N == 8) 
+        Pos := {"x" : 1920 + 1550, "y" : 1012}
+    ;좌측 차트용으로 추가
+    else if (N == 99)
+        Pos := {"x" : 1085, "y" : 30}
+
+    return Pos
+}
+
+;[0999] 호가창 내 차트의 분<-->틱 교환을 위한 함수
+NumToMinuPos(N)
+{
+    Pos := {"x" : 0, "y" : 0}
+
+    if (N == 1) 
+        Pos := {"x" : 1920 + 356, "y" : 215}
+    else if (N == 2)
+        Pos := {"x" : 1920 + 973, "y" : 215}
+    else if (N == 3)
+        Pos := {"x" : 1920 + 1588, "y" : 215}
+    else if (N == 4)
+        Pos := {"x" : 1920 + 356, "y" : 616}
+    else if (N == 5) 
+        Pos := {"x" : 1920 + 973, "y" : 616}
+    else if (N == 6) 
+        Pos := {"x" : 1920 + 1588, "y" : 616}
+    else if (N == 7) 
+        Pos := {"x" : 1920 + 356, "y" : 1012}
+    else if (N == 8) 
+        Pos := {"x" : 1920 + 1588, "y" : 1012}
+    ;좌측 차트용으로 추가
+    else if (N == 99)
+        Pos := {"x" : 1065, "y" : 30}
+
+    return Pos
+}
+
 
 ; [0999] A좌표셋에서 B좌표셋으로 드래그 합니다
 DragProc(A, B)
@@ -1305,6 +1380,48 @@ XButton1::
     ;MsgBox, ㅎㅎㅎ
     Send, {Space}
     return
+}
+
+
+; [0999] 각 호가창 내에서 마우스 앞으로 키 눌렀을 경우, 분<-->틱 토글 기능추가
+XButton2::
+{
+    global toggle0101
+
+    ; 마우스 커서의 포지션을 구합니다
+    MouseGetPos, posX, posY
+    Sleep, 10
+    
+    ;현재호가창 번호를 좌표를 통해 지정합니다 (1~8번)
+    cur := CheckPos(posX, posY)
+
+    ;만약 의미없는 포지션일 경우 아무 액션도 하지 않습니다
+    if (cur == 0)
+    {
+        return
+    }
+
+    posT := {"x" : 0, "y": 0}
+
+    ;플래그에 따라 tick 을 누를건지 분 을 누를 건지 결정합니다
+    If (toggle0101[cur] == 1)
+    {
+        posT := NumToMinuPos(cur)
+    }
+    else
+    {
+        posT := NumToTickPos(cur)
+    }
+
+    ;해당 포지션 클릭 후 다시 원래 마우스 포지션으로 되돌립니다
+    MouseClick, Left, posT.x, posT.y
+    Sleep, 20
+    MouseMove, posX, posY
+
+    ;다음 플래그로(분<--->틱) 전환해 놓습니다
+    toggle0101[cur] := toggle0101[cur] * -1
+
+    return 
 }
 
 
