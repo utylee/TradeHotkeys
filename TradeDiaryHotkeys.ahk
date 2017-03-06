@@ -14,6 +14,7 @@ toggle0101[6] := 1
 toggle0101[7] := 1
 toggle0101[8] := 1
 toggle0101[99] := 1 ;좌측 좀 큰차트에서의 토글을 위한 변수
+toggle0101[77] := 1 ;잔고 / 당일매매 영역의 토글을 위한 변수
 
 ;SetDefaultMouseSpeed, 0
 
@@ -509,57 +510,63 @@ return
 CheckPos(posX, posY)
 {
     ret := 0
+
+    ;잔고/당일매매 영역일 경우
+    if (posX >= 1920 + 620) and (posX <= 1920 + 1223) and (posY >= 820 ) and (posY <= 1076)
+    {
+        ret := 77 
+    }
     
     ;(추가)좌측 큰 차트일 경우
-    If (posX >= 671) and (posX <= 1193) and (posY >=9) and (posY <= 403)
+    else if (posX >= 671) and (posX <= 1193) and (posY >=9) and (posY <= 403)
     {
         ret := 99
     }
 
     ;첫번째 호가 위치일 경우  
-    If (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
+    else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
     {
         ret := 1
     }
     ; 2nd 호가창 위치일 경우
-    If (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY <= 410)
+    else if (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY <= 410)
     {
         ret := 2
     }
 
     ; 3rd 호가창 위치일 경우
-    If (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY <= 410)
+    else if (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY <= 410)
     {
         ;-->
         ret := 3
     }
 
     ; 4th 호가창 위치일 경우
-    If (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 411) and (posY <= 812)
+    else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 411) and (posY <= 812)
     {
         ;-->
         ret := 4
     }
     ; 5th 호가창 위치일 경우
-    If (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY >= 411) and (posY <= 812)
+    else if (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY >= 411) and (posY <= 812)
     {
         ;-->
         ret := 5
     }
     ; 6th 호가창 위치일 경우
-    If (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY >= 411) and (posY <= 812)
+    else if (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY >= 411) and (posY <= 812)
     {
         ;-->
         ret := 6
     }
     ; 7th 호가창 위치일 경우
-    If (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 813)
+    else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 813)
     {
         ;-->
         ret := 7
     }
     ; 8th 호가창 위치일 경우
-    If (posX >= 1920 + 1226) and (posY >= 813) 
+    else if (posX >= 1920 + 1226) and (posY >= 813) 
     {
         ;-->
         ret := 8
@@ -617,6 +624,9 @@ NumToTickPos(N)
     ;좌측 차트용으로 추가
     else if (N == 99)
         Pos := {"x" : 1085, "y" : 30}
+    ;잔고/당일매매 전환
+    else if (N == 77)
+        Pos := {"x" : 1920 + 663, "y" : 830}
 
     return Pos
 }
@@ -645,6 +655,9 @@ NumToMinuPos(N)
     ;좌측 차트용으로 추가
     else if (N == 99)
         Pos := {"x" : 1065, "y" : 30}
+    ;잔고/당일매매 전환
+    else if (N == 77)
+        Pos := {"x" : 1920 + 730, "y" : 830}
 
     return Pos
 }
