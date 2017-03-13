@@ -680,7 +680,9 @@ SwapWinProc(A, B)
     pos_B := NumToSubjectPos(B)
 
     ;최하단의 임시 창의 좌표입니다
-    pos_temp := {"x" : 1920 + 650, "y" : 1101}
+    ;pos_temp := {"x" : 1920 + 650, "y" : 1101}
+    ;144hz 모니터로 바꾸면서 세로 해상도 줄어들어 임시로 우측차트으로 이동해봄 ^^
+    pos_temp := {"x" : 1920 + 1900, "y" : 45}
 
     ;A좌표에서 temp좌표(1920 + 756, 1128)로 드래그 합니다
     DragProc(pos_A, pos_temp)
