@@ -18,7 +18,18 @@ toggle0101[77] := 1 ;잔고 / 당일매매 영역의 토글을 위한 변수
 
 ;SetDefaultMouseSpeed, 0
 
-
+;#define MOUSEEVENTF_MOVE 0x0001 /* mouse move */
+;#define MOUSEEVENTF_LEFTDOWN 0x0002 /* left button down */
+;#define MOUSEEVENTF_LEFTUP 0x0004 /* left button up */
+;#define MOUSEEVENTF_RIGHTDOWN 0x0008 /* right button down */
+;#define MOUSEEVENTF_RIGHTUP 0x0010 /* right button up */
+;#define MOUSEEVENTF_MIDDLEDOWN 0x0020 /* middle button down */
+;#define MOUSEEVENTF_MIDDLEUP 0x0040 /* middle button up */
+;#define MOUSEEVENTF_XDOWN 0x0080 /* x button down */
+;#define MOUSEEVENTF_XUP 0x0100 /* x button down */
+;#define MOUSEEVENTF_WHEEL 0x0800 /* wheel button rolled */
+;#define MOUSEEVENTF_VIRTUALDESK 0x4000 /* map to entire virtual desktop */
+;#define MOUSEEVENTF_ABSOLUTE 0x8000 /* absolute move */
 ; 오버워치 뒤로 돌기 매크로 테스트
 /*
 XButton1::
@@ -45,9 +56,270 @@ return
 
 ;오버워치 실행중 일 경우 LWin 윈도우키 비활성화
 #IfWinExist, 오버워치
+;윈도우키 비활성화
 LWin::
 {
     return
+}
+
+LAlt & ~1::
+XButton1::
+{
+	IfWinExist, 오버워치
+	{
+
+		WinActivate, 오버워치
+	
+		;MouseMove, -100, 0, , R
+
+        ;(참고)화면 풀사이즈로 이동할 때의 좌표
+        ;DllCall("mouse_event", uint, 1, int, 840, int, 490, uint, 0, int, 0)
+
+        ;(0, 0)좌표로 옮겨줍니다
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;Sleep 200
+
+        ;"플레이"클릭
+        ;(100, 300)좌표로 옮겨줍니다. 그리고 클릭
+        ;DllCall("mouse_event", uint, 1, int, 1, int, 1, uint, 0, int, 0)
+        DllCall("mouse_event", uint, 1, int, 50, int, 130, uint, 0, int, 0)
+        Sleep 20
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 1000
+
+        ;"아케이드 클릭"
+        DllCall("mouse_event", uint, 1, int, 300, int, 100, uint, 0, int, 0)
+        Sleep 20
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 1000
+
+        ;"게임만들기 클릭"
+        DllCall("mouse_event", uint, 1, int, 400, int, 100, uint, 0, int, 0)
+        Sleep 20
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        Sleep 1000
+        
+
+        ;"설정" 클릭
+        ;(0, 0)좌표로 옮겨줍니다
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;설정으로 이동
+        DllCall("mouse_event", uint, 1, int, 660, int, 150, uint, 0, int, 0)
+        Sleep 20
+        ;클릭
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"모드" ( << 설정 ) 클릭
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;설정으로 이동
+        DllCall("mouse_event", uint, 1, int, 560, int, 150, uint, 0, int, 0)
+        Sleep 20
+        ;클릭
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"연습모드" 클릭
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;설정으로 이동
+        DllCall("mouse_event", uint, 1, int, 560, int, 250, uint, 0, int, 0)
+        Sleep 20
+        ;클릭
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"연습모드 > 활성화" 클릭
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;설정으로 이동
+        DllCall("mouse_event", uint, 1, int, 470, int, 115, uint, 0, int, 0)
+        Sleep 20
+        ;클릭
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"한단계위로"
+        Send, {ESC}
+        Sleep 500
+
+        ;"한단계위로"
+        Send, {ESC}
+        Sleep 500
+
+
+
+        ;"전장" ( << 설정 ) 클릭
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;설정으로 이동
+        DllCall("mouse_event", uint, 1, int, 120, int, 250, uint, 0, int, 0)
+        Sleep 20
+        ;클릭
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"모두끄기" ( << 전장) 클릭
+
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;설정으로 이동
+        DllCall("mouse_event", uint, 1, int, 590, int, 90, uint, 0, int, 0)
+        Sleep 20
+        ;클릭
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"리장타워" 활성화 클릭
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;설정으로 이동
+        DllCall("mouse_event", uint, 1, int, 475, int, 230, uint, 0, int, 0)
+        Sleep 20
+        ;클릭
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"한단계위로"
+        Send, {ESC}
+        Sleep 500
+
+        ;"한단계위로"
+        Send, {ESC}
+        Sleep 500
+
+
+
+
+        ;"인공지능 추가"
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;설정으로 이동
+        DllCall("mouse_event", uint, 1, int, 795, int, 150, uint, 0, int, 0)
+        Sleep 20
+        ;클릭
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"루시우 우리편 추가"
+        Send, {Space}
+        Sleep 20
+
+        Loop, 3
+        {
+            Send, {Down}
+            Sleep 20
+        }
+
+        Send, {Space}
+        Sleep 20
+
+        Loop, 2
+        {
+            Send, {Down}
+            Sleep 20
+        }
+        Loop, 9
+        {
+            Send, {Left}
+            Sleep 20
+        }
+
+        Loop, 3
+        {
+            Send, {Down}
+            Sleep 20
+            Send, {Space}
+            Sleep 20
+        }
+    
+        Sleep 500
+
+
+
+        ;"솔져 3명 적팀 추가"
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;설정으로 이동
+        DllCall("mouse_event", uint, 1, int, 795, int, 150, uint, 0, int, 0)
+        Sleep 20
+        ;클릭
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"솔져 3명 추가"
+        Send, {Space}
+        Sleep 20
+
+        ;솔져
+        Loop, 8
+        {
+            Send, {Down}
+            Sleep 20
+        }
+
+        Send, {Space}
+        Sleep 20
+
+        Loop, 2
+        {
+            Send, {Down}
+            Sleep 20
+        }
+        
+        ;(8->3으로 줄이기)
+        Loop, 6
+        {
+            Send, {Left}
+            Sleep 20
+        }
+        Send, {Down}
+        Sleep 20
+        Send, {Space}
+        Sleep 20
+        Send, {Down}
+        Sleep 20
+        Send, {Down}
+        Sleep 20
+        Send, {Space}
+        Sleep 20
+        Send, {Down}
+        Sleep 20
+        Send, {Space}
+        Sleep 20
+
+        Sleep 500
+
+
+        ;"시~~~~~~작!!!!!!!!!!!!"
+
+		;Loop, 10
+		;{
+			;DllCall("mouse_event", uint, 1, int, 303, int, 0, uint, 0, int, 0)
+			;Sleep 15	
+		;}
+	
+	}
+	return
 }
 #IfWinExist
 
