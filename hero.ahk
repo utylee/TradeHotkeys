@@ -150,7 +150,7 @@ Sleep 200
 ; 0998 저장화면 눌러서 가상화면 세개를 모두 실행시켜줌, 처음 접속 시 초기는 가상화면 한 개 밖에 지원을 안하네
 ;위치를 하단으로 변경함
 ;MouseClick, Left, 48, 24
-MouseClick, Left, 708, 1150 
+MouseClick, Left, 710, 1145 
 Send {0}
 Sleep 10
 Send {9}

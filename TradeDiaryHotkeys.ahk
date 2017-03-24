@@ -63,7 +63,6 @@ LWin::
 }
 
 LAlt & ~1::
-XButton1::
 {
 	IfWinExist, 오버워치
 	{
@@ -83,23 +82,23 @@ XButton1::
         ;(100, 300)좌표로 옮겨줍니다. 그리고 클릭
         ;DllCall("mouse_event", uint, 1, int, 1, int, 1, uint, 0, int, 0)
         DllCall("mouse_event", uint, 1, int, 50, int, 130, uint, 0, int, 0)
-        Sleep 20
+        Sleep 1000
         DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
         Sleep 20
         DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
-        Sleep 1000
+        Sleep 1500
 
         ;"아케이드 클릭"
         DllCall("mouse_event", uint, 1, int, 300, int, 100, uint, 0, int, 0)
-        Sleep 20
+        Sleep 1000
         DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
         Sleep 20
         DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
-        Sleep 1000
+        Sleep 1500
 
         ;"게임만들기 클릭"
         DllCall("mouse_event", uint, 1, int, 400, int, 100, uint, 0, int, 0)
-        Sleep 20
+        Sleep 1000
         DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
         Sleep 20
         DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
