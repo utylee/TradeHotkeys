@@ -3,6 +3,9 @@ SetTitleMatchMode, RegEx
 ; 분봉<-->틱봉 간의 교환을 위한 변수
 toggle := 1
 
+; 가상화면1 <---> 가상화면3 간의 교환을 위한 변수
+togglescr := 1
+
 ; [0999] 각 0101호가창의 분<-->틱 교환을 위한 토글 플래그 변수들
 toggle0101 := Object() ;배열을 지원하지 않아 이렇게 해야한다고 합니다
 toggle0101[1] := 1
@@ -1668,6 +1671,46 @@ XButton1::
     return
 }
 
+; [0999] 가상화면1<--->가상화면3을 스윗칭
+MButton::
+{
+    global togglescr
+    
+    ;가상화면 3일경우(기본)
+    if(togglescr == 1)
+    {
+        ;Ctrl + 1 누름
+        Send, {LCtrl Down}
+        Sleep 20
+        Send, {1 Down}
+        Sleep 20
+
+        Send, {1 Up}
+        Sleep 20
+        Send, {LCtrl Up}
+
+    }
+    
+    ;가상화면 1일경우
+    else 
+    {
+        ;Ctrl + 3 누름
+        Send, {LCtrl Down}
+        Sleep 20
+        Send, {3 Down}
+        Sleep 20
+
+        Send, {3 Up}
+        Sleep 20
+        Send, {LCtrl Up}
+    }
+
+    ;가상화면 1일경우
+    
+
+    togglescr := togglescr * -1
+    return
+}
 
 ; [0999] 각 호가창 내에서 마우스 앞으로 키 눌렀을 경우, 분<-->틱 토글 기능추가
 XButton2::
