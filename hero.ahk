@@ -2,15 +2,15 @@
 Sleep 1000
 SetKeyDelay, 20
 Send {LWin Down}
-Send {9 Down}
+Send {8 Down}
 Sleep 100
 Send {LWin Up}
-Send {9 Up}
+Send {8 Up}
 
 WinWait, 영웅문 Login 
 IfWinExist, 영웅문 Login
 	WinActivate
-Sleep 1500
+Sleep 2000
 SetKeyDelay, 100 
 Send {q}{n}{w}{k}{1}{1}
 Send {Tab}
@@ -150,7 +150,8 @@ Sleep 200
 ; 0998 저장화면 눌러서 가상화면 세개를 모두 실행시켜줌, 처음 접속 시 초기는 가상화면 한 개 밖에 지원을 안하네
 ;위치를 하단으로 변경함
 ;MouseClick, Left, 48, 24
-MouseClick, Left, 710, 1145 
+;MouseClick, Left, 710, 1145 
+MouseClick, Left, 705, 1130 
 Send {0}
 Sleep 10
 Send {9}

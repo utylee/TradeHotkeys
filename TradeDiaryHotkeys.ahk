@@ -483,12 +483,15 @@ return
 }
 return
 
+; win10 으로 업데이트후 할 필요없어보여 임시제거 
+
 LWin & E::
 {
 	;Run explorer F:\
-	Run explorer c:\Users\seoru 
+	Run explorer ;c:\Users\utylee 
 	return
 }
+
 
 return
 ; 관심종목 1
