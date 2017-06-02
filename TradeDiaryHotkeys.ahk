@@ -5065,8 +5065,6 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-
-
     ;<--새탭에 띄우기로 바뀌면서 임시로 변경
     /*
 	WinWait, 네이버 포토업로더 - Mozilla Firefox
@@ -5081,29 +5079,53 @@ return
 	Sleep 1200
     */
     ; 새탭으로 열린 올리기 버튼 누르기
+    /*
     Sleep 2400 
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1920 + 977, 175, 5, R
     ;MouseClick, Left, 977, 175
     Send {LButton} 
     ;-->
+    */
+    ; 윈10
+    Sleep 4000 
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 475, 145, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    
 
-
-
-	WinWait, 열기|blog.upphoto
+	WinWait, 파일 업로드|열기|blog.upphoto
+	;WinWait, 열기|blog.upphoto
 	;WinWait, blog.upphoto
-	IfWinExist, 열기|blog.upphoto
+	IfWinExist, 파일 업로드|열기|blog.upphoto
+	;IfWinExist, 열기|blog.upphoto
 	;IfWinExist, blog.upphoto
 		WinActivate
-	Sleep 1000
+	Sleep 400
 	
-	Send {1}{.}{p}{n}{g}{Enter}
-	Sleep 800
+	Send {1}{.}{p}{n}{g}
+    /*
+	IfWinExist, 파일 업로드|열기|blog.upphoto
+		WinActivate
+    Sleep 700
+    Send {Tab}{Tab}{Space}
+    */
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1195, 506, 5, R
+    Send {LButton} 
+	;Sleep 1000
+	Sleep 2500
 
 
+    ;올리기 버튼 클릭
+    ;윈10
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1693, 150, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
 
-
-    ;<-- 새탭으로 열기로 변경되면서 임시 교체
+    ;초안
     /*
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1957, 17, 5, R
@@ -5116,13 +5138,14 @@ return
 	Sleep 100
 	Send {LButton}
     */
+    ;<-- 새탭으로 열기로 변경되면서 임시 교체
+    /*
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1920 + 1190, 732, 5, R
     ;MouseClick, Left, 977, 175
     Send {LButton} 
     ;-->
-
-
+    */
 
 
 
