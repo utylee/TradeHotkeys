@@ -1,5 +1,8 @@
 SetTitleMatchMode, RegEx
 SetKeyDelay, 100
+; 마우스 이동을 활성윈도우가 아닌 절대좌표를 이용합니다
+Coordmode, Mouse, Screen
+;CoordMode, ToolTip|Pixel|Mouse|Caret|Menu [, Screen|Window|Client]
 
 ; 분봉<-->틱봉 간의 교환을 위한 변수
 toggle := 1
@@ -2249,7 +2252,8 @@ return
     Sleep 150
     ;툴바 내림으로 y축 올림
 	;MouseClick, Left, 2584, 60 
-	MouseClick, Left, 2584, 60 - 27
+	;MouseClick, Left, 2584, 60 - 27
+	MouseClick, Left, 2584 - 1920, 60 - 27
 	return
 }
 
@@ -2342,6 +2346,65 @@ return
 
 }
 
+; 개발테스트용 임시 단축키
+#!F2::
+{
+
+	;파폭으로 전환하여 사진/열기 1.png / 올리기 를 누른다
+	IfWinExist, ahk_class MozillaWindowClass
+		WinActivate
+	;WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
+	Sleep 100
+	;MouseMove, -4000, -4000, 0, R
+	MouseMove, 2210 - 1920, 700, 5 
+	MouseMove, 779, -120, 2 , R
+    Sleep 1000
+	MouseMove, 2110 - 1920, 600 - 27, 5
+	;Send {LButton}
+    Sleep 1000
+	MouseMove, 899, 377, 5, R
+
+	/*
+WinWait, 네이버 포토업로더 - Mozilla Firefox
+	IfWinExist, 네이버 포토업로더 - Mozilla Firefox
+		WinActivate
+	Sleep 100
+	WinMove, 네이버 포토업로더 - Mozilla Firefox, 0, 0 
+	Sleep 2000
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2495, 130, 5, R
+	Send {LButton}
+	Sleep 1200
+
+	;WinWait, blog.upphoto 
+	WinWait, 열기|blog.upphoto
+	;IfWinExist, blog.upphoto
+	IfWinExist, 열기|blog.upphoto
+		WinActivate
+	Sleep 700
+	
+	Send {1}{.}{p}{n}{g}{Enter}
+	Sleep 800
+
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1957, 17, 5, R
+	Sleep 100
+	Send {LButton}
+	Sleep 500
+
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2707, 690, 5, R
+	Sleep 100
+	Send {LButton}
+	IfWinExist, ahk_class MozillaWindowClass
+		WinActivate
+	Sleep 800
+	Send {Enter}
+    */
+
+    return
+}
+
 ; 그냥 1.png 업로드 
 #!F1::
 {
@@ -2398,9 +2461,27 @@ return
 ; [호가창 거래로 변경] 하면서 지수 위치 바뀜
 #!F4::
 {
-	IfWinExist, ahk_class MozillaWindowClass
+
+    /* 상단 모니터인 영웅문 4 화면으로 바꿈 
+	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
-	Sleep 100
+	Sleep 500
+
+    ;가상화면 3으로 변경
+    Send {LCtrl Down}
+    Sleep 10
+    
+    Send {3 Down}
+    Sleep 10
+
+    Send {3 Up}
+    Sleep 10
+
+    Send {LCtrl Up}
+    Sleep 10
+    */
+
+
 
     ;SnagIt 캡쳐 가동
 	Send {LShift Down}
@@ -2410,12 +2491,23 @@ return
 	Send {PrintScreen Up}
 	Sleep 700
 
-    ;영역선택
-	MouseMove, -4000, -4000, 0, R 
-	Sleep 20
-	MouseMove, 12, 69, 2, R
-	Sleep 20
+	MouseMove, 7, -424, 2
+    Send {LButton Down}
+    Sleep 100
+	MouseMove, 1410, 422, 2, R
+	Sleep 100 
+	Send {LButton Up}
 
+    /*
+    ;영역선택
+	;MouseMove, -4000, -4000, 0, R 
+	Sleep 20
+	;MouseMove, 12, 69, 2, R
+	MouseMove, 12 - 1920, 69, 2
+	Sleep 20
+    */
+
+    /*
 	Send {LButton Down}
 	Sleep 100
     ;일봉 캡쳐 가로폭 수정
@@ -2425,6 +2517,7 @@ return
 	MouseMove, 654, 775, 5, R
 	Sleep 100 
 	Send {LButton Up}
+    */
 	
 	WinWait, Snagit Editor
 		WinActivate
@@ -2448,7 +2541,9 @@ return
 	Send {Tab}
 	Sleep 50
 
-	Send {7}{0}
+    ; 가로로 너무 길쭉하니깐 60%로 수정
+	;Send {7}{0}
+	Send {6}{0}
 	Sleep 2000 
 
 	Send {Tab}
@@ -2496,8 +2591,9 @@ return
 	IfWinExist, Save As
 		WinActivate
 	Sleep 500
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2332, 357, 0, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2332, 357, 0, R
+	MouseMove, 2332 - 1920, 357, 0
 	Sleep 300
 	Send {LButton Down}
 	Sleep 20
@@ -2531,14 +2627,16 @@ return
 	Sleep 100
 	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
 	Sleep 100
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2555, 130, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2555, 130, 5, R
+	MouseMove, 2555 - 1920, 130, 5
 	Send {LButton}
 
     ; 윈10
     Sleep 6000 
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 475, 145, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 475, 145, 5, R
+	MouseMove, 475, 145, 5
     ;MouseClick, Left, 977, 175
     Send {LButton} 
     
@@ -2557,16 +2655,18 @@ return
     Sleep 700
     Send {Tab}{Tab}{Space}
     */
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 1195, 506, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1195, 506, 5, R
+	MouseMove, 1195, 506, 5
     Send {LButton} 
     ;MouseClick, Left, 1195, 506
 	Sleep 2500
 
 
     ;윈10
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 1693, 150, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1693, 150, 5, R
+	MouseMove, 1693, 150, 5
     ;MouseClick, Left, 977, 175
     Send {LButton} 
     
@@ -3101,8 +3201,8 @@ return
 		WinActivate
 	Sleep 50
 
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2210, 700, 5 , R
+	;MouseMove, -4000, -4000, 0, R
+	MouseMove, 2210 - 1920, 700, 5
 	MouseMove, 779, -120, 2 , R
 	
 	Send {LShift Down}
@@ -3112,13 +3212,16 @@ return
 	Send {PrintScreen Up}
 
 	Sleep 700
-	MouseMove, -4000, -4000, 0, R
+    ;캡쳐초기좌표로 갑니다
+	;MouseMove, -4000, -4000, 0, R
     ;툴바를 하단으로 내리면서 y좌표 올림
 	;MouseMove, 2110, 600, 5 , R
-	MouseMove, 2110, 600 - 27, 5 , R
+	;MouseMove, 2110, 600 - 27, 5 , R
+	MouseMove, 2110 - 1920, 600 - 27, 5
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
+    ;사각형 사이즈 드래그해줍니다
 	MouseMove, 899, 377, 5, R
 	Sleep 100
 	Send {LButton Up}
@@ -3139,8 +3242,8 @@ return
 	IfWinExist, Save As
 		WinActivate
 	Sleep 500
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2332, 357, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	MouseMove, 2332 -1920, 357, 5
 
 	Sleep 20
 	Send {LButton Down}
@@ -3172,8 +3275,8 @@ return
 	Sleep 100
 	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
 	Sleep 100
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2555, 130, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	MouseMove, 2555 - 1920, 130, 5
 	Send {LButton}
 
 
@@ -3201,8 +3304,9 @@ return
     */
     ; 윈10
     Sleep 4000 
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 475, 145, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 475, 145, 5, R
+	MouseMove, 475, 145, 5
     ;MouseClick, Left, 977, 175
     Send {LButton} 
     
@@ -3223,8 +3327,9 @@ return
     Sleep 700
     Send {Tab}{Tab}{Space}
     */
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 1195, 506, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1195, 506, 5, R
+	MouseMove, 1195, 506, 5
     Send {LButton} 
 	;Sleep 1000
 	Sleep 2500
@@ -3232,8 +3337,9 @@ return
 
     ;올리기 버튼 클릭
     ;윈10
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 1693, 150, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1693, 150, 5, R
+	MouseMove, 1693, 150, 5
     ;MouseClick, Left, 977, 175
     Send {LButton} 
 
@@ -3285,9 +3391,11 @@ return
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
-
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1109, 663, 5, R
+    
+    ; ???
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1109, 663, 5, R
+	MouseMove, 1920 + 1109, 663, 5
 	MouseMove, 775, -80, 2, R
 
 	Send {LShift Down}
@@ -3297,15 +3405,18 @@ return
 	Send {PrintScreen Up}
 
 	Sleep 700
-	MouseMove, -4000, -4000, 0, R
+	;MouseMove, -4000, -4000, 0, R
+
 	;MouseMove, 1009 + 350 - 137, 613, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동
 	;MouseMove, 1009 + 350 - 137, 516, 5, R  ;350 픽셀줄임, 그리고 체결창 때문에 좌측으로 137만큼 이동 + 호가창녹화버전으로 인해 위로 좀 올림
     ;툴바 내림으로 인해 y축 올림
 	;MouseMove, 1920 + 1340 , 580, 5, R  ;호가거래 세팅으로서 우측 모니터로 옮김
-	MouseMove, 1920 + 1340 , 580 - 27, 5, R  ;호가거래 세팅으로서 우측 모니터로 옮김
+	;MouseMove, 1920 + 1340 , 580 - 27, 5, R  ;호가거래 세팅으로서 우측 모니터로 옮김
+	MouseMove, 1340 , 580 - 27, 5  ;호가거래 세팅으로서 우측 모니터로 옮김
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
+    ;드래그
 	MouseMove, 895 - 350, 357, 5, R ;350 픽셀줄임
 	Sleep 100
 	Send {LButton Up}
@@ -3382,8 +3493,9 @@ return
 	IfWinExist, Save As
 		WinActivate
 	Sleep 500
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2332, 357, 0, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2332, 357, 0, R
+	MouseMove, 2332 - 1920, 357, 0
 	Sleep 300
 	Send {LButton Down}
 	Sleep 20
@@ -3415,8 +3527,9 @@ return
 	Sleep 100
 	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
 	Sleep 100
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2555, 130, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2555, 130, 5, R
+	MouseMove, 2555 - 1920, 130, 5
 	Send {LButton}
 
 
@@ -3446,8 +3559,9 @@ return
     */
     ; 윈10
     Sleep 4000 
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 475, 145, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 475, 145, 5, R
+	MouseMove, 475, 145, 5
     ;MouseClick, Left, 977, 175
     Send {LButton} 
     
@@ -3469,8 +3583,9 @@ return
 	Sleep 700
     Send {Tab}{Tab}{Space}
     */
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 1195, 506, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1195, 506, 5, R
+	MouseMove, 1195, 506, 5
     Send {LButton} 
 	;Sleep 1300
 	Sleep 2500
@@ -3478,8 +3593,9 @@ return
 
     ;올리기 버튼 클릭
     ;윈10
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 1693, 150, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1693, 150, 5, R
+	MouseMove, 1693, 150, 5
     ;MouseClick, Left, 977, 175
     Send {LButton} 
     ;<-- 새탭으로 열기로 변경되면서 임시 교체
@@ -3534,10 +3650,11 @@ return
 	Send {PrintScreen Up}
 
 	Sleep 700
-	MouseMove, -4000, -4000, 0, R
+	;MouseMove, -4000, -4000, 0, R
     ;툴바 내림으로 인해 y축 올림
 	;MouseMove, 2490 + 200, 50, 5, R ; 200픽셀 가로 줄임
-	MouseMove, 2490 + 200, 50 - 27, 5, R ; 200픽셀 가로 줄임
+	;MouseMove, 2490 + 200, 50 - 27, 5, R ; 200픽셀 가로 줄임
+	MouseMove, 2490 + 200 - 1920, 50 - 27, 5 ; 200픽셀 가로 줄임
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
@@ -3622,8 +3739,9 @@ return
 	IfWinExist, Save As
 		WinActivate
 	Sleep 500
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2332, 357, 0, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2332, 357, 0, R
+	MouseMove, 2332 - 1920, 357, 0
 	Sleep 300
 	Send {LButton Down}
 	Sleep 20
@@ -3655,8 +3773,9 @@ return
 	Sleep 100
 	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
 	Sleep 100
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2555, 130, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2555, 130, 5, R
+	MouseMove, 2555 - 1920, 130, 5
 	Send {LButton}
 
 
@@ -3687,8 +3806,9 @@ return
     */
     ; 윈10
     Sleep 4000 
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 475, 145, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 475, 145, 5, R
+	MouseMove, 475, 145, 5
     ;MouseClick, Left, 977, 175
     Send {LButton} 
     
@@ -3703,8 +3823,9 @@ return
 	Sleep 400
 	
 	Send {1}{.}{p}{n}{g}
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 1195, 506, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1195, 506, 5, R
+	MouseMove, 1195, 506, 5
     Send {LButton} 
 	;Sleep 1300
 	Sleep 2500
@@ -3713,8 +3834,9 @@ return
 
     ;올리기 버튼 클릭
     ;윈10
-	MouseMove, -4000, -4000, 0, R
+	;MouseMove, -4000, -4000, 0, R
 	MouseMove, 1920 + 1693, 150, 5, R
+	MouseMove, 1693, 150, 5
     ;MouseClick, Left, 977, 175
     Send {LButton} 
 
