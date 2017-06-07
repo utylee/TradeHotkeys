@@ -2494,7 +2494,7 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
 	MouseMove, 7, -424, 2
     Send {LButton Down}
     Sleep 100
-	MouseMove, 1410, 422, 2, R
+	MouseMove, 1410, 418, 2, R
 	Sleep 100 
 	Send {LButton Up}
 
