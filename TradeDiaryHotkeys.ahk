@@ -363,13 +363,18 @@ LAlt & ~1::
 	IfWinExist, ahk_class MozillaWindowClass
 	{
 		;WinActivate
-		WinMove, ahk_class MozillaWindowClass, , 390, 55, 1400, 1100 
+		WinMove, ahk_class MozillaWindowClass, , 390, 55, 1400, 980 
 	}	
 
 	IfWinExist, MINGW32 
 	{
 		;WinActivate
 		WinMove, MINGW32, , 460, 55, 1200, 1100 
+	}	
+	IfWinExist, ahk_class mintty
+	{
+		;WinActivate
+		WinMove, ahk_class mintty, , 520, 135, 1100, 870 
 	}	
 
 	return
@@ -5112,8 +5117,9 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
 		WinActivate
 	Sleep 50
 
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2210, 700, 5 , R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2210, 700, 5 , R
+	MouseMove, 2210 - 1920, 700, 5
 	MouseMove, 779, -120, 2 , R
 	
 	Send {LShift Down}
@@ -5123,10 +5129,11 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
 	Send {PrintScreen Up}
 
 	Sleep 700
-	MouseMove, -4000, -4000, 0, R
+	;MouseMove, -4000, -4000, 0, R
     ;툴바 내림으로 인해 y축 올림
 	;MouseMove, 2110, 600, 5 , R
-	MouseMove, 2110, 600 - 27, 5 , R
+	;MouseMove, 2110, 600 - 27, 5 , R
+	MouseMove, 2110 - 1920, 600 - 27, 5
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
@@ -5150,8 +5157,9 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
 	IfWinExist, Save As
 		WinActivate
 	Sleep 500
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2332, 357, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2332, 357, 5, R
+	MouseMove, 2332 - 1920, 357, 5
 
 	Sleep 20
 	Send {LButton Down}
@@ -5183,8 +5191,9 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
 	Sleep 100
 	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
 	Sleep 100
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2555, 130, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2555, 130, 5, R
+	MouseMove, 2555 - 1920, 130, 5
 	Send {LButton}
 
     ;<--새탭에 띄우기로 바뀌면서 임시로 변경
@@ -5211,8 +5220,9 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
     */
     ; 윈10
     Sleep 4000 
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 475, 145, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 475, 145, 5, R
+	MouseMove, 475, 145, 5
     ;MouseClick, Left, 977, 175
     Send {LButton} 
     
@@ -5233,8 +5243,9 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
     Sleep 700
     Send {Tab}{Tab}{Space}
     */
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 1195, 506, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1195, 506, 5, R
+	MouseMove, 1195, 506, 5
     Send {LButton} 
 	;Sleep 1000
 	Sleep 2500
@@ -5242,8 +5253,9 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
 
     ;올리기 버튼 클릭
     ;윈10
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1920 + 1693, 150, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1693, 150, 5, R
+	MouseMove, 1693, 150, 5
     ;MouseClick, Left, 977, 175
     Send {LButton} 
 
