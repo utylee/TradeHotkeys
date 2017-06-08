@@ -802,61 +802,71 @@ CheckPos(posX, posY)
     ret := 0
 
     ;잔고/당일매매 영역일 경우
-    if (posX >= 1920 + 620) and (posX <= 1920 + 1223) and (posY >= 820 ) and (posY <= 1076)
+    ;if (posX >= 1920 + 620) and (posX <= 1920 + 1223) and (posY >= 820 ) and (posY <= 1076)
+    if (posX >= 620) and (posX <= 1223) and (posY >= 820 ) and (posY <= 1076)
     {
         ret := 77 
     }
     
     ;(추가)좌측 큰 차트일 경우
-    else if (posX >= 671) and (posX <= 1193) and (posY >=9) and (posY <= 403)
+    ;else if (posX >= 671) and (posX <= 1193) and (posY >=9) and (posY <= 403)
+    else if (posX >= 671 - 1920) and (posX <= 1193 - 1920) and (posY >=9) and (posY <= 403)
     {
         ret := 99
     }
 
     ;첫번째 호가 위치일 경우  
-    else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
+    ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
+    else if (posX >= 0) and ( posX <= 615) and (posY <= 410)
     {
         ret := 1
     }
     ; 2nd 호가창 위치일 경우
-    else if (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY <= 410)
+    ;else if (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY <= 410)
+    else if (posX >= 616) and ( posX <= 1225) and (posY <= 410)
     {
         ret := 2
     }
 
     ; 3rd 호가창 위치일 경우
-    else if (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY <= 410)
+    ;else if (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY <= 410)
+    else if (posX >= 1226) and ( posX <= 1841) and (posY <= 410)
     {
         ;-->
         ret := 3
     }
 
     ; 4th 호가창 위치일 경우
-    else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 411) and (posY <= 812)
+    ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 411) and (posY <= 812)
+    else if (posX >= 0) and ( posX <= 615) and (posY >= 411) and (posY <= 812)
     {
         ;-->
         ret := 4
     }
     ; 5th 호가창 위치일 경우
-    else if (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY >= 411) and (posY <= 812)
+    ;else if (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY >= 411) and (posY <= 812)
+    else if (posX >= 616) and ( posX <= 1225) and (posY >= 411) and (posY <= 812)
     {
         ;-->
         ret := 5
     }
     ; 6th 호가창 위치일 경우
-    else if (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY >= 411) and (posY <= 812)
+    ;else if (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY >= 411) and (posY <= 812)
+    else if (posX >= 1226) and ( posX <= 1841) and (posY >= 411) and (posY <= 812)
     {
         ;-->
         ret := 6
     }
     ; 7th 호가창 위치일 경우
-    else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 813)
+    ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 813)
+    else if (posX >= 0) and ( posX <= 615) and (posY >= 813)
     {
         ;-->
         ret := 7
     }
     ; 8th 호가창 위치일 경우
-    else if (posX >= 1920 + 1226) and (posY >= 813) 
+    ;else if (posX >= 1920 + 1226) and (posY >= 813) 
+    else if (posX >= 1226) and (posY >= 813) 
     {
         ;-->
         ret := 8
@@ -871,21 +881,29 @@ NumToSubjectPos(N)
     Pos := {"x" : 0, "y" :0}
 
     if (N == 1) 
-        Pos := {"x" : 1920 + 30, "y" : 25}
+        ;Pos := {"x" : 1920 + 30, "y" : 25}
+        Pos := {"x" : 30, "y" : 25}
     else if (N == 2)
-        Pos := {"x" : 1920 + 642, "y" : 25}
+        ;Pos := {"x" : 1920 + 642, "y" : 25}
+        Pos := {"x" : 642, "y" : 25}
     else if (N == 3)
-        Pos := {"x" : 1920 + 1260, "y" : 25}
+        ;Pos := {"x" : 1920 + 1260, "y" : 25}
+        Pos := {"x" : 1260, "y" : 25}
     else if (N == 4)
-        Pos := {"x" : 1920 + 30, "y" : 425}
+        ;Pos := {"x" : 1920 + 30, "y" : 425}
+        Pos := {"x" : 30, "y" : 425}
     else if (N == 5) 
-        Pos := {"x" : 1920 + 642, "y" : 425}
+        ;Pos := {"x" : 1920 + 642, "y" : 425}
+        Pos := {"x" : 642, "y" : 425}
     else if (N == 6) 
-        Pos := {"x" : 1920 + 1260, "y" : 425}
+        ;Pos := {"x" : 1920 + 1260, "y" : 425}
+        Pos := {"x" : 1260, "y" : 425}
     else if (N == 7) 
-        Pos := {"x" : 1920 + 30, "y" : 825}
+        ;Pos := {"x" : 1920 + 30, "y" : 825}
+        Pos := {"x" : 30, "y" : 825}
     else if (N == 8) 
-        Pos := {"x" : 1920 + 1260, "y" : 825}
+        ;Pos := {"x" : 1920 + 1260, "y" : 825}
+        Pos := {"x" : 1260, "y" : 825}
 
     return Pos
 }
@@ -896,27 +914,37 @@ NumToTickPos(N)
     Pos := {"x" : 0, "y" : 0}
 
     if (N == 1) 
-        Pos := {"x" : 1920 + 318, "y" : 215}
+        ;Pos := {"x" : 1920 + 318, "y" : 215}
+        Pos := {"x" : 318, "y" : 215}
     else if (N == 2)
-        Pos := {"x" : 1920 + 935, "y" : 215}
+        ;Pos := {"x" : 1920 + 935, "y" : 215}
+        Pos := {"x" : 935, "y" : 215}
     else if (N == 3)
-        Pos := {"x" : 1920 + 1550, "y" : 215}
+        ;Pos := {"x" : 1920 + 1550, "y" : 215}
+        Pos := {"x" : 1550, "y" : 215}
     else if (N == 4)
-        Pos := {"x" : 1920 + 318, "y" : 616}
+        ;Pos := {"x" : 1920 + 318, "y" : 616}
+        Pos := {"x" : 318, "y" : 616}
     else if (N == 5) 
-        Pos := {"x" : 1920 + 935, "y" : 616}
+        ;Pos := {"x" : 1920 + 935, "y" : 616}
+        Pos := {"x" : 935, "y" : 616}
     else if (N == 6) 
-        Pos := {"x" : 1920 + 1550, "y" : 616}
+        ;Pos := {"x" : 1920 + 1550, "y" : 616}
+        Pos := {"x" : 1550, "y" : 616}
     else if (N == 7) 
-        Pos := {"x" : 1920 + 318, "y" : 1012}
+        ;Pos := {"x" : 1920 + 318, "y" : 1012}
+        Pos := {"x" : 318, "y" : 1012}
     else if (N == 8) 
-        Pos := {"x" : 1920 + 1550, "y" : 1012}
+        ;Pos := {"x" : 1920 + 1550, "y" : 1012}
+        Pos := {"x" : 1550, "y" : 1012}
     ;좌측 차트용으로 추가
     else if (N == 99)
-        Pos := {"x" : 1085, "y" : 30}
+        ;Pos := {"x" : 1085, "y" : 30}
+        Pos := {"x" : 1085 - 1920, "y" : 30}
     ;잔고/당일매매 전환
     else if (N == 77)
-        Pos := {"x" : 1920 + 663, "y" : 830}
+        ;Pos := {"x" : 1920 + 663, "y" : 830}
+        Pos := {"x" : 663, "y" : 830}
 
     return Pos
 }
@@ -927,27 +955,37 @@ NumToMinuPos(N)
     Pos := {"x" : 0, "y" : 0}
 
     if (N == 1) 
-        Pos := {"x" : 1920 + 356, "y" : 215}
+        ;Pos := {"x" : 1920 + 356, "y" : 215}
+        Pos := {"x" : 356, "y" : 215}
     else if (N == 2)
-        Pos := {"x" : 1920 + 973, "y" : 215}
+        ;Pos := {"x" : 1920 + 973, "y" : 215}
+        Pos := {"x" : 973, "y" : 215}
     else if (N == 3)
-        Pos := {"x" : 1920 + 1588, "y" : 215}
+        ;Pos := {"x" : 1920 + 1588, "y" : 215}
+        Pos := {"x" : 1588, "y" : 215}
     else if (N == 4)
-        Pos := {"x" : 1920 + 356, "y" : 616}
+        ;Pos := {"x" : 1920 + 356, "y" : 616}
+        Pos := {"x" : 356, "y" : 616}
     else if (N == 5) 
-        Pos := {"x" : 1920 + 973, "y" : 616}
+        ;Pos := {"x" : 1920 + 973, "y" : 616}
+        Pos := {"x" : 973, "y" : 616}
     else if (N == 6) 
-        Pos := {"x" : 1920 + 1588, "y" : 616}
+        ;Pos := {"x" : 1920 + 1588, "y" : 616}
+        Pos := {"x" : 1588, "y" : 616}
     else if (N == 7) 
-        Pos := {"x" : 1920 + 356, "y" : 1012}
+        ;Pos := {"x" : 1920 + 356, "y" : 1012}
+        Pos := {"x" : 356, "y" : 1012}
     else if (N == 8) 
-        Pos := {"x" : 1920 + 1588, "y" : 1012}
+        ;Pos := {"x" : 1920 + 1588, "y" : 1012}
+        Pos := {"x" : 1588, "y" : 1012}
     ;좌측 차트용으로 추가
     else if (N == 99)
-        Pos := {"x" : 1065, "y" : 30}
+        ;Pos := {"x" : 1065, "y" : 30}
+        Pos := {"x" : 1065 - 1920, "y" : 30}
     ;잔고/당일매매 전환
     else if (N == 77)
-        Pos := {"x" : 1920 + 730, "y" : 830}
+        ;Pos := {"x" : 1920 + 730, "y" : 830}
+        Pos := {"x" : 730, "y" : 830}
 
     return Pos
 }
@@ -972,7 +1010,8 @@ SwapWinProc(A, B)
     ;최하단의 임시 창의 좌표입니다
     ;pos_temp := {"x" : 1920 + 650, "y" : 1101}
     ;144hz 모니터로 바꾸면서 세로 해상도 줄어들어 임시로 우측차트으로 이동해봄 ^^
-    pos_temp := {"x" : 1920 + 1900, "y" : 45}
+    ;pos_temp := {"x" : 1920 + 1900, "y" : 45}
+    pos_temp := {"x" : 1900, "y" : 45}
 
     ;A좌표에서 temp좌표(1920 + 756, 1128)로 드래그 합니다
     DragProc(pos_A, pos_temp)
@@ -1778,20 +1817,24 @@ XButton1::
 
     ;#####
     ; [8282] 분틱차트 위치일 경우, 분<-->틱 상호교환
-    If (posX >= 671) and (posX <= 1193) and (posY >=9) and (posY <= 403)
+    ;If (posX >= 671) and (posX <= 1193) and (posY >=9) and (posY <= 403)
+    If (posX >= 671 - 1920) and (posX <= 1193 - 1920) and (posY >=9) and (posY <= 403)
     {
         global toggle
 
         toggle := toggle * -1
-        cX := 1650
+        ;cX := 1650
+        cX := 1650 - 1920
 
         if(toggle == -1) 
         {
-            cX := 1065
+            ;cX := 1065
+            cX := 1065 - 1920
         }
         else
         {
-            cX := 1085
+            ;cX := 1085
+            cX := 1085 - 1920
         }
         
         MouseClick, Left, cX, 30
@@ -1801,9 +1844,11 @@ XButton1::
 
     ;#####
     ; [8282] 호가창 전체버튼 누르기
-    If (posX >= 1192) and (posX <= 1720) and (posY >=5) and (posY <= 518)
+    ;If (posX >= 1192) and (posX <= 1720) and (posY >=5) and (posY <= 518)
+    If (posX >= 1192 - 1920) and (posX <= 1720 - 1920) and (posY >=5) and (posY <= 518)
     {
-        MouseClick, Left, 1650, 50
+        ;MouseClick, Left, 1650, 50
+        MouseClick, Left, 1650 - 1920, 50
         Sleep, 50
         MouseMove, posX, posY
     }
@@ -1812,13 +1857,16 @@ XButton1::
     ;0999때문에 0998 버전을 주석처리 해놓는다
     ; 첫 호가창 위치일 경우 (0999 버전)
 
-    If (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
+    ;If (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
+    If (posX >= 0) and ( posX <= 615) and (posY <= 410)
     {
-        MouseMove, 1920 + 37, 28
+        ;MouseMove, 1920 + 37, 28
+        MouseMove, 37, 28
 	    Send {LButton Down}
 	    Sleep 20
 	    ;MouseMove, 1585, -180, 2, R
-	    MouseMove, 1920 - 694, 50, 2 
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
 	    Send {LButton Up}
 
         Sleep 10
@@ -1827,13 +1875,16 @@ XButton1::
         ;-->
     }
     ; 2nd 호가창 위치일 경우
-    If (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY <= 410)
+    ;If (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY <= 410)
+    If (posX >= 616) and ( posX <= 1225) and (posY <= 410)
     {
-        MouseMove, 1920 + 37 + 615, 28
+        ;MouseMove, 1920 + 37 + 615, 28
+        MouseMove, 37 + 615, 28
 	    Send {LButton Down}
 	    Sleep 20
 	    ;MouseMove, 1585, -180, 2, R
-	    MouseMove, 1920 - 694, 50, 2 
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
 	    Send {LButton Up}
 
         Sleep 10
@@ -1843,13 +1894,16 @@ XButton1::
     }
 
     ; 3rd 호가창 위치일 경우
-    If (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY <= 410)
+    ;If (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY <= 410)
+    If (posX >= 1226) and ( posX <= 1841) and (posY <= 410)
     {
-        MouseMove, 1920 + 37 + 1225, 28
+        ;MouseMove, 1920 + 37 + 1225, 28
+        MouseMove, 37 + 1225, 28
 	    Send {LButton Down}
 	    Sleep 20
 	    ;MouseMove, 1585, -180, 2, R
-	    MouseMove, 1920 - 694, 50, 2 
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
 	    Send {LButton Up}
 
         Sleep 10
@@ -1859,13 +1913,16 @@ XButton1::
     }
 
     ; 4th 호가창 위치일 경우
-    If (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 411) and (posY <= 812)
+    ;If (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 411) and (posY <= 812)
+    If (posX >= 0) and ( posX <= 615) and (posY >= 411) and (posY <= 812)
     {
-        MouseMove, 1920 + 37, 428
+        ;MouseMove, 1920 + 37, 428
+        MouseMove, 37, 428
 	    Send {LButton Down}
 	    Sleep 20
 	    ;MouseMove, 1585, -180, 2, R
-	    MouseMove, 1920 - 694, 50, 2 
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
 	    Send {LButton Up}
 
         Sleep 10
@@ -1874,13 +1931,16 @@ XButton1::
         ;-->
     }
     ; 5th 호가창 위치일 경우
-    If (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY >= 411) and (posY <= 812)
+    ;If (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY >= 411) and (posY <= 812)
+    If (posX >= 616) and ( posX <= 1225) and (posY >= 411) and (posY <= 812)
     {
-        MouseMove, 1920 + 37 + 615, 428
+        ;MouseMove, 1920 + 37 + 615, 428
+        MouseMove, 37 + 615, 428
 	    Send {LButton Down}
 	    Sleep 20
 	    ;MouseMove, 1585, -180, 2, R
-	    MouseMove, 1920 - 694, 50, 2 
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
 	    Send {LButton Up}
 
         Sleep 10
@@ -1889,13 +1949,16 @@ XButton1::
         ;-->
     }
     ; 6th 호가창 위치일 경우
-    If (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY >= 411) and (posY <= 812)
+    ;If (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY >= 411) and (posY <= 812)
+    If (posX >= 1226) and ( posX <= 1841) and (posY >= 411) and (posY <= 812)
     {
-        MouseMove, 1920 + 37 + 1225, 428
+        ;MouseMove, 1920 + 37 + 1225, 428
+        MouseMove, 37 + 1225, 428
 	    Send {LButton Down}
 	    Sleep 20
 	    ;MouseMove, 1585, -180, 2, R
-	    MouseMove, 1920 - 694, 50, 2 
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
 	    Send {LButton Up}
 
         Sleep 10
@@ -1904,13 +1967,16 @@ XButton1::
         ;-->
     }
     ; 7th 호가창 위치일 경우
-    If (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 813)
+    ;If (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 813)
+    If (posX >= 0) and ( posX <= 615) and (posY >= 813)
     {
-        MouseMove, 1920 + 37, 825
+        ;MouseMove, 1920 + 37, 825
+        MouseMove, 37, 825
 	    Send {LButton Down}
 	    Sleep 20
 	    ;MouseMove, 1585, -180, 2, R
-	    MouseMove, 1920 - 694, 50, 2 
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
 	    Send {LButton Up}
 
         Sleep 10
@@ -1919,13 +1985,16 @@ XButton1::
         ;-->
     }
     ; 8th 호가창 위치일 경우
-    If (posX >= 1920 + 1226) and (posY >= 813) 
+    ;If (posX >= 1920 + 1226) and (posY >= 813) 
+    If (posX >= 1226) and (posY >= 813) 
     {
-        MouseMove, 1920 + 37 + 1225, 825
+        ;MouseMove, 1920 + 37 + 1225, 825
+        MouseMove, 37 + 1225, 825
 	    Send {LButton Down}
 	    Sleep 20
 	    ;MouseMove, 1585, -180, 2, R
-	    MouseMove, 1920 - 694, 50, 2 
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
 	    Send {LButton Up}
 
         Sleep 10
