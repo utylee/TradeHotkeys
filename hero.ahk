@@ -1,4 +1,7 @@
 
+;ì ˆëŒ€ì¢Œí‘œë¥¼ ì‚¬ìš©í•˜ëŠ” ëª…ë ¹ì–´
+Coordmode, Mouse, Screen
+
 Sleep 1000
 SetKeyDelay, 20
 Send {LWin Down}
@@ -7,8 +10,8 @@ Sleep 100
 Send {LWin Up}
 Send {8 Up}
 
-WinWait, ¿µ¿õ¹® Login 
-IfWinExist, ¿µ¿õ¹® Login
+WinWait, ì˜ì›…ë¬¸ Login 
+IfWinExist, ì˜ì›…ë¬¸ Login
 	WinActivate
 Sleep 2000
 SetKeyDelay, 100 
@@ -21,15 +24,15 @@ Sleep 14000
 IfWinExist, ahk_class _KiWoomClass
 	WinActivate
 	Sleep 100
-	;0Á¡Á¶Àý
+	;0ì ì¡°ì ˆ
 	WinMove, ahk_class _KiWoomClass, , -1920, 0	
 Sleep 30
-; ¸Þ´º Åø¹Ù º¸ÀÌ±â ¾ðÃ½
+; ë©”ë‰´ íˆ´ë°” ë³´ì´ê¸° ì–¸ì²µ
 ;MouseClick, Right, 2100, 20
 ;Sleep 30
 ;MouseClick, Left, 2110, 25 
 ;Sleep 100
-; Æ¼Ä¿Åø¹Ù- ½ÅÈ£´ë±â Å¬¸¯
+; í‹°ì»¤íˆ´ë°”- ì‹ í˜¸ëŒ€ê¸° í´ë¦­
 
 /*
 MouseMove, 2330, 880
@@ -54,9 +57,9 @@ MouseClick, Left, 210, 400
 Sleep 1800
 
 
-/* È£°¡¸Å¸Å·Î °¡»óÈ­¸é3¿¡¼­ ÁÖ·Î ¿¬½ÀÇÏ±â·Î ÇØ¼­ ÀÓ½Ã·Î Á¦°Å
-;¸Å¸Åµ¿Çâ Á¤»óÈ­
-;¿ÞÂÊÃ¢À¸·Î ¿Å±â±â À§ÇØ ¼öÁ¤
+/* í˜¸ê°€ë§¤ë§¤ë¡œ ê°€ìƒí™”ë©´3ì—ì„œ ì£¼ë¡œ ì—°ìŠµí•˜ê¸°ë¡œ í•´ì„œ ìž„ì‹œë¡œ ì œê±°
+;ë§¤ë§¤ë™í–¥ ì •ìƒí™”
+;ì™¼ìª½ì°½ìœ¼ë¡œ ì˜®ê¸°ê¸° ìœ„í•´ ìˆ˜ì •
 ;MouseClick, Left, 74 + 1920 - 1200, 58 
 MouseClick, Left, 1920 - 1200, 58 
 Sleep 200
@@ -65,9 +68,9 @@ MouseClick, Left, 1920 - 1200, 315
 Sleep 200
 
 
-; ¹Ø¿¡ »õ·Î ÀÛ¼ºÇÏ´Â ¹Ù¶÷¿¡ ÀÏ´Ü »ý·«
+; ë°‘ì— ìƒˆë¡œ ìž‘ì„±í•˜ëŠ” ë°”ëžŒì— ì¼ë‹¨ ìƒëžµ
 ;MouseMove, 2043 - 1200, 160 - 80
-;¿ÞÂÊÃ¢À¸·Î ¿Å±â±â À§ÇØ ¼öÁ¤
+;ì™¼ìª½ì°½ìœ¼ë¡œ ì˜®ê¸°ê¸° ìœ„í•´ ìˆ˜ì •
 ;MouseMove, 833, 83 
 MouseMove, 764, 87 
 Send {LButton Down}
@@ -80,7 +83,7 @@ Send {LButton Up}
 ;Sleep 200
 Sleep 100
 ;MouseMove, 2043 - 1200, 360 - 65
-;¿ÞÂÊÃ¢À¸·Î ¿Å±â±â À§ÇØ ¼öÁ¤
+;ì™¼ìª½ì°½ìœ¼ë¡œ ì˜®ê¸°ê¸° ìœ„í•´ ìˆ˜ì •
 ;MouseMove, 835, 296 
 MouseMove, 763, 293 
 Send {LButton Down}
@@ -91,21 +94,21 @@ Send {LButton Up}
 ;Sleep 200
 Sleep 100
 
-;¸Å¸Åµ¿Çâ ¼±¹° ¹öÆ° Å¬¸¯
+;ë§¤ë§¤ë™í–¥ ì„ ë¬¼ ë²„íŠ¼ í´ë¦­
 ;MouseClick, Left, 1838 - 1190 - 50, 152 
 MouseClick, Left, 538, 154 
 
 ;Sleep 100
 Sleep 100
-;¸Å¸Åµ¿Çâ ÄÚ½º´Ú ¹öÆ° Å¬¸¯
+;ë§¤ë§¤ë™í–¥ ì½”ìŠ¤ë‹¥ ë²„íŠ¼ í´ë¦­
 ;MouseClick, Left, 1838 - 1190 - 50, 340 
 MouseClick, Left, 538, 345 
 ;Sleep 200
 Sleep 100
 */
 
-/* ÀÏ´Ü ¸Å¸Åµ¿ÇâÀÌ ÀÛ¾ÆÁ®¼­ Àß ¾Èº¸¿©¼­ ÀÓ½Ã·Î ÇÁ·Î¼¼½º »©³õ°ÚÀ½
-;¸Å¸Åµ¿Çâ Ã¢µé Æ÷Ä¿½Ì Å¬¸¯
+/* ì¼ë‹¨ ë§¤ë§¤ë™í–¥ì´ ìž‘ì•„ì ¸ì„œ ìž˜ ì•ˆë³´ì—¬ì„œ ìž„ì‹œë¡œ í”„ë¡œì„¸ìŠ¤ ë¹¼ë†“ê² ìŒ
+;ë§¤ë§¤ë™í–¥ ì°½ë“¤ í¬ì»¤ì‹± í´ë¦­
 ;MouseClick, Left, 823, 83 
 MouseMove, 823, 83 
 Send {LButton down}
@@ -124,7 +127,7 @@ Sleep 50
 Send {LButton up}
 Sleep 200
 
-;¼±¹°/ÄÚ½º´Ú ºÐºÀ 5ºÐÀ¸·Î º¯°æ
+;ì„ ë¬¼/ì½”ìŠ¤ë‹¥ ë¶„ë´‰ 5ë¶„ìœ¼ë¡œ ë³€ê²½
 Sleep 100
 MouseClick, Left, 1525 + 1920, 528
 Sleep 100
@@ -134,62 +137,65 @@ MouseClick, Left, 1630 + 1920, 43
 Sleep 100
 MouseClick, Left, 1870 + 1920, 55 
 Sleep 100
-;ÀÏºÀ ¸ÞÀÎÂ÷Æ® Å¬¸¯ÇØ¼­ ÃÖ»óÀ§·Î ¿Ã¸²
+;ì¼ë´‰ ë©”ì¸ì°¨íŠ¸ í´ë¦­í•´ì„œ ìµœìƒìœ„ë¡œ ì˜¬ë¦¼
 MouseClick, Left, 607 + 1920, 47
 Sleep 10
 
-;¸Å¸Åµ¿Çâ ¼±¹° ¹öÆ° Å¬¸¯
+;ë§¤ë§¤ë™í–¥ ì„ ë¬¼ ë²„íŠ¼ í´ë¦­
 MouseClick, Left, 1838 - 1190 - 50, 152 
 Sleep 200
-;¸Å¸Åµ¿Çâ ÄÚ½º´Ú ¹öÆ° Å¬¸¯
+;ë§¤ë§¤ë™í–¥ ì½”ìŠ¤ë‹¥ ë²„íŠ¼ í´ë¦­
 MouseClick, Left, 1838 - 1190 - 50, 340 
 Sleep 200
 */
 
 
-; 0998 ÀúÀåÈ­¸é ´­·¯¼­ °¡»óÈ­¸é ¼¼°³¸¦ ¸ðµÎ ½ÇÇà½ÃÄÑÁÜ, Ã³À½ Á¢¼Ó ½Ã ÃÊ±â´Â °¡»óÈ­¸é ÇÑ °³ ¹Û¿¡ Áö¿øÀ» ¾ÈÇÏ³×
-;À§Ä¡¸¦ ÇÏ´ÜÀ¸·Î º¯°æÇÔ
+; 0998 ì €ìž¥í™”ë©´ ëˆŒëŸ¬ì„œ ê°€ìƒí™”ë©´ ì„¸ê°œë¥¼ ëª¨ë‘ ì‹¤í–‰ì‹œì¼œì¤Œ, ì²˜ìŒ ì ‘ì† ì‹œ ì´ˆê¸°ëŠ” ê°€ìƒí™”ë©´ í•œ ê°œ ë°–ì— ì§€ì›ì„ ì•ˆí•˜ë„¤
+;ìœ„ì¹˜ë¥¼ í•˜ë‹¨ìœ¼ë¡œ ë³€ê²½í•¨
 ;MouseClick, Left, 48, 24
 ;MouseClick, Left, 710, 1145 
-MouseClick, Left, 705, 1130 
+;MouseClick, Left, 705, 1130 
+MouseClick, Left, 705 - 1920, 1130 
 Send {0}
 Sleep 10
 Send {9}
 Sleep 10
 Send {9}
 Sleep 10
-;0999·Î º¯°æ
+;0999ë¡œ ë³€ê²½
 ;Send {8}
-Send {9}
+;Send {9}
+;0997ë¡œ ë³€ê²½
+Send {7}
 
-;È­¸é »ý¼º °£ 30ÃÊ¸¦ ±â´Ù·Á ÁÜ
+;í™”ë©´ ìƒì„± ê°„ 30ì´ˆë¥¼ ê¸°ë‹¤ë ¤ ì¤Œ
 Sleep 30000
 
 /*
-;ÇØ¿ÜÁõ½ÃÂ÷Æ® ÇÑ¹ø Âï¾îÁÜ
+;í•´ì™¸ì¦ì‹œì°¨íŠ¸ í•œë²ˆ ì°ì–´ì¤Œ
 MouseClick, Left, 1571 - 1190, 55 
 Sleep 200
 */
 
-/*-160921-ÀÜ°íÃ¢ ÇÏ´ÜÀ¸·ÎÀÇ À§Ä¡ º¯°æÀ¸·Î ÀÎÇØ ÀÏ´Ü Á¦°Å
-;°èÁÂÁ¤º¸ Ã¢ ÇÑ¹ø Âï¾îÁÜ
+/*-160921-ìž”ê³ ì°½ í•˜ë‹¨ìœ¼ë¡œì˜ ìœ„ì¹˜ ë³€ê²½ìœ¼ë¡œ ì¸í•´ ì¼ë‹¨ ì œê±°
+;ê³„ì¢Œì •ë³´ ì°½ í•œë²ˆ ì°ì–´ì¤Œ
 MouseClick, Left, 2400 - 1190, 80 
 Sleep 200
 */
 
-;;¼±¹° Ã¢ ÇÑ¹ø Âï¾îÁÜ
+;;ì„ ë¬¼ ì°½ í•œë²ˆ ì°ì–´ì¤Œ
 ;MouseClick, Left, 784, 609 
 ;Sleep 200
 
 
-;¿µ¿õ¹®4 ÀÌ¿ë¾È³»Ã¢ ´Ý±â
+;ì˜ì›…ë¬¸4 ì´ìš©ì•ˆë‚´ì°½ ë‹«ê¸°
 ;MouseClick, Left, 462, 53
 ;Sleep 100
 ;MouseClick, Left, 512, 53
 ;Sleep 100
 
-/* ÀÏ´Ü º¯°æµÇ¾î Á¦°ÅÇÔ
-;ÇöÀç°¡Ã¢2 Â÷Æ®ÅÇ Âï¾îÁÖ±â
+/* ì¼ë‹¨ ë³€ê²½ë˜ì–´ ì œê±°í•¨
+;í˜„ìž¬ê°€ì°½2 ì°¨íŠ¸íƒ­ ì°ì–´ì£¼ê¸°
 MouseClick, Left, 1920 - 1092, 232
 Sleep 100
 */
@@ -202,8 +208,8 @@ Sleep 100
 ;MouseClick, Left, 2200, 123
 
 
-/* stopÁÖ¹® Ã¢ È£°¡ÁÖ¹® À§ÁÖ·Î °¡»óÈ­¸é3ÀÌ¶ó Á¦°Å 
-;ÁÖ½ÄStopÁÖ¹® ÀÚµ¿ÁÖ¹®À¸·Î º¯°æÇÏ´Â ÇÁ·Î¼¼½º Ãß°¡
+/* stopì£¼ë¬¸ ì°½ í˜¸ê°€ì£¼ë¬¸ ìœ„ì£¼ë¡œ ê°€ìƒí™”ë©´3ì´ë¼ ì œê±° 
+;ì£¼ì‹Stopì£¼ë¬¸ ìžë™ì£¼ë¬¸ìœ¼ë¡œ ë³€ê²½í•˜ëŠ” í”„ë¡œì„¸ìŠ¤ ì¶”ê°€
 IfWinExist, ahk_class _KiWoomClass
 	WinActivate
 Sleep 100
@@ -219,9 +225,9 @@ MouseClick, Left, 430 + 1920, 1000
 */
 
 
-; 161017 ÇÏ¶ôÀå¼¼¿¡¼­ ÀÚ²Ù ¼öÀÍ½ÇÇöÀ» ¸øÇÏ°í °í²Ù¶óÁü ¹æÁö¸¦ À§ÇØ ½ºÅ¾ÁÖ¹®À» ÀÚµ¿½ÇÇàÇÏµµ·Ï
+; 161017 í•˜ë½ìž¥ì„¸ì—ì„œ ìžê¾¸ ìˆ˜ìµì‹¤í˜„ì„ ëª»í•˜ê³  ê³ ê¾¸ë¼ì§ ë°©ì§€ë¥¼ ìœ„í•´ ìŠ¤íƒ‘ì£¼ë¬¸ì„ ìžë™ì‹¤í–‰í•˜ë„ë¡
 
-; Ctrl W ´©¸§
+; Ctrl W ëˆ„ë¦„
 Send {LCtrl Down}
 Sleep 20
 Send {w Down}
@@ -232,31 +238,34 @@ Send {w up}
 Sleep 2300
 
 
-;ÀÜ°íÆíÀÔ ½ºÅ¾·Î½º ÅÇ ´©¸§
-;ÅÇ¸Þ´º¸¦ ÇÏ´ÜÀ¸·Î ¿Å±â¸é¼­ yÃà -30 
+;ìž”ê³ íŽ¸ìž… ìŠ¤íƒ‘ë¡œìŠ¤ íƒ­ ëˆ„ë¦„
+;íƒ­ë©”ë‰´ë¥¼ í•˜ë‹¨ìœ¼ë¡œ ì˜®ê¸°ë©´ì„œ yì¶• -30 
 ;MouseClick, Left, 460, 85
-MouseClick, Left, 460, 55
+;MouseClick, Left, 460, 55
+MouseClick, Left, 460 - 1920, 55
 Sleep 100
 
-;1,2,3 Á¶°Ç ¼øÂ÷ÀûÀ¸·Î Å¬¸¯
-;ÅÇ¸Þ´º¸¦ ÇÏ´ÜÀ¸·Î ¿Å±â¸é¼­ yÃà -10 
+;1,2,3 ì¡°ê±´ ìˆœì°¨ì ìœ¼ë¡œ í´ë¦­
+;íƒ­ë©”ë‰´ë¥¼ í•˜ë‹¨ìœ¼ë¡œ ì˜®ê¸°ë©´ì„œ yì¶• -10 
 ;MouseClick, Left, 68, 560
-MouseClick, Left, 68, 530
+;MouseClick, Left, 68, 530
+MouseClick, Left, 68 - 1920, 530
 Sleep 100
-/* ½ÇÇö ½ºÅ¾ÁÖ¹®Àº ÀÏ´Ü ´Ù½Ã »©°Ú´Ù
+/* ì‹¤í˜„ ìŠ¤íƒ‘ì£¼ë¬¸ì€ ì¼ë‹¨ ë‹¤ì‹œ ë¹¼ê² ë‹¤
 MouseClick, Left, 68, 580
 Sleep 100
 MouseClick, Left, 68, 600
 */
 
-; Àá½ÃÈÄ ½ºÅ¾·Î½º ¼³Á¤ Ã¢ ´Ý±â
+; ìž ì‹œí›„ ìŠ¤íƒ‘ë¡œìŠ¤ ì„¤ì • ì°½ ë‹«ê¸°
 Sleep 500
-;ÅÇ¸Þ´º¸¦ ÇÏ´ÜÀ¸·Î ¿Å±â¸é¼­ yÃà -10 
+;íƒ­ë©”ë‰´ë¥¼ í•˜ë‹¨ìœ¼ë¡œ ì˜®ê¸°ë©´ì„œ yì¶• -10 
 ;MouseClick, Left, 937, 51
-MouseClick, Left, 937, 21
+;MouseClick, Left, 937, 21
+MouseClick, Left, 937 - 1920, 21
 
 /*
-; Åø¹Ù Á¦°Å (0999 È£°¡°Å·¡ È­¸é¿¡¼±  0101 ÇöÀç°¡Ã¢À» ¾²´Ùº¸´Ï ¼¼·Î°¡ ºÎÁ·ÇØ ±Ø´ëÈ­¸¦ À§ÇØ ¼¼·Î¸¦ ÃÖ´ëÇÑ È®ÀåÇÏ±â À§ÇÔ
+; íˆ´ë°” ì œê±° (0999 í˜¸ê°€ê±°ëž˜ í™”ë©´ì—ì„   0101 í˜„ìž¬ê°€ì°½ì„ ì“°ë‹¤ë³´ë‹ˆ ì„¸ë¡œê°€ ë¶€ì¡±í•´ ê·¹ëŒ€í™”ë¥¼ ìœ„í•´ ì„¸ë¡œë¥¼ ìµœëŒ€í•œ í™•ìž¥í•˜ê¸° ìœ„í•¨
 MouseClick, Right, 721, 1163
 Send {Down}
 Sleep 10
