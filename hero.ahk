@@ -1,4 +1,4 @@
-
+﻿
 ;절대좌표를 사용하는 명령어
 Coordmode, Mouse, Screen
 

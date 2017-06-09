@@ -1,4 +1,4 @@
-SetTitleMatchMode, RegEx
+﻿SetTitleMatchMode, RegEx
 SetKeyDelay, 100
 ; 마우스 이동을 활성윈도우가 아닌 절대좌표를 이용합니다
 Coordmode, Mouse, Screen
