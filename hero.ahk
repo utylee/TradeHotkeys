@@ -225,8 +225,9 @@ MouseClick, Left, 430 + 1920, 1000
 */
 
 
+; 스캘에 있어 자동손절이 추매를 방해하므로 일단 제거해보기로
 ; 161017 하락장세에서 자꾸 수익실현을 못하고 고꾸라짐 방지를 위해 스탑주문을 자동실행하도록
-
+/*
 ; Ctrl W 누름
 Send {LCtrl Down}
 Sleep 20
@@ -251,18 +252,13 @@ Sleep 100
 ;MouseClick, Left, 68, 530
 MouseClick, Left, 68 - 1920, 530
 Sleep 100
-/* 실현 스탑주문은 일단 다시 빼겠다
-MouseClick, Left, 68, 580
-Sleep 100
-MouseClick, Left, 68, 600
-*/
-
 ; 잠시후 스탑로스 설정 창 닫기
 Sleep 500
 ;탭메뉴를 하단으로 옮기면서 y축 -10 
 ;MouseClick, Left, 937, 51
 ;MouseClick, Left, 937, 21
 MouseClick, Left, 937 - 1920, 21
+*/
 
 /*
 ; 툴바 제거 (0999 호가거래 화면에선  0101 현재가창을 쓰다보니 세로가 부족해 극대화를 위해 세로를 최대한 확장하기 위함
