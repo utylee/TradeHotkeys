@@ -2731,8 +2731,13 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
     */
 	;MouseMove, -4000, -4000, 0, R
 	;MouseMove, 1920 + 1195, 506, 5, R
+
+    /*
 	MouseMove, 1195, 506, 5
     Send {LButton} 
+    */
+    ; 열기 버튼 위치가 바뀌어서 그런지 자꾸 안돼서 키보드로 변경해봄
+    Send {Tab}{Enter}
     ;MouseClick, Left, 1195, 506
 	Sleep 2500
 
