@@ -717,32 +717,42 @@ return
 ;
 
 
-#!j::
++!j::
 {
 	send {Down}
 	return
 }
 
-#!k::
++!k::
 {
 	send {Up}
 	return
 }
 
-#!h::
++!h::
 {
-	send {PgDn}
+	send {Left}
 	return
 }
 
-#!l::
++!l::
 {
-	send {PgUp}
+	send {Right}
+	return
+}
+
++!u::
+{
+	send {Home}
 	return
 }
 
 
-
++!i::
+{
+	send {End}
+	return
+}
 
 
 
