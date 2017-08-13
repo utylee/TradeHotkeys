@@ -1,9 +1,12 @@
 ﻿SetTitleMatchMode, RegEx
-SetKeyDelay, 100
+;SetKeyDelay, 100
+;SetKeyDelay, 100
 ; 마우스 이동을 활성윈도우가 아닌 절대좌표를 이용합니다
 Coordmode, Mouse, Screen
 ;CoordMode, ToolTip|Pixel|Mouse|Caret|Menu [, Screen|Window|Client]
 
+s_toggle := 0
+slash_toggle := 0
 ; 분봉<-->틱봉 간의 교환을 위한 변수
 toggle := 1
 
@@ -717,29 +720,136 @@ return
 ;
 
 
-+!j::
+
+/*
+~ / & 1::
 {
+     
+    ;GetKeyState, state, LWin
+    ;if state = D
+    ;{
+    ;    slash_toggle := 1
+	;    send {LWin Down}{F1}
+    ;}
+    ;
+    slash_toggle := 1
+    send {F1}
+	return
+}
+/::
+{
+    return
+}
+
+/ Up::
+{
+    if slash_toggle = 1
+    {
+        slash_toggle := 0 
+        return
+    }
+    else if slash_toggle = 0
+    {
+        send {/}
+        slash_toggle := 0
+        return
+    }
+}
+
+~S & J::
+{
+    s_toggle := 1
 	send {Down}
 	return
 }
-
-+!k::
+~S & K::
 {
+    s_toggle := 1
 	send {Up}
 	return
 }
-
-+!h::
+~S & H::
 {
+    s_toggle := 1
 	send {Left}
 	return
 }
 
-+!l::
+~S & L::
 {
+    s_toggle := 1
 	send {Right}
 	return
 }
+
+S::
+{
+    return
+}
+
+
+S Up::
+{
+    if s_toggle = 1
+    {
+        s_toggle := 0 
+        return
+    }
+    else if s_toggle = 0
+    {
+        send {s}
+        s_toggle := 0
+        return
+    }
+}
+
+*/
+
+#!j::
+{
+    GetKeyState, state, C   
+    if state = D
+    {
+        Send {PgDn}
+        return
+    }
+	send {Down}
+	return
+}
+#!k::
+{
+    GetKeyState, state, C   
+    if state = D
+    {
+        Send {PgUp}
+        return
+    }
+	send {Up}
+	return
+}
+#!h::
+{
+    GetKeyState, state, C   
+    if state = D
+    {
+        Send {Home}
+        return
+    }
+	send {Left}
+	return
+}
+#!l::
+{
+    GetKeyState, state, C   
+    if state = D
+    {
+        Send {End}
+        return
+    }
+	send {Right}
+	return
+}
+
 
 +!u::
 {
