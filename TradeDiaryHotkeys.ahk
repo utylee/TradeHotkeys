@@ -8,8 +8,9 @@ Coordmode, Mouse, Screen
 ; S 버튼을 스페셜 커맨드 키로 사용하기 위한 플래그
 s_toggle := 0
 
-; / 버튼을 스페셜 커맨드 키로 사용하기 위한 플래그 ( + 숫자 = 펑션키)
+; / ? 버튼을 스페셜 커맨드 키로 사용하기 위한 플래그 ( + 숫자 = 펑션키)
 slash_toggle := 0
+question_toggle := 0
 
 ; 분봉<-->틱봉 간의 교환을 위한 변수
 toggle := 1
@@ -823,15 +824,15 @@ S Up::
 }
 ~ / & 4::
 {
-     
+    slash_toggle := 1
     GetKeyState, state, LAlt
     if state = D
     {
-        slash_toggle := 1
 	    send {LAlt Down}{F4}
+        sleep, 30
+	    send {LAlt Up}{F4}
     }
     
-    slash_toggle := 1
     send {F4}
 	return
 }
@@ -848,6 +849,26 @@ S Up::
     send {F5}
 	return
 }
+; shift insert
+~ / & I::
+{
+    slash_toggle := 1
+    GetKeyState, state, LCtrl
+    if state = D
+    {
+        ; ctrl + insert ( copy ) 버튼
+        send {Ctrl Down}{Insert}
+        sleep, 30
+        send {Ctrl Up}
+        return
+    }
+
+    send {Shift Down}{Insert}
+    Sleep, 30
+    send {Shift Up}
+	return
+}
+
 /::
 {
     return
