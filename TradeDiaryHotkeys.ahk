@@ -1,12 +1,16 @@
 ﻿SetTitleMatchMode, RegEx
-;SetKeyDelay, 100
+;SetKeyDelay, 70
 ;SetKeyDelay, 100
 ; 마우스 이동을 활성윈도우가 아닌 절대좌표를 이용합니다
 Coordmode, Mouse, Screen
 ;CoordMode, ToolTip|Pixel|Mouse|Caret|Menu [, Screen|Window|Client]
 
+; S 버튼을 스페셜 커맨드 키로 사용하기 위한 플래그
 s_toggle := 0
+
+; / 버튼을 스페셜 커맨드 키로 사용하기 위한 플래그 ( + 숫자 = 펑션키)
 slash_toggle := 0
+
 ; 분봉<-->틱봉 간의 교환을 위한 변수
 toggle := 1
 
@@ -804,6 +808,64 @@ S Up::
 }
 
 */
+~ / & 1::
+{
+    ;GetKeyState, state, LAlt
+    ;if state = D
+    ;{
+    ;    slash_toggle := 1
+	;    send {LAlt Down}{F4}
+    ;}
+    
+    slash_toggle := 1
+    send {F1}
+	return
+}
+~ / & 4::
+{
+     
+    GetKeyState, state, LAlt
+    if state = D
+    {
+        slash_toggle := 1
+	    send {LAlt Down}{F4}
+    }
+    
+    slash_toggle := 1
+    send {F4}
+	return
+}
+~ / & 5::
+{
+    ;GetKeyState, state, LAlt
+    ;if state = D
+    ;{
+    ;    slash_toggle := 1
+	;    send {LAlt Down}{F4}
+    ;}
+    
+    slash_toggle := 1
+    send {F5}
+	return
+}
+/::
+{
+    return
+}
+/ Up::
+{
+    if slash_toggle = 1
+    {
+        slash_toggle := 0 
+        return
+    }
+    else if slash_toggle = 0
+    {
+        send {/}
+        slash_toggle := 0
+        return
+    }
+}
 
 #!j::
 {
