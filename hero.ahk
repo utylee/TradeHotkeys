@@ -225,9 +225,9 @@ MouseClick, Left, 430 + 1920, 1000
 */
 
 
+; 수익확정기가 필요한 상황이 있다. 너무 빨리 움직이는 경우 큰 수익을 실현못하고 도리어 손실이 되는 경우가 많아 추가해보기로
 ; 스캘에 있어 자동손절이 추매를 방해하므로 일단 제거해보기로
 ; 161017 하락장세에서 자꾸 수익실현을 못하고 고꾸라짐 방지를 위해 스탑주문을 자동실행하도록
-/*
 ; Ctrl W 누름
 Send {LCtrl Down}
 Sleep 20
@@ -250,7 +250,8 @@ Sleep 100
 ;탭메뉴를 하단으로 옮기면서 y축 -10 
 ;MouseClick, Left, 68, 560
 ;MouseClick, Left, 68, 530
-MouseClick, Left, 68 - 1920, 530
+;MouseClick, Left, 68 - 1920, 530
+MouseClick, Left, 68 - 1920, 550
 Sleep 100
 ; 잠시후 스탑로스 설정 창 닫기
 Sleep 500

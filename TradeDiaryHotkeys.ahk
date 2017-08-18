@@ -822,6 +822,19 @@ S Up::
     send {F1}
 	return
 }
+~ / & 2::
+{
+    ;GetKeyState, state, LAlt
+    ;if state = D
+    ;{
+    ;    slash_toggle := 1
+	;    send {LAlt Down}{F4}
+    ;}
+    
+    slash_toggle := 1
+    send {F2}
+	return
+}
 ~ / & 4::
 {
     slash_toggle := 1
@@ -831,6 +844,7 @@ S Up::
 	    send {LAlt Down}{F4}
         sleep, 30
 	    send {LAlt Up}{F4}
+        return
     }
     
     send {F4}
@@ -864,6 +878,27 @@ S Up::
     }
 
     send {Shift Down}{Insert}
+    Sleep, 30
+    send {Shift Up}
+	return
+}
+; shift printscreen 
+~ / & P::
+{
+    slash_toggle := 1
+    /*   
+    GetKeyState, state, LCtrl
+    if state = D
+    {
+        ; ctrl + insert ( copy ) 버튼
+        send {Ctrl Down}{Insert}
+        sleep, 30
+        send {Ctrl Up}
+        return
+    }
+    */
+
+    send {Shift Down}{PrintScreen}
     Sleep, 30
     send {Shift Up}
 	return
