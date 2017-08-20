@@ -809,6 +809,17 @@ S Up::
 }
 
 */
+
+
+
+SC029::ESC
+^SC029::Send, `` 
++SC029::SendRaw, ~ 
+
+
+
+
+
 ~ / & 1::
 {
     ;GetKeyState, state, LAlt
@@ -835,12 +846,21 @@ S Up::
     send {F2}
 	return
 }
+!$::
+{
+    send {LAlt Down}{F4}
+    sleep, 30
+    send {LAlt Up}{F4}
+    return
+}
+
 ~ / & 4::
 {
     slash_toggle := 1
     GetKeyState, state, LAlt
     if state = D
     {
+	    ;send {LAlt Down}{F4}
 	    send {LAlt Down}{F4}
         sleep, 30
 	    send {LAlt Up}{F4}
@@ -903,6 +923,7 @@ S Up::
     send {Shift Up}
 	return
 }
+
 
 /::
 {
