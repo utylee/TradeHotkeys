@@ -658,6 +658,8 @@ return
 	return
 }
 
+/*
+; #!F4 지수캡쳐를 변경함
 ; 영국지수 보기
 #!4::
 {
@@ -671,6 +673,7 @@ return
 	Send {LButton}
 	return
 }
+*/
 
 ; 일본니께이지수 보기
 #!5::
@@ -820,6 +823,7 @@ SC029::ESC
 
 
 
+
 ~ / & 1::
 {
     ;GetKeyState, state, LAlt
@@ -854,6 +858,8 @@ SC029::ESC
     return
 }
 
+#!4::Send, !{F4}
+
 ~ / & 4::
 {
     slash_toggle := 1
@@ -864,6 +870,8 @@ SC029::ESC
 	    send {LAlt Down}{F4}
         sleep, 30
 	    send {LAlt Up}{F4}
+        sleep, 30
+        send {/ Up}
         return
     }
     
@@ -1038,18 +1046,20 @@ SC029::ESC
 }
 #IfWinExist
 
-
-#IfWinExist ahk_class _KiWoomClass
+; 자꾸 잘못눌려서 Win+4가 다른 앱이 실행되어서 그냥 단축키 두개를 같이 쓰게끔 바꾸었습니다
+;#IfWinExist ahk_class _KiWoomClass
+#IfWinExist ahk_class _NKHeroMainClass
+#4::
 #5::
 {
-	IfWinExist, ahk_class _KiWoomClass
+	IfWinExist, ahk_class _NKHeroMainClass
 		WinActivate
 
     return
 }
 
 ;영웅문이 틀어져있을 경우
-#IfWinActive ahk_class _KiWoomClass
+#IfWinActive ahk_class _NKHeroMainClass
 
 ; [호가창만으로 거래 0999저장화면 ver] 
 ; alt 드래그 시 두 호가 상호 교환
@@ -2792,7 +2802,7 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
 }
 
 ; [호가창 거래로 변경] 하면서 지수 위치 바뀜
-#!F4::
+#^4::
 {
 
     /* 상단 모니터인 영웅문 4 화면으로 바꿈 
