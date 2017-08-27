@@ -10,8 +10,8 @@ Sleep 100
 Send {LWin Up}
 Send {8 Up}
 
-WinWait, 영웅문 Login 
-IfWinExist, 영웅문 Login
+WinWait, 영웅문4 Login 
+IfWinExist, 영웅문4 Login
 	WinActivate
 Sleep 2000
 SetKeyDelay, 100 
@@ -21,11 +21,11 @@ Send {s}{k}{s}{m}{s}{q}{n}{w}{k}{1}{!}
 Send {Enter}
 WinWait, Utylee Asset
 Sleep 14000
-IfWinExist, ahk_class _KiWoomClass
+IfWinExist, ahk_class NKHeroMainClass
 	WinActivate
 	Sleep 100
 	;0점조절
-	WinMove, ahk_class _KiWoomClass, , -1920, 0	
+	WinMove, ahk_class NKHeroMainClass, , -1920, 0	
 Sleep 30
 ; 메뉴 툴바 보이기 언첵
 ;MouseClick, Right, 2100, 20
@@ -155,7 +155,9 @@ Sleep 200
 ;MouseClick, Left, 48, 24
 ;MouseClick, Left, 710, 1145 
 ;MouseClick, Left, 705, 1130 
-MouseClick, Left, 705 - 1920, 1130 
+;MouseClick, Left, 705 - 1920, 1130 
+;영웅문4
+MouseClick, Left, 743, 1136 
 Send {0}
 Sleep 10
 Send {9}
@@ -200,7 +202,8 @@ MouseClick, Left, 1920 - 1092, 232
 Sleep 100
 */
 
-IfWinExist, ahk_class _KiWoomClass
+;IfWinExist, ahk_class _KiWoomClass
+IfWinExist, ahk_class NKHeroMainClass
 	WinActivate
 
 Sleep 100
