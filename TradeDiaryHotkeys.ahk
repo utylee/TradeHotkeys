@@ -356,11 +356,23 @@ LAlt & ~1::
 		WinMove, ahk_class PuTTY, , 572, 170 
 	}
 
+    /*
 	IfWinExist, ahk_class _KiWoomClass
 	{
 		;WinActivate
 		WinMove, ahk_class _KiWoomClass, , -1920, 0, 3840, 1160
 	}
+    */
+
+    ;두개를 띄우기에 레이아웃 망칠 확률이 높다
+    /*
+	IfWinExist, ahk_class _NKHeroMainClass
+	{
+		;WinActivate
+		WinMove, ahk_class _NKHeroMainClass, , -1920, 0, 3840, 1160
+	}
+    */
+
 
 	IfWinExist, Pro Evolution Soccer 2015
 	{
@@ -1036,8 +1048,10 @@ SC029::ESC
 }
 #IfWinExist
 
+; 자꾸 잘못눌려서 Win+4가 다른 앱이 실행되어서 그냥 단축키 두개를 같이 쓰게끔 바꾸었습니다
 #IfWinExist ahk_class MozillaWindowClass
 #3::
+#4::
 {
     IfWinExist, ahk_class MozillaWindowClass
         WinActivate
@@ -1046,10 +1060,8 @@ SC029::ESC
 }
 #IfWinExist
 
-; 자꾸 잘못눌려서 Win+4가 다른 앱이 실행되어서 그냥 단축키 두개를 같이 쓰게끔 바꾸었습니다
 ;#IfWinExist ahk_class _KiWoomClass
 #IfWinExist ahk_class _NKHeroMainClass
-#4::
 #5::
 {
 	IfWinExist, ahk_class _NKHeroMainClass
@@ -2573,7 +2585,8 @@ return
 
 #!o::
 {
-	IfWinExist, ahk_class _KiWoomClass
+	;IfWinExist, ahk_class _KiWoomClass
+	IfWinExist, ahk_class _NKHeroMainClass
 		WinActivate
     Sleep 150 
 
@@ -2694,9 +2707,15 @@ return
 {
 
 	;파폭으로 전환하여 사진/열기 1.png / 올리기 를 누른다
-	IfWinExist, ahk_class MozillaWindowClass
+	;IfWinExist, ahk_class MozillaWindowClass
+	IfWinExist, ahk_class _NKHeroMainClass
 		WinActivate
-	;WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
+	    WinMove, ahk_class _NKHeroMainClass,,0, -1200, 1920, 1200
+	    ;WinMove, ahk_class _NKHeroMainClass,,-1920, 0, 1920 * 2, 1200
+        ;저장화면 0989(지수) 단축키 누르기 Ctrl + [
+        Sleep, 1000
+        Send, ^[
+    /*
 	Sleep 100
 	;MouseMove, -4000, -4000, 0, R
 	MouseMove, 2210 - 1920, 700, 5 
@@ -2706,7 +2725,7 @@ return
 	;Send {LButton}
     Sleep 1000
 	MouseMove, 899, 377, 5, R
-
+    */
 	/*
 WinWait, 네이버 포토업로더 - Mozilla Firefox
 	IfWinExist, 네이버 포토업로더 - Mozilla Firefox
@@ -2834,10 +2853,11 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
 	Send {PrintScreen Up}
 	Sleep 700
 
-	MouseMove, 7, -424, 2
+	;MouseMove, 7, -424, 2
+	MouseMove, 10, -1920 + 10, 2
     Send {LButton Down}
     Sleep 100
-	MouseMove, 1410, 418, 2, R
+	MouseMove, 1900, 470, 2, R
 	Sleep 100 
 	Send {LButton Up}
 
