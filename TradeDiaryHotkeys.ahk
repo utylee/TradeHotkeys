@@ -883,6 +883,24 @@ $LWin Up::
 
 
 
+~ / & =::
+{
+    slash_toggle := 1
+    send, {Volume_Up 2}
+    return
+}
+~ / & -::
+{
+    slash_toggle := 1
+    send, {Volume_Down 2}
+    return
+}
+~ / & 0::
+{
+    slash_toggle := 1
+    send, {Volume_Mute}
+    return
+}
 
 
 ~ / & 1::
