@@ -1,4 +1,7 @@
 ﻿SetTitleMatchMode, RegEx
+#InstallKeybdHook
+#UseHook
+#Persistent
 ;SetKeyDelay, 70
 ;SetKeyDelay, 100
 ; 마우스 이동을 활성윈도우가 아닌 절대좌표를 이용합니다
@@ -11,6 +14,7 @@ s_toggle := 0
 ; / ? 버튼을 스페셜 커맨드 키로 사용하기 위한 플래그 ( + 숫자 = 펑션키)
 slash_toggle := 0
 question_toggle := 0
+wintab_toggle := 0
 
 ; 분봉<-->틱봉 간의 교환을 위한 변수
 toggle := 1
@@ -831,6 +835,51 @@ SC029::ESC
 ^SC029::Send, `` 
 +SC029::SendRaw, ~ 
 
+LWin & Tab::AltTab
+
+
+/*
+
+~*LWin & Tab::
+{
+    wintab_toggle := 1
+    Send, {LAlt Down}
+    Sleep 10
+    Send, {Tab}
+    Send, {LWin Up}
+    return
+}
+LAlt::
+{
+    Send, {LAlt}
+    return
+}
+
+LWin::
+{
+    Send, {LWin}
+    return
+}
+
+$LWin Up::
+{   
+    MsgBox, ㅋㅋㅋ
+    GetKeyState, state, LAlt
+    if state = D
+    {
+        Send, {LAlt up}
+    } 
+    if wintab_toggle = 1 
+    {
+        wintab_toggle := 0
+        Send, {LAlt up}
+        Send, {Lwin up}
+        return
+    }
+    Send, {Lwin Up}
+    return
+}
+*/
 
 
 
@@ -3026,7 +3075,11 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
     Send {LButton} 
     */
     ; 열기 버튼 위치가 바뀌어서 그런지 자꾸 안돼서 키보드로 변경해봄
-    Send {Tab}{Tab}{Enter}
+    Send {Tab}
+    Sleep 100
+    Send {Tab}
+    Sleep 100
+    Send {Enter}
     ;MouseClick, Left, 1195, 506
 	Sleep 2500
 
