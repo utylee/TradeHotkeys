@@ -937,7 +937,29 @@ $LWin Up::
     return
 }
 
-#!4::Send, !{F4}
+#+4::Send, !{F4}
+
+;키움HTS에서 삼등분선 자동 메뉴 선택
+#IfWinActive ahk_class _NKHeroMainClass
+^XButton1::
+!XButton1::
+#^1::
+{
+	IfWinExist, ahk_class _NKHeroMainClass
+		WinActivate
+    Send, {RButton}
+    Sleep 50
+    Send, {l}
+    Sleep 50
+    Loop, 9 
+    {
+        Send, {Down}
+        Sleep, 10
+    }
+    Send, {Enter}
+    return
+}
+#IfWinActive
 
 ~ / & 4::
 {
