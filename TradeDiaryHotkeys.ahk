@@ -1075,7 +1075,7 @@ $LWin Up::
 	send {Up}
 	return
 }
-#!h::
+#+h::
 {
     GetKeyState, state, C   
     if state = D
@@ -1086,7 +1086,7 @@ $LWin Up::
 	send {Left}
 	return
 }
-#!l::
+#+l::
 {
     GetKeyState, state, C   
     if state = D
