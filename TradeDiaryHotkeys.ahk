@@ -398,7 +398,8 @@ LAlt & ~1::
 	IfWinExist, ahk_class mintty
 	{
 		;WinActivate
-		WinMove, ahk_class mintty, , 520, 135, 1100, 870 
+		;WinMove, ahk_class mintty, , 520, 135, 1100, 870 
+		WinMove, ahk_class mintty, , 500, 130, 1200, 900 
 	}	
 
 	return
@@ -937,6 +938,9 @@ $LWin Up::
     return
 }
 
+^+2::Send, {F2}
+^!2::Send, {F2}
+
 #+4::Send, !{F4}
 
 ;키움HTS에서 삼등분선 자동 메뉴 선택
@@ -961,6 +965,9 @@ $LWin Up::
 }
 #IfWinActive
 
+
+; Alt+/+4 를 Alt+F4로 설정. 그러나 Win+Q 를 mac처럼 종료명령으로 사용하면 더 편할 듯 하다
+/*
 ~ / & 4::
 {
     slash_toggle := 1
@@ -976,9 +983,17 @@ $LWin Up::
         return
     }
     
-    send {F4}
+    send,{F4}
 	return
 }
+*/
+
+#Q::
+{
+    send !{F4}
+	return
+}
+
 ~ / & 5::
 {
     ;GetKeyState, state, LAlt
@@ -2738,6 +2753,7 @@ return
 	return
 }
 
+/*
 #!q::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -2752,6 +2768,7 @@ return
 
 	return
 }
+*/
 
 ;[호가창 거래] 원래 관심종목 상단 클릭 단축키였으나, 가상화면3의 종목 입력칸으로 변경
 #!i::
