@@ -882,6 +882,16 @@ $LWin Up::
 }
 */
 
+#IfWinActive ahk_class MozillaWindowClass 
+#l::
+{
+    return
+}
+#t::^t
+#s::^s
+#o::^o
+
+#IfWinActive
 
 
 ~ / & =::
@@ -2926,6 +2936,7 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
     return
 }
 
+; 코스피/코스닥 지수 캡쳐 업로드 프로세스
 ; [호가창 거래로 변경] 하면서 지수 위치 바뀜
 #^4::
 {
