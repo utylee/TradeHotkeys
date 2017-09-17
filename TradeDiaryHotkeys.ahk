@@ -1,7 +1,7 @@
 ﻿SetTitleMatchMode, RegEx
 #InstallKeybdHook
 #UseHook
-#Persistent
+#Persistent    ;마치 while로 계속 떠있는 이벤트 룹같이 동작하도록 하는 명령어
 ;SetKeyDelay, 70
 ;SetKeyDelay, 100
 ; 마우스 이동을 활성윈도우가 아닌 절대좌표를 이용합니다
@@ -1212,20 +1212,24 @@ CheckPos(posX, posY)
 
     ;첫번째 호가 위치일 경우  
     ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
-    else if (posX >= 0) and ( posX <= 615) and (posY <= 410)
+    ;else if (posX >= 0) and ( posX <= 615) and (posY <= 410)
+    ;굵은폰트 및 호가창 몰아놓음으로 바뀐 좌표에 따라 로직 변경
+    else if (posX >= 627) and ( posX <= 935) and (posY <= 430)
     {
         ret := 1
     }
     ; 2nd 호가창 위치일 경우
     ;else if (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY <= 410)
-    else if (posX >= 616) and ( posX <= 1225) and (posY <= 410)
+    ;else if (posX >= 616) and ( posX <= 1225) and (posY <= 410)
+    else if (posX >= 936) and ( posX <= 1230) and (posY <= 430)
     {
         ret := 2
     }
 
     ; 3rd 호가창 위치일 경우
     ;else if (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY <= 410)
-    else if (posX >= 1226) and ( posX <= 1841) and (posY <= 410)
+    ;else if (posX >= 1226) and ( posX <= 1841) and (posY <= 410)
+    else if (posX >= 1231) and ( posX <= 1540) and (posY <= 430)
     {
         ;-->
         ret := 3
@@ -1233,41 +1237,71 @@ CheckPos(posX, posY)
 
     ; 4th 호가창 위치일 경우
     ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 411) and (posY <= 812)
-    else if (posX >= 0) and ( posX <= 615) and (posY >= 411) and (posY <= 812)
+    ;else if (posX >= 0) and ( posX <= 615) and (posY >= 411) and (posY <= 812)
+    else if (posX >= 1541) and ( posX <= 1848) and (posY <= 430)
     {
         ;-->
         ret := 4
     }
     ; 5th 호가창 위치일 경우
     ;else if (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY >= 411) and (posY <= 812)
-    else if (posX >= 616) and ( posX <= 1225) and (posY >= 411) and (posY <= 812)
+    ;else if (posX >= 616) and ( posX <= 1225) and (posY >= 411) and (posY <= 812)
+    else if (posX >= 627) and ( posX <= 935) and (posY >= 431) and (posY <= 857)
     {
         ;-->
         ret := 5
     }
     ; 6th 호가창 위치일 경우
     ;else if (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY >= 411) and (posY <= 812)
-    else if (posX >= 1226) and ( posX <= 1841) and (posY >= 411) and (posY <= 812)
+    ;else if (posX >= 1226) and ( posX <= 1841) and (posY >= 411) and (posY <= 812)
+    else if (posX >= 936) and ( posX <= 1230) and (posY >= 431) and (posY <= 857)
     {
         ;-->
         ret := 6
     }
     ; 7th 호가창 위치일 경우
     ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 813)
-    else if (posX >= 0) and ( posX <= 615) and (posY >= 813)
+    ;else if (posX >= 0) and ( posX <= 615) and (posY >= 813)
+    else if (posX >= 1231) and ( posX <= 1540) and (posY >= 431) and (posY <= 857)
     {
         ;-->
         ret := 7
     }
     ; 8th 호가창 위치일 경우
     ;else if (posX >= 1920 + 1226) and (posY >= 813) 
-    else if (posX >= 1226) and (posY >= 813) 
+    ;else if (posX >= 1226) and (posY >= 813) 
+    else if (posX >= 1541) and ( posX <= 1848) and (posY >= 431) and (posY <= 857)
     {
         ;-->
         ret := 8
     }
 
     return ret 
+}
+
+; 각 호가창 내 우상단 순환 버튼 좌표 반납
+NumToRightUpPos(N)
+{
+    Pos := {"x" : 0, "y" :0}
+
+    if (N == 1) 
+        Pos := {"x" : 902, "y" : 24}
+    else if (N == 2)
+        Pos := {"x" : 1210, "y" : 24}
+    else if (N == 3)
+        Pos := {"x" : 1507, "y" : 24}
+    else if (N == 4)
+        Pos := {"x" : 1816, "y" : 24}
+    else if (N == 5) 
+        Pos := {"x" : 902, "y" : 450}
+    else if (N == 6) 
+        Pos := {"x" : 1200, "y" : 450}
+    else if (N == 7) 
+        Pos := {"x" : 1509, "y" : 450}
+    else if (N == 8) 
+        Pos := {"x" : 1818, "y" : 450}
+
+    return Pos
 }
 
 ; [0999] 호가넘버를 전달받으면 해당 호가의 종목코드 위치의 x, y 좌표셋을 반납합니다
@@ -1277,28 +1311,36 @@ NumToSubjectPos(N)
 
     if (N == 1) 
         ;Pos := {"x" : 1920 + 30, "y" : 25}
-        Pos := {"x" : 30, "y" : 25}
+        ;Pos := {"x" : 30, "y" : 25}
+        Pos := {"x" : 656, "y" : 23}
     else if (N == 2)
         ;Pos := {"x" : 1920 + 642, "y" : 25}
-        Pos := {"x" : 642, "y" : 25}
+        ;Pos := {"x" : 642, "y" : 25}
+        Pos := {"x" : 961, "y" : 23}
     else if (N == 3)
         ;Pos := {"x" : 1920 + 1260, "y" : 25}
-        Pos := {"x" : 1260, "y" : 25}
+        ;Pos := {"x" : 1260, "y" : 25}
+        Pos := {"x" : 1258, "y" : 23}
     else if (N == 4)
         ;Pos := {"x" : 1920 + 30, "y" : 425}
-        Pos := {"x" : 30, "y" : 425}
+        ;Pos := {"x" : 30, "y" : 425}
+        Pos := {"x" : 1572, "y" : 23}
     else if (N == 5) 
         ;Pos := {"x" : 1920 + 642, "y" : 425}
-        Pos := {"x" : 642, "y" : 425}
+        ;Pos := {"x" : 642, "y" : 425}
+        Pos := {"x" : 656, "y" : 450}
     else if (N == 6) 
         ;Pos := {"x" : 1920 + 1260, "y" : 425}
-        Pos := {"x" : 1260, "y" : 425}
+        ;Pos := {"x" : 1260, "y" : 425}
+        Pos := {"x" : 961, "y" : 450}
     else if (N == 7) 
         ;Pos := {"x" : 1920 + 30, "y" : 825}
-        Pos := {"x" : 30, "y" : 825}
+        ;Pos := {"x" : 30, "y" : 825}
+        Pos := {"x" : 1258, "y" : 450}
     else if (N == 8) 
         ;Pos := {"x" : 1920 + 1260, "y" : 825}
-        Pos := {"x" : 1260, "y" : 825}
+        ;Pos := {"x" : 1260, "y" : 825}
+        Pos := {"x" : 1572, "y" : 450}
 
     return Pos
 }
@@ -2163,8 +2205,30 @@ MButton::
 }
 
 ; [0999] 각 호가창 내에서 마우스 앞으로 키 눌렀을 경우, 분<-->틱 토글 기능추가
+; 호가창만으로 바뀌면서 틱-분 전환은 필요없어졌고, 대신 우상단 알림창 순환 버튼 클릭으로 용도 변경
 XButton2::
 {
+    ; 마우스 커서의 포지션을 구합니다
+    MouseGetPos, posX, posY
+    Sleep, 10
+
+    ;현재호가창 번호를 좌표를 통해 지정합니다 (1~8번)
+    cur := CheckPos(posX, posY)
+
+    ;만약 의미없는 포지션일 경우 아무 액션도 하지 않습니다
+    if (cur == 0)
+    {
+        return
+    }
+
+    pos_T := NumToRightUpPos(cur)
+
+    ;해당 포지션 클릭 후 다시 원래 마우스 포지션으로 되돌립니다
+    MouseClick, Left, pos_T.x, pos_T.y
+    Sleep, 20
+    MouseMove, posX, posY
+
+    /*
     global toggle0101
 
     ; 마우스 커서의 포지션을 구합니다
@@ -2199,6 +2263,7 @@ XButton2::
 
     ;다음 플래그로(분<--->틱) 전환해 놓습니다
     toggle0101[cur] := toggle0101[cur] * -1
+    */
 
     return 
 }
@@ -2224,7 +2289,8 @@ XButton1::
         if(toggle == -1) 
         {
             ;cX := 1065
-            cX := 1065 - 1920
+            ;cX := 1065 - 1920
+            cX := 1045 - 1920
         }
         else
         {
@@ -2235,6 +2301,7 @@ XButton1::
         MouseClick, Left, cX, 30
         Sleep, 50
         MouseMove, posX, posY
+        return 
     }
 
     ;#####
@@ -2246,11 +2313,43 @@ XButton1::
         MouseClick, Left, 1650 - 1920, 50
         Sleep, 50
         MouseMove, posX, posY
+        return
     }
+
+
+
+
 
     ;###############################################3
     ;0999때문에 0998 버전을 주석처리 해놓는다
     ; 첫 호가창 위치일 경우 (0999 버전)
+
+    start := CheckPos(posX, posY)
+    ;의미없는 포지션일 경우 아무 액션도 하지 않습니다
+    if (start == 0)
+    {
+        return
+    }
+    pos_A := NumToSubjectPos(start)
+    pos_Main := {"x": 35, "y": 430}
+
+    ;호가 좌표에서 temp좌표(1920 + 756, 1128)로 드래그 합니다
+    DragProc(pos_A, pos_Main)
+
+    ;마우스커서의 위치를 원래 위치로 되돌립니다
+    MouseMove, posX, posY
+
+
+
+
+    /*
+
+    ;최하단의 임시 창의 좌표입니다
+    ;pos_temp := {"x" : 1920 + 650, "y" : 1101}
+    ;144hz 모니터로 바꾸면서 세로 해상도 줄어들어 임시로 우측차트으로 이동해봄 ^^
+    ;pos_temp := {"x" : 1920 + 1900, "y" : 45}
+    pos_temp := {"x" : 1900, "y" : 45}
+
 
     ;If (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
     If (posX >= 0) and ( posX <= 615) and (posY <= 410)
@@ -2397,6 +2496,8 @@ XButton1::
         MouseMove, posX, posY
         ;-->
     }
+
+    */
 
 
 
@@ -2627,7 +2728,11 @@ NumpadAdd & Numpad7::
     return
 	
 }
-#IfWinActive
+#IfWinActive ; 영웅문이 활성화 되어있는 경우, -끝-
+
+
+
+
 
 ;신호검색된 종목 클릭
 #!n::
@@ -3102,6 +3207,7 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
     ;;;;;;;
     ;;;;;;;
 	;파폭으로 전환하여 사진/열기 1.png / 올리기 를 누른다
+    ; 자꾸 열기 버튼이 종종 안눌린다
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
@@ -3129,6 +3235,9 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
 	Sleep 500
 	
 	Send {1}{.}{p}{n}{g}
+
+    ; 열기 버튼 안눌리는 문제 해결법
+    Sleep, 2000
     /*
 	IfWinExist, 파일 업로드|열기|blog.upphoto
 		WinActivate
@@ -3144,9 +3253,9 @@ WinWait, 네이버 포토업로더 - Mozilla Firefox
     */
     ; 열기 버튼 위치가 바뀌어서 그런지 자꾸 안돼서 키보드로 변경해봄
     Send {Tab}
-    Sleep 100
+    Sleep 300
     Send {Tab}
-    Sleep 100
+    Sleep 300
     Send {Enter}
     ;MouseClick, Left, 1195, 506
 	Sleep 2500

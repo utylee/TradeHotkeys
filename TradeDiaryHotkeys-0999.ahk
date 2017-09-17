@@ -1,16 +1,62 @@
-SetTitleMatchMode, RegEx
+ï»¿SetTitleMatchMode, RegEx
+#InstallKeybdHook
+#UseHook
+#Persistent
+;SetKeyDelay, 70
+;SetKeyDelay, 100
+; ë§ˆìš°ìŠ¤ ì´ë™ì„ í™œì„±ìœˆë„ìš°ê°€ ì•„ë‹Œ ì ˆëŒ€ì¢Œí‘œë¥¼ ì´ìš©í•©ë‹ˆë‹¤
+Coordmode, Mouse, Screen
+;CoordMode, ToolTip|Pixel|Mouse|Caret|Menu [, Screen|Window|Client]
+
+; S ë²„íŠ¼ì„ ìŠ¤í˜ì…œ ì»¤ë§¨ë“œ í‚¤ë¡œ ì‚¬ìš©í•˜ê¸° ìœ„í•œ í”Œë˜ê·¸
+s_toggle := 0
+
+; / ? ë²„íŠ¼ì„ ìŠ¤í˜ì…œ ì»¤ë§¨ë“œ í‚¤ë¡œ ì‚¬ìš©í•˜ê¸° ìœ„í•œ í”Œë˜ê·¸ ( + ìˆ«ì = í‘ì…˜í‚¤)
+slash_toggle := 0
+question_toggle := 0
+wintab_toggle := 0
+
+; ë¶„ë´‰<-->í‹±ë´‰ ê°„ì˜ êµí™˜ì„ ìœ„í•œ ë³€ìˆ˜
+toggle := 1
+
+; ê°€ìƒí™”ë©´1 <---> ê°€ìƒí™”ë©´3 ê°„ì˜ êµí™˜ì„ ìœ„í•œ ë³€ìˆ˜
+togglescr := 1
+
+; [0999] ê° 0101í˜¸ê°€ì°½ì˜ ë¶„<-->í‹± êµí™˜ì„ ìœ„í•œ í† ê¸€ í”Œë˜ê·¸ ë³€ìˆ˜ë“¤
+toggle0101 := Object() ;ë°°ì—´ì„ ì§€ì›í•˜ì§€ ì•Šì•„ ì´ë ‡ê²Œ í•´ì•¼í•œë‹¤ê³  í•©ë‹ˆë‹¤
+toggle0101[1] := 1
+toggle0101[2] := 1
+toggle0101[3] := 1
+toggle0101[4] := 1
+toggle0101[5] := 1
+toggle0101[6] := 1
+toggle0101[7] := 1
+toggle0101[8] := 1
+toggle0101[99] := 1 ;ì¢Œì¸¡ ì¢€ í°ì°¨íŠ¸ì—ì„œì˜ í† ê¸€ì„ ìœ„í•œ ë³€ìˆ˜
+toggle0101[77] := 1 ;ì”ê³  / ë‹¹ì¼ë§¤ë§¤ ì˜ì—­ì˜ í† ê¸€ì„ ìœ„í•œ ë³€ìˆ˜
 
 ;SetDefaultMouseSpeed, 0
 
-
-; ¿À¹ö¿öÄ¡ µÚ·Î µ¹±â ¸ÅÅ©·Î Å×½ºÆ®
+;#define MOUSEEVENTF_MOVE 0x0001 /* mouse move */
+;#define MOUSEEVENTF_LEFTDOWN 0x0002 /* left button down */
+;#define MOUSEEVENTF_LEFTUP 0x0004 /* left button up */
+;#define MOUSEEVENTF_RIGHTDOWN 0x0008 /* right button down */
+;#define MOUSEEVENTF_RIGHTUP 0x0010 /* right button up */
+;#define MOUSEEVENTF_MIDDLEDOWN 0x0020 /* middle button down */
+;#define MOUSEEVENTF_MIDDLEUP 0x0040 /* middle button up */
+;#define MOUSEEVENTF_XDOWN 0x0080 /* x button down */
+;#define MOUSEEVENTF_XUP 0x0100 /* x button down */
+;#define MOUSEEVENTF_WHEEL 0x0800 /* wheel button rolled */
+;#define MOUSEEVENTF_VIRTUALDESK 0x4000 /* map to entire virtual desktop */
+;#define MOUSEEVENTF_ABSOLUTE 0x8000 /* absolute move */
+; ì˜¤ë²„ì›Œì¹˜ ë’¤ë¡œ ëŒê¸° ë§¤í¬ë¡œ í…ŒìŠ¤íŠ¸
 /*
 XButton1::
 {
-	IfWinExist, ¿À¹ö¿öÄ¡
+	IfWinExist, ì˜¤ë²„ì›Œì¹˜
 	{
 
-		WinActivate, ¿À¹ö¿öÄ¡
+		WinActivate, ì˜¤ë²„ì›Œì¹˜
 	
 		;MouseMove, -100, 0, , R
 		Loop, 10
@@ -26,7 +72,280 @@ XButton1::
 return
 */
 
-;stockstory Å©±â¼¼ÆÃ
+
+;ì˜¤ë²„ì›Œì¹˜ ì‹¤í–‰ì¤‘ ì¼ ê²½ìš° LWin ìœˆë„ìš°í‚¤ ë¹„í™œì„±í™”
+#IfWinExist, ì˜¤ë²„ì›Œì¹˜
+;ìœˆë„ìš°í‚¤ ë¹„í™œì„±í™”
+LWin::
+{
+    return
+}
+
+
+;ì„ì‹œë¡œ ì—°ìŠµì¥ ì œê±° 
+/*
+LAlt & ~1::
+{
+	IfWinExist, ì˜¤ë²„ì›Œì¹˜
+	{
+
+		WinActivate, ì˜¤ë²„ì›Œì¹˜
+	
+		;MouseMove, -100, 0, , R
+
+        ;(ì°¸ê³ )í™”ë©´ í’€ì‚¬ì´ì¦ˆë¡œ ì´ë™í•  ë•Œì˜ ì¢Œí‘œ
+        ;DllCall("mouse_event", uint, 1, int, 840, int, 490, uint, 0, int, 0)
+
+        ;(0, 0)ì¢Œí‘œë¡œ ì˜®ê²¨ì¤ë‹ˆë‹¤
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;Sleep 200
+
+        ;"í”Œë ˆì´"í´ë¦­
+        ;(100, 300)ì¢Œí‘œë¡œ ì˜®ê²¨ì¤ë‹ˆë‹¤. ê·¸ë¦¬ê³  í´ë¦­
+        ;DllCall("mouse_event", uint, 1, int, 1, int, 1, uint, 0, int, 0)
+        DllCall("mouse_event", uint, 1, int, 50, int, 130, uint, 0, int, 0)
+        Sleep 1000
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 1500
+
+        ;"ì•„ì¼€ì´ë“œ í´ë¦­"
+        DllCall("mouse_event", uint, 1, int, 300, int, 100, uint, 0, int, 0)
+        Sleep 1000
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 1500
+
+        ;"ê²Œì„ë§Œë“¤ê¸° í´ë¦­"
+        DllCall("mouse_event", uint, 1, int, 400, int, 100, uint, 0, int, 0)
+        Sleep 1000
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        Sleep 1000
+        
+
+        ;"ì„¤ì •" í´ë¦­
+        ;(0, 0)ì¢Œí‘œë¡œ ì˜®ê²¨ì¤ë‹ˆë‹¤
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;ì„¤ì •ìœ¼ë¡œ ì´ë™
+        DllCall("mouse_event", uint, 1, int, 660, int, 150, uint, 0, int, 0)
+        Sleep 20
+        ;í´ë¦­
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"ëª¨ë“œ" ( << ì„¤ì • ) í´ë¦­
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;ì„¤ì •ìœ¼ë¡œ ì´ë™
+        DllCall("mouse_event", uint, 1, int, 560, int, 150, uint, 0, int, 0)
+        Sleep 20
+        ;í´ë¦­
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"ì—°ìŠµëª¨ë“œ" í´ë¦­
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;ì„¤ì •ìœ¼ë¡œ ì´ë™
+        DllCall("mouse_event", uint, 1, int, 560, int, 250, uint, 0, int, 0)
+        Sleep 20
+        ;í´ë¦­
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"ì—°ìŠµëª¨ë“œ > í™œì„±í™”" í´ë¦­
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;ì„¤ì •ìœ¼ë¡œ ì´ë™
+        DllCall("mouse_event", uint, 1, int, 470, int, 115, uint, 0, int, 0)
+        Sleep 20
+        ;í´ë¦­
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"í•œë‹¨ê³„ìœ„ë¡œ"
+        Send, {ESC}
+        Sleep 500
+
+        ;"í•œë‹¨ê³„ìœ„ë¡œ"
+        Send, {ESC}
+        Sleep 500
+
+
+
+        ;"ì „ì¥" ( << ì„¤ì • ) í´ë¦­
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;ì„¤ì •ìœ¼ë¡œ ì´ë™
+        DllCall("mouse_event", uint, 1, int, 120, int, 250, uint, 0, int, 0)
+        Sleep 20
+        ;í´ë¦­
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"ëª¨ë‘ë„ê¸°" ( << ì „ì¥) í´ë¦­
+
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;ì„¤ì •ìœ¼ë¡œ ì´ë™
+        DllCall("mouse_event", uint, 1, int, 590, int, 90, uint, 0, int, 0)
+        Sleep 20
+        ;í´ë¦­
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"ë¦¬ì¥íƒ€ì›Œ" í™œì„±í™” í´ë¦­
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;ì„¤ì •ìœ¼ë¡œ ì´ë™
+        DllCall("mouse_event", uint, 1, int, 475, int, 230, uint, 0, int, 0)
+        Sleep 20
+        ;í´ë¦­
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"í•œë‹¨ê³„ìœ„ë¡œ"
+        Send, {ESC}
+        Sleep 500
+
+        ;"í•œë‹¨ê³„ìœ„ë¡œ"
+        Send, {ESC}
+        Sleep 500
+
+
+
+
+        ;"ì¸ê³µì§€ëŠ¥ ì¶”ê°€"
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;ì„¤ì •ìœ¼ë¡œ ì´ë™
+        DllCall("mouse_event", uint, 1, int, 795, int, 150, uint, 0, int, 0)
+        Sleep 20
+        ;í´ë¦­
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"ë£¨ì‹œìš° ìš°ë¦¬í¸ ì¶”ê°€"
+        Send, {Space}
+        Sleep 20
+
+        Loop, 3
+        {
+            Send, {Down}
+            Sleep 20
+        }
+
+        Send, {Space}
+        Sleep 20
+
+        Loop, 2
+        {
+            Send, {Down}
+            Sleep 20
+        }
+        Loop, 9
+        {
+            Send, {Left}
+            Sleep 20
+        }
+
+        Loop, 3
+        {
+            Send, {Down}
+            Sleep 20
+            Send, {Space}
+            Sleep 20
+        }
+    
+        Sleep 500
+
+
+
+        ;"ì†”ì ¸ 3ëª… ì íŒ€ ì¶”ê°€"
+        DllCall("mouse_event", uint, 1, int, -1900, int, -1200, uint, 0, int, 0)
+        ;ì„¤ì •ìœ¼ë¡œ ì´ë™
+        DllCall("mouse_event", uint, 1, int, 795, int, 150, uint, 0, int, 0)
+        Sleep 20
+        ;í´ë¦­
+        DllCall("mouse_event", uint, 2, int, 0, int, 0, uint, 0, int, 0) ;LButton_down
+        Sleep 20
+        DllCall("mouse_event", uint, 4, int, 0, int, 0, uint, 0, int, 0) ;LButton_up
+        Sleep 500
+
+        ;"ì†”ì ¸ 3ëª… ì¶”ê°€"
+        Send, {Space}
+        Sleep 20
+
+        ;ì†”ì ¸
+        Loop, 8
+        {
+            Send, {Down}
+            Sleep 20
+        }
+
+        Send, {Space}
+        Sleep 20
+
+        Loop, 2
+        {
+            Send, {Down}
+            Sleep 20
+        }
+        
+        ;(8->3ìœ¼ë¡œ ì¤„ì´ê¸°)
+        Loop, 6
+        {
+            Send, {Left}
+            Sleep 20
+        }
+        Send, {Down}
+        Sleep 20
+        Send, {Space}
+        Sleep 20
+        Send, {Down}
+        Sleep 20
+        Send, {Down}
+        Sleep 20
+        Send, {Space}
+        Sleep 20
+        Send, {Down}
+        Sleep 20
+        Send, {Space}
+        Sleep 20
+
+        Sleep 500
+
+
+        ;"ì‹œ~~~~~~ì‘!!!!!!!!!!!!"
+
+		;Loop, 10
+		;{
+			;DllCall("mouse_event", uint, 1, int, 303, int, 0, uint, 0, int, 0)
+			;Sleep 15	
+		;}
+	
+	}
+	return
+}
+*/
+#IfWinExist
+
+;stockstory í¬ê¸°ì„¸íŒ…
 #!Up::
 {
 	IfWinExist, FmpPlayerStockStory
@@ -41,11 +360,23 @@ return
 		WinMove, ahk_class PuTTY, , 572, 170 
 	}
 
+    /*
 	IfWinExist, ahk_class _KiWoomClass
 	{
 		;WinActivate
 		WinMove, ahk_class _KiWoomClass, , -1920, 0, 3840, 1160
 	}
+    */
+
+    ;ë‘ê°œë¥¼ ë„ìš°ê¸°ì— ë ˆì´ì•„ì›ƒ ë§ì¹  í™•ë¥ ì´ ë†’ë‹¤
+    /*
+	IfWinExist, ahk_class _NKHeroMainClass
+	{
+		;WinActivate
+		WinMove, ahk_class _NKHeroMainClass, , -1920, 0, 3840, 1160
+	}
+    */
+
 
 	IfWinExist, Pro Evolution Soccer 2015
 	{
@@ -56,7 +387,7 @@ return
 	IfWinExist, ahk_class MozillaWindowClass
 	{
 		;WinActivate
-		WinMove, ahk_class MozillaWindowClass, , 390, 55, 1400, 1100 
+		WinMove, ahk_class MozillaWindowClass, , 390, 55, 1400, 980 
 	}	
 
 	IfWinExist, MINGW32 
@@ -64,12 +395,18 @@ return
 		;WinActivate
 		WinMove, MINGW32, , 460, 55, 1200, 1100 
 	}	
+	IfWinExist, ahk_class mintty
+	{
+		;WinActivate
+		;WinMove, ahk_class mintty, , 520, 135, 1100, 870 
+		WinMove, ahk_class mintty, , 500, 130, 1200, 900 
+	}	
 
 	return
 }
 return
 
-;¸¶¿ì½º ½ºÅ©·Ñ ÈÙ ¶óÀÎ¼ö ¼öÁ¤ 1 --> 5
+;ë§ˆìš°ìŠ¤ ìŠ¤í¬ë¡¤ íœ  ë¼ì¸ìˆ˜ ìˆ˜ì • 1 --> 5
 #!Down::
 {
 	Sleep 400
@@ -77,7 +414,7 @@ return
 	Sleep 100
 	MouseClick, Left, 91, 151
 
-	WinWait, ¸¶¿ì½º ¼Ó¼º
+	WinWait, ë§ˆìš°ìŠ¤ ì†ì„±
 		WinActivate
 	Sleep 500
 	
@@ -88,7 +425,7 @@ return
 	Send, {Enter}
 	
 /*
-	;ÇÑ¿µÅ°°¡ ´­¸°Áö ¾È´­¸°Áö ¸ğ¸£´Ï ¿µ¾î ÇÑ±Û µÎ¹ø ¹İº¹ÇÏ¸é µÊ
+	;í•œì˜í‚¤ê°€ ëˆŒë¦°ì§€ ì•ˆëˆŒë¦°ì§€ ëª¨ë¥´ë‹ˆ ì˜ì–´ í•œê¸€ ë‘ë²ˆ ë°˜ë³µí•˜ë©´ ë¨
 	Sleep 400
 	Send, {LWin}
 	Sleep 100
@@ -106,15 +443,15 @@ return
 	Sleep 20
 	Send, {Enter}
 
-	WinWait, ¸¶¿ì½º ¼Ó¼º
+	WinWait, ë§ˆìš°ìŠ¤ ì†ì„±
 		WinActivate
 	Sleep 500
 	
-	WinMove, ¸¶¿ì½º ¼Ó¼º, , 0, 0
+	WinMove, ë§ˆìš°ìŠ¤ ì†ì„±, , 0, 0
 	Sleep 100
 	MouseClick, Left, 210, 45 	
 	Sleep 100
-	;À§ È­»ìÇ¥ Å¬¸¯ÇÏ¿© ¼ıÀÚ¸¦ 5±îÁö ¿Ã¸²
+	;ìœ„ í™”ì‚´í‘œ í´ë¦­í•˜ì—¬ ìˆ«ìë¥¼ 5ê¹Œì§€ ì˜¬ë¦¼
 	MouseClick, Left, 217, 135 	
 	Sleep 50
 	MouseClick, Left, 217, 135 	
@@ -131,17 +468,17 @@ return
 }
 return
 
-;ÀÏºÀÂ÷Æ® »çÀÌÁî À¯Å¸ÀÏ¸®½Ä µğÆúÆ®È­
+;ì¼ë´‰ì°¨íŠ¸ ì‚¬ì´ì¦ˆ ìœ íƒ€ì¼ë¦¬ì‹ ë””í´íŠ¸í™”
 #!Left::
 {
-	;0Á¡±³Á¤
+	;0ì êµì •
 	IfWinExist, ahk_class _KiWoomClass
 	{
 		WinActivate
 		WinMove, ahk_class _KiWoomClass, , -1920, 0 
 	}
 	
-	;ÀÏºÀ ÀüÃ¼ ºä ÀüÈ¯
+	;ì¼ë´‰ ì „ì²´ ë·° ì „í™˜
 	MouseMove, -4000, -4000, 0, R
 	Sleep 100
 	MouseMove, 2850, 122, 5, R
@@ -151,7 +488,7 @@ return
 	Send, {LButton Up}
 	Sleep 100
 
-	;1Â÷ È®´ë
+	;1ì°¨ í™•ëŒ€
 	MouseMove, -4000, -4000, 0, R
 	Sleep 100
 	MouseMove, 3093, 122, 5, R
@@ -161,7 +498,7 @@ return
 	Send, {LButton Up}
 	Sleep 100
 
-	;2Â÷ È®´ë
+	;2ì°¨ í™•ëŒ€
 	MouseMove, -4000, -4000, 0, R
 	Sleep 100
 	;MouseMove, 2718, 122, 5, R
@@ -184,23 +521,26 @@ return
 }
 return
 
+; win10 ìœ¼ë¡œ ì—…ë°ì´íŠ¸í›„ í•  í•„ìš”ì—†ì–´ë³´ì—¬ ì„ì‹œì œê±° 
+
 LWin & E::
 {
 	;Run explorer F:\
-	Run explorer c:\Users\seoru 
+	Run explorer ;c:\Users\utylee 
 	return
 }
 
+
 return
-; °ü½ÉÁ¾¸ñ 1
+; ê´€ì‹¬ì¢…ëª© 1
 #!z::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 80
-	; ±âÁ¸ 0995 È­¸é¿ë
+	; ê¸°ì¡´ 0995 í™”ë©´ìš©
 	;MouseMove, 24 + 1920, 81, 0
-	; »õ·Î¿î ÁÂÃø ¸ğ´ÏÅÍ·Î ¿Å±ä 0994¿ë È­¸é¿ë
+	; ìƒˆë¡œìš´ ì¢Œì¸¡ ëª¨ë‹ˆí„°ë¡œ ì˜®ê¸´ 0994ìš© í™”ë©´ìš©
 	MouseMove, 1400, 81, 0
 	Sleep 20
 	Send {LButton}
@@ -209,15 +549,15 @@ return
 }
 return
 
-; °ü½ÉÁ¾¸ñ 2
+; ê´€ì‹¬ì¢…ëª© 2
 #!x::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 80
-	; ±âÁ¸ 0995 È­¸é¿ë
+	; ê¸°ì¡´ 0995 í™”ë©´ìš©
 	;MouseMove, 57 + 1920, 81, 0
-	; »õ·Î¿î ÁÂÃø ¸ğ´ÏÅÍ·Î ¿Å±ä 0994¿ë È­¸é¿ë
+	; ìƒˆë¡œìš´ ì¢Œì¸¡ ëª¨ë‹ˆí„°ë¡œ ì˜®ê¸´ 0994ìš© í™”ë©´ìš©
 	MouseMove, 1430, 81, 0
 	Sleep 20
 	Send {LButton}
@@ -227,7 +567,7 @@ return
 }
 return
 
-; ÀÜ°íº¸±â
+; ì”ê³ ë³´ê¸°
 #!a::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -237,7 +577,7 @@ return
 	return
 }
 return
-; ¹ÌÃ¼°áº¸±â
+; ë¯¸ì²´ê²°ë³´ê¸°
 #!s::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -248,7 +588,7 @@ return
 }
 
 return
-; ´çÀÏ¸Å¸Åº¸±â
+; ë‹¹ì¼ë§¤ë§¤ë³´ê¸°
 #!d::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -261,7 +601,7 @@ return
 return
 
 
-; ¼±¹°Áö¼öº¸±â
+; ì„ ë¬¼ì§€ìˆ˜ë³´ê¸°
 #!9::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -272,7 +612,7 @@ return
 	return
 }
 
-; ÄÚ½º´ÚÁö¼ö º¸±â
+; ì½”ìŠ¤ë‹¥ì§€ìˆ˜ ë³´ê¸°
 #!0::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -283,7 +623,7 @@ return
 	return
 }
 
-; ¸Å¼ö½Ã¼¼ °¨½Ã º¸±â
+; ë§¤ìˆ˜ì‹œì„¸ ê°ì‹œ ë³´ê¸°
 #!BackSpace::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -293,7 +633,7 @@ return
 	return
 }
 
-; ´Ù¿ìÁö¼ö º¸±â
+; ë‹¤ìš°ì§€ìˆ˜ ë³´ê¸°
 #!1::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -307,7 +647,7 @@ return
 	return
 }
 
-; ³ª½º´ÚÁö¼ö º¸±â
+; ë‚˜ìŠ¤ë‹¥ì§€ìˆ˜ ë³´ê¸°
 #!2::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -321,7 +661,7 @@ return
 	return
 }
 
-; µ¶ÀÏDAXÁö¼ö º¸±â
+; ë…ì¼DAXì§€ìˆ˜ ë³´ê¸°
 #!3::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -335,7 +675,9 @@ return
 	return
 }
 
-; ¿µ±¹Áö¼ö º¸±â
+/*
+; #!F4 ì§€ìˆ˜ìº¡ì³ë¥¼ ë³€ê²½í•¨
+; ì˜êµ­ì§€ìˆ˜ ë³´ê¸°
 #!4::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -348,8 +690,9 @@ return
 	Send {LButton}
 	return
 }
+*/
 
-; ÀÏº»´Ï²²ÀÌÁö¼ö º¸±â
+; ì¼ë³¸ë‹ˆê»˜ì´ì§€ìˆ˜ ë³´ê¸°
 #!5::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -363,7 +706,7 @@ return
 	return
 }
 
-; »óÇØÁ¾ÇÕÁö¼ö º¸±â
+; ìƒí•´ì¢…í•©ì§€ìˆ˜ ë³´ê¸°
 #!6::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -386,56 +729,1055 @@ return
 	return
 }
 
-;°ü½ÉÁ¾¸ñ¸®½ºÆ® ÃÖ»ó´Ü Ç×¸ñ Å¬¸¯
+;ê´€ì‹¬ì¢…ëª©ë¦¬ìŠ¤íŠ¸ ìµœìƒë‹¨ í•­ëª© í´ë¦­
 #!u::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 100
 
-	; ±âÁ¸ 0995¿ë
+	; ê¸°ì¡´ 0995ìš©
 	;MouseClick, Left, 2200, 123
-	; »õ·Î¿î 0994¿ë
+	; ìƒˆë¡œìš´ 0994ìš©
 	MouseClick, Left, 1541, 128
 	return
 }
 ;
 
 
-#!j::
+
+/*
+~ / & 1::
 {
+     
+    ;GetKeyState, state, LWin
+    ;if state = D
+    ;{
+    ;    slash_toggle := 1
+	;    send {LWin Down}{F1}
+    ;}
+    ;
+    slash_toggle := 1
+    send {F1}
+	return
+}
+/::
+{
+    return
+}
+
+/ Up::
+{
+    if slash_toggle = 1
+    {
+        slash_toggle := 0 
+        return
+    }
+    else if slash_toggle = 0
+    {
+        send {/}
+        slash_toggle := 0
+        return
+    }
+}
+
+~S & J::
+{
+    s_toggle := 1
 	send {Down}
 	return
 }
-
-#!k::
+~S & K::
 {
+    s_toggle := 1
 	send {Up}
 	return
 }
-
-#!h::
+~S & H::
 {
-	send {PgDn}
+    s_toggle := 1
+	send {Left}
 	return
 }
 
-#!l::
+~S & L::
 {
-	send {PgUp}
+    s_toggle := 1
+	send {Right}
 	return
 }
 
-#IfWinActive ahk_class _KiWoomClass
+S::
+{
+    return
+}
 
 
-;Numpad Add ±â´É »ì·ÁµÎ±â
+S Up::
+{
+    if s_toggle = 1
+    {
+        s_toggle := 0 
+        return
+    }
+    else if s_toggle = 0
+    {
+        send {s}
+        s_toggle := 0
+        return
+    }
+}
+
+*/
+
+
+
+SC029::ESC
+^SC029::Send, `` 
++SC029::SendRaw, ~ 
+
+LWin & Tab::AltTab
+
+
+/*
+
+~*LWin & Tab::
+{
+    wintab_toggle := 1
+    Send, {LAlt Down}
+    Sleep 10
+    Send, {Tab}
+    Send, {LWin Up}
+    return
+}
+LAlt::
+{
+    Send, {LAlt}
+    return
+}
+
+LWin::
+{
+    Send, {LWin}
+    return
+}
+
+$LWin Up::
+{   
+    MsgBox, ã…‹ã…‹ã…‹
+    GetKeyState, state, LAlt
+    if state = D
+    {
+        Send, {LAlt up}
+    } 
+    if wintab_toggle = 1 
+    {
+        wintab_toggle := 0
+        Send, {LAlt up}
+        Send, {Lwin up}
+        return
+    }
+    Send, {Lwin Up}
+    return
+}
+*/
+
+#IfWinActive ahk_class MozillaWindowClass 
+#l::
+{
+    return
+}
+#t::^t
+#s::^s
+#o::^o
+
+#IfWinActive
+
+
+~ / & =::
+{
+    slash_toggle := 1
+    send, {Volume_Up 2}
+    return
+}
+~ / & -::
+{
+    slash_toggle := 1
+    send, {Volume_Down 2}
+    return
+}
+~ / & 0::
+{
+    slash_toggle := 1
+    send, {Volume_Mute}
+    return
+}
+
+
+~ / & 1::
+{
+    ;GetKeyState, state, LAlt
+    ;if state = D
+    ;{
+    ;    slash_toggle := 1
+	;    send {LAlt Down}{F4}
+    ;}
+    
+    slash_toggle := 1
+    send {F1}
+	return
+}
+~ / & 2::
+{
+    ;GetKeyState, state, LAlt
+    ;if state = D
+    ;{
+    ;    slash_toggle := 1
+	;    send {LAlt Down}{F4}
+    ;}
+    
+    slash_toggle := 1
+    send {F2}
+	return
+}
+!$::
+{
+    send {LAlt Down}{F4}
+    sleep, 30
+    send {LAlt Up}{F4}
+    return
+}
+
+^+2::Send, {F2}
+^!2::Send, {F2}
+
+#+4::Send, !{F4}
+
+;í‚¤ì›€HTSì—ì„œ ì‚¼ë“±ë¶„ì„  ìë™ ë©”ë‰´ ì„ íƒ
+#IfWinActive ahk_class _NKHeroMainClass
+^XButton1::
+!XButton1::
+#^1::
+{
+	IfWinExist, ahk_class _NKHeroMainClass
+		WinActivate
+    Send, {RButton}
+    Sleep 50
+    Send, {l}
+    Sleep 50
+    Loop, 9 
+    {
+        Send, {Down}
+        Sleep, 10
+    }
+    Send, {Enter}
+    return
+}
+#IfWinActive
+
+
+; Alt+/+4 ë¥¼ Alt+F4ë¡œ ì„¤ì •. ê·¸ëŸ¬ë‚˜ Win+Q ë¥¼ macì²˜ëŸ¼ ì¢…ë£Œëª…ë ¹ìœ¼ë¡œ ì‚¬ìš©í•˜ë©´ ë” í¸í•  ë“¯ í•˜ë‹¤
+/*
+~ / & 4::
+{
+    slash_toggle := 1
+    GetKeyState, state, LAlt
+    if state = D
+    {
+	    ;send {LAlt Down}{F4}
+	    send {LAlt Down}{F4}
+        sleep, 30
+	    send {LAlt Up}{F4}
+        sleep, 30
+        send {/ Up}
+        return
+    }
+    
+    send,{F4}
+	return
+}
+*/
+
+#Q::
+{
+    send !{F4}
+	return
+}
+
+~ / & 5::
+{
+    ;GetKeyState, state, LAlt
+    ;if state = D
+    ;{
+    ;    slash_toggle := 1
+	;    send {LAlt Down}{F4}
+    ;}
+    
+    slash_toggle := 1
+    send {F5}
+	return
+}
+; shift insert
+~ / & I::
+{
+    slash_toggle := 1
+    GetKeyState, state, LCtrl
+    if state = D
+    {
+        ; ctrl + insert ( copy ) ë²„íŠ¼
+        send {Ctrl Down}{Insert}
+        sleep, 30
+        send {Ctrl Up}
+        return
+    }
+
+    send {Shift Down}{Insert}
+    Sleep, 30
+    send {Shift Up}
+	return
+}
+; shift printscreen 
+~ / & P::
+{
+    slash_toggle := 1
+    /*   
+    GetKeyState, state, LCtrl
+    if state = D
+    {
+        ; ctrl + insert ( copy ) ë²„íŠ¼
+        send {Ctrl Down}{Insert}
+        sleep, 30
+        send {Ctrl Up}
+        return
+    }
+    */
+
+    send {Shift Down}{PrintScreen}
+    Sleep, 30
+    send {Shift Up}
+	return
+}
+
+
+/::
+{
+    return
+}
+/ Up::
+{
+    if slash_toggle = 1
+    {
+        slash_toggle := 0 
+        return
+    }
+    else if slash_toggle = 0
+    {
+        send {/}
+        slash_toggle := 0
+        return
+    }
+}
+
+#+j::
+{
+    GetKeyState, state, C   
+    if state = D
+    {
+        Send {PgDn}
+        return
+    }
+	send {Down}
+	return
+}
+#+k::
+{
+    GetKeyState, state, C   
+    if state = D
+    {
+        Send {PgUp}
+        return
+    }
+	send {Up}
+	return
+}
+#+h::
+{
+    GetKeyState, state, C   
+    if state = D
+    {
+        Send {Home}
+        return
+    }
+	send {Left}
+	return
+}
+#+l::
+{
+    GetKeyState, state, C   
+    if state = D
+    {
+        Send {End}
+        return
+    }
+	send {Right}
+	return
+}
+
+
++!u::
+{
+	send {Home}
+	return
+}
+
+
++!i::
+{
+	send {End}
+	return
+}
+
+
+
+
+
+
+#IfWinExist MINGW32
+#1::
+{
+    IfWinExist, MINGW32
+        WinActivate
+
+    return
+}
+#IfWinExist
+
+#IfWinExist ahk_class Vim
+#2::
+{
+    IfWinExist, ahk_class Vim
+        WinActivate
+    
+    return
+}
+#IfWinExist
+
+; ìê¾¸ ì˜ëª»ëˆŒë ¤ì„œ Win+4ê°€ ë‹¤ë¥¸ ì•±ì´ ì‹¤í–‰ë˜ì–´ì„œ ê·¸ëƒ¥ ë‹¨ì¶•í‚¤ ë‘ê°œë¥¼ ê°™ì´ ì“°ê²Œë” ë°”ê¾¸ì—ˆìŠµë‹ˆë‹¤
+#IfWinExist ahk_class MozillaWindowClass
+#3::
+#4::
+{
+    IfWinExist, ahk_class MozillaWindowClass
+        WinActivate
+    
+    return
+}
+#IfWinExist
+
+;#IfWinExist ahk_class _KiWoomClass
+#IfWinExist ahk_class _NKHeroMainClass
+#5::
+{
+	IfWinExist, ahk_class _NKHeroMainClass
+		WinActivate
+
+    return
+}
+
+;ì˜ì›…ë¬¸ì´ í‹€ì–´ì ¸ìˆì„ ê²½ìš°
+#IfWinActive ahk_class _NKHeroMainClass
+
+; [í˜¸ê°€ì°½ë§Œìœ¼ë¡œ ê±°ë˜ 0999ì €ì¥í™”ë©´ ver] 
+; alt ë“œë˜ê·¸ ì‹œ ë‘ í˜¸ê°€ ìƒí˜¸ êµí™˜
+
+
+; 0999 ì €ì¥í™”ë©´ì—ì„œ í˜„ì¬ ì»¤ì„œì˜ ìœ„ì¹˜ê°€ ì–´ë–¤ í˜¸ê°€ë¥¼ ê°€ë¥´í‚¤ê³  ìˆëŠ”ì§€ íŒë‹¨í•©ë‹ˆë‹¤
+CheckPos(posX, posY)
+{
+    ret := 0
+
+    ;ì”ê³ /ë‹¹ì¼ë§¤ë§¤ ì˜ì—­ì¼ ê²½ìš°
+    ;if (posX >= 1920 + 620) and (posX <= 1920 + 1223) and (posY >= 820 ) and (posY <= 1076)
+    if (posX >= 620) and (posX <= 1223) and (posY >= 820 ) and (posY <= 1076)
+    {
+        ret := 77 
+    }
+    
+    ;(ì¶”ê°€)ì¢Œì¸¡ í° ì°¨íŠ¸ì¼ ê²½ìš°
+    ;else if (posX >= 671) and (posX <= 1193) and (posY >=9) and (posY <= 403)
+    else if (posX >= 671 - 1920) and (posX <= 1193 - 1920) and (posY >=9) and (posY <= 403)
+    {
+        ret := 99
+    }
+
+    ;ì²«ë²ˆì§¸ í˜¸ê°€ ìœ„ì¹˜ì¼ ê²½ìš°  
+    ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
+    else if (posX >= 0) and ( posX <= 615) and (posY <= 410)
+    {
+        ret := 1
+    }
+    ; 2nd í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;else if (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY <= 410)
+    else if (posX >= 616) and ( posX <= 1225) and (posY <= 410)
+    {
+        ret := 2
+    }
+
+    ; 3rd í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;else if (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY <= 410)
+    else if (posX >= 1226) and ( posX <= 1841) and (posY <= 410)
+    {
+        ;-->
+        ret := 3
+    }
+
+    ; 4th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 411) and (posY <= 812)
+    else if (posX >= 0) and ( posX <= 615) and (posY >= 411) and (posY <= 812)
+    {
+        ;-->
+        ret := 4
+    }
+    ; 5th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;else if (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY >= 411) and (posY <= 812)
+    else if (posX >= 616) and ( posX <= 1225) and (posY >= 411) and (posY <= 812)
+    {
+        ;-->
+        ret := 5
+    }
+    ; 6th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;else if (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY >= 411) and (posY <= 812)
+    else if (posX >= 1226) and ( posX <= 1841) and (posY >= 411) and (posY <= 812)
+    {
+        ;-->
+        ret := 6
+    }
+    ; 7th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 813)
+    else if (posX >= 0) and ( posX <= 615) and (posY >= 813)
+    {
+        ;-->
+        ret := 7
+    }
+    ; 8th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;else if (posX >= 1920 + 1226) and (posY >= 813) 
+    else if (posX >= 1226) and (posY >= 813) 
+    {
+        ;-->
+        ret := 8
+    }
+
+    return ret 
+}
+
+; [0999] í˜¸ê°€ë„˜ë²„ë¥¼ ì „ë‹¬ë°›ìœ¼ë©´ í•´ë‹¹ í˜¸ê°€ì˜ ì¢…ëª©ì½”ë“œ ìœ„ì¹˜ì˜ x, y ì¢Œí‘œì…‹ì„ ë°˜ë‚©í•©ë‹ˆë‹¤
+NumToSubjectPos(N)
+{
+    Pos := {"x" : 0, "y" :0}
+
+    if (N == 1) 
+        ;Pos := {"x" : 1920 + 30, "y" : 25}
+        Pos := {"x" : 30, "y" : 25}
+    else if (N == 2)
+        ;Pos := {"x" : 1920 + 642, "y" : 25}
+        Pos := {"x" : 642, "y" : 25}
+    else if (N == 3)
+        ;Pos := {"x" : 1920 + 1260, "y" : 25}
+        Pos := {"x" : 1260, "y" : 25}
+    else if (N == 4)
+        ;Pos := {"x" : 1920 + 30, "y" : 425}
+        Pos := {"x" : 30, "y" : 425}
+    else if (N == 5) 
+        ;Pos := {"x" : 1920 + 642, "y" : 425}
+        Pos := {"x" : 642, "y" : 425}
+    else if (N == 6) 
+        ;Pos := {"x" : 1920 + 1260, "y" : 425}
+        Pos := {"x" : 1260, "y" : 425}
+    else if (N == 7) 
+        ;Pos := {"x" : 1920 + 30, "y" : 825}
+        Pos := {"x" : 30, "y" : 825}
+    else if (N == 8) 
+        ;Pos := {"x" : 1920 + 1260, "y" : 825}
+        Pos := {"x" : 1260, "y" : 825}
+
+    return Pos
+}
+
+;[0999] í˜¸ê°€ì°½ ë‚´ ì°¨íŠ¸ì˜ ë¶„<-->í‹± êµí™˜ì„ ìœ„í•œ í•¨ìˆ˜
+NumToTickPos(N)
+{
+    Pos := {"x" : 0, "y" : 0}
+
+    if (N == 1) 
+        ;Pos := {"x" : 1920 + 318, "y" : 215}
+        Pos := {"x" : 318, "y" : 215}
+    else if (N == 2)
+        ;Pos := {"x" : 1920 + 935, "y" : 215}
+        Pos := {"x" : 935, "y" : 215}
+    else if (N == 3)
+        ;Pos := {"x" : 1920 + 1550, "y" : 215}
+        Pos := {"x" : 1550, "y" : 215}
+    else if (N == 4)
+        ;Pos := {"x" : 1920 + 318, "y" : 616}
+        Pos := {"x" : 318, "y" : 616}
+    else if (N == 5) 
+        ;Pos := {"x" : 1920 + 935, "y" : 616}
+        Pos := {"x" : 935, "y" : 616}
+    else if (N == 6) 
+        ;Pos := {"x" : 1920 + 1550, "y" : 616}
+        Pos := {"x" : 1550, "y" : 616}
+    else if (N == 7) 
+        ;Pos := {"x" : 1920 + 318, "y" : 1012}
+        Pos := {"x" : 318, "y" : 1012}
+    else if (N == 8) 
+        ;Pos := {"x" : 1920 + 1550, "y" : 1012}
+        Pos := {"x" : 1550, "y" : 1012}
+    ;ì¢Œì¸¡ ì°¨íŠ¸ìš©ìœ¼ë¡œ ì¶”ê°€
+    else if (N == 99)
+        ;Pos := {"x" : 1085, "y" : 30}
+        Pos := {"x" : 1085 - 1920, "y" : 30}
+    ;ì”ê³ /ë‹¹ì¼ë§¤ë§¤ ì „í™˜
+    else if (N == 77)
+        ;Pos := {"x" : 1920 + 663, "y" : 830}
+        Pos := {"x" : 663, "y" : 830}
+
+    return Pos
+}
+
+;[0999] í˜¸ê°€ì°½ ë‚´ ì°¨íŠ¸ì˜ ë¶„<-->í‹± êµí™˜ì„ ìœ„í•œ í•¨ìˆ˜
+NumToMinuPos(N)
+{
+    Pos := {"x" : 0, "y" : 0}
+
+    if (N == 1) 
+        ;Pos := {"x" : 1920 + 356, "y" : 215}
+        Pos := {"x" : 356, "y" : 215}
+    else if (N == 2)
+        ;Pos := {"x" : 1920 + 973, "y" : 215}
+        Pos := {"x" : 973, "y" : 215}
+    else if (N == 3)
+        ;Pos := {"x" : 1920 + 1588, "y" : 215}
+        Pos := {"x" : 1588, "y" : 215}
+    else if (N == 4)
+        ;Pos := {"x" : 1920 + 356, "y" : 616}
+        Pos := {"x" : 356, "y" : 616}
+    else if (N == 5) 
+        ;Pos := {"x" : 1920 + 973, "y" : 616}
+        Pos := {"x" : 973, "y" : 616}
+    else if (N == 6) 
+        ;Pos := {"x" : 1920 + 1588, "y" : 616}
+        Pos := {"x" : 1588, "y" : 616}
+    else if (N == 7) 
+        ;Pos := {"x" : 1920 + 356, "y" : 1012}
+        Pos := {"x" : 356, "y" : 1012}
+    else if (N == 8) 
+        ;Pos := {"x" : 1920 + 1588, "y" : 1012}
+        Pos := {"x" : 1588, "y" : 1012}
+    ;ì¢Œì¸¡ ì°¨íŠ¸ìš©ìœ¼ë¡œ ì¶”ê°€
+    else if (N == 99)
+        ;Pos := {"x" : 1065, "y" : 30}
+        Pos := {"x" : 1065 - 1920, "y" : 30}
+    ;ì”ê³ /ë‹¹ì¼ë§¤ë§¤ ì „í™˜
+    else if (N == 77)
+        ;Pos := {"x" : 1920 + 730, "y" : 830}
+        Pos := {"x" : 730, "y" : 830}
+
+    return Pos
+}
+
+
+; [0999] Aì¢Œí‘œì…‹ì—ì„œ Bì¢Œí‘œì…‹ìœ¼ë¡œ ë“œë˜ê·¸ í•©ë‹ˆë‹¤
+DragProc(A, B)
+{
+        MouseMove, A.x, A.y 
+	    Send {LButton Down}
+	    Sleep 20
+	    MouseMove, B.x, B.y
+	    Send {LButton Up}
+}
+
+; [0999] ì €ì¥í™”ë©´ì—ì„œ ë‘ í˜¸ê°€ì°½ì˜ ìœ„ì¹˜ë¥¼ ë³€ê²½í•˜ëŠ” í”„ë¡œì„¸ìŠ¤ì…ë‹ˆë‹¤
+SwapWinProc(A, B)
+{
+    pos_A := NumToSubjectPos(A)
+    pos_B := NumToSubjectPos(B)
+
+    ;ìµœí•˜ë‹¨ì˜ ì„ì‹œ ì°½ì˜ ì¢Œí‘œì…ë‹ˆë‹¤
+    ;pos_temp := {"x" : 1920 + 650, "y" : 1101}
+    ;144hz ëª¨ë‹ˆí„°ë¡œ ë°”ê¾¸ë©´ì„œ ì„¸ë¡œ í•´ìƒë„ ì¤„ì–´ë“¤ì–´ ì„ì‹œë¡œ ìš°ì¸¡ì°¨íŠ¸ìœ¼ë¡œ ì´ë™í•´ë´„ ^^
+    ;pos_temp := {"x" : 1920 + 1900, "y" : 45}
+    pos_temp := {"x" : 1900, "y" : 45}
+
+    ;Aì¢Œí‘œì—ì„œ tempì¢Œí‘œ(1920 + 756, 1128)ë¡œ ë“œë˜ê·¸ í•©ë‹ˆë‹¤
+    DragProc(pos_A, pos_temp)
+    Sleep 20
+
+    ;Bì¢Œí‘œì—ì„œ Aì¢Œí‘œë¡œ ë“œë˜ê·¸ í•©ë‹ˆë‹¤
+    DragProc(pos_B, pos_A)
+    Sleep 20
+
+    ;tempì¢Œí‘œ(1920 + 756, 1128)ì—ì„œ Bì¢Œí‘œë¡œ ë“œë˜ê·¸ í•©ë‹ˆë‹¤
+    DragProc(pos_temp, pos_B)
+    Sleep 20
+
+}
+
+LAlt & ~LButton::
+{   
+    MouseGetPos, posX, posY 
+    
+    ; ì¢Œí´ë¦­ì´ ëˆŒë ¤ìˆëŠ” ë™ì•ˆ ê³„ì† ì´ loop ì•ˆì— ë¨¸ë­…ë‹ˆë‹¤
+    while GetKeyState("LButton", "P")
+    {
+        MouseGetPos, new_X, new_Y
+        ToolTip, % (posX - new_X)
+        ; cpu 100%ë¥¼ ë§‰ê¸°ìœ„í•´ ë„£ìŠµë‹ˆë‹¤
+        Sleep 10
+    }
+    
+    ; íˆ´íŒ ìˆ«ìë¥¼ ì œê±°í•˜ê¸° ìœ„í•´ ë¹ˆë€ í‘œì‹œë¥¼ ë„£ìŠµë‹ˆë‹¤.
+    tooltip, 
+
+    start := CheckPos(posX, posY)
+    end := CheckPos(new_X, new_Y)
+
+    SwapWinProc(start, end)
+
+
+    return
+}
+
+; [í˜¸ê°€ì°½ë§Œìœ¼ë¡œ ê±°ë˜] F1 í‚¤ ë“±ì„ ë¶„ë´‰ í´ë¦­ì—ì„œ í˜„ì¬ ì»¤ì„œì˜ ì¢…ëª©ì„ ê° í˜¸ê°€ì°½ìœ¼ë¡œì˜ í• ë‹¹ ë“œë˜ê·¸ë¡œ ë³€ê²½
+F1::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37, 60
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F2::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 320, 60
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F3::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 632, 60
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F4::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 949, 60
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F5::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 1262, 60
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F6::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 1577, 60
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F7::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37, 495
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F8::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 320, 495
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F9::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 632, 495
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F10::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 949, 495
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F11::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 1262, 495 
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+F12::
+{
+    MouseGetPos, posX, posY
+	Send {LButton Down}
+    MouseMove, 1920 + 37 + 1577, 495
+    Sleep 10
+	Send {LButton Up}
+    Sleep 10
+    MouseMove, posX, posY
+
+    return 
+}
+
+/*
+;F1~F4ê¹Œì§€ 1,2,3,5ë¶„ë´‰ í´ë¦­ ë“±ì„ í• ë‹¹
+F1::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        ; 170104-ë¶„ë´‰í´ë¦­ì—ì„œ ê° í˜¸ê°€ì°½ ë“œë˜ê·¸ë¡œ ë³€ê²½
+        ;MouseClick, Left, 1920 + 453, 563
+        ;
+	    MouseMove, 508, 484
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1910, 35 - 70, 2, R
+	    Send {LButton Up}
+        ;-->
+        return
+}
+
+F2::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        ; 170104-ë¶„ë´‰í´ë¦­ì—ì„œ ê° í˜¸ê°€ì°½ ë“œë˜ê·¸ë¡œ ë³€ê²½
+        ;MouseClick, Left, 1920 + 453 + 18, 563
+        ;
+	    MouseMove, 817, 484
+	    Send {LButton Down}
+	    Sleep 20
+	    MouseMove, 1275 + 335, 35 - 70, 2, R
+	    Send {LButton Up}
+        ;-->
+    return
+}
+
+F3::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        ; 170104-ë¶„ë´‰í´ë¦­ì—ì„œ ê° í˜¸ê°€ì°½ ë“œë˜ê·¸ë¡œ ë³€ê²½
+        ;MouseClick, Left, 1920 + 453 + 18 +18, 563
+        ;
+	    MouseMove, 1135, 484
+	    Send {LButton Down}
+	    Sleep 20
+	    MouseMove,  957+ 335, 35 - 70, 2, R
+	    Send {LButton Up}
+        ;-->
+    return
+}
+
+F4::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        ; 170104-ë¶„ë´‰í´ë¦­ì—ì„œ ê° í˜¸ê°€ì°½ ë“œë˜ê·¸ë¡œ ë³€ê²½
+        ;MouseClick, Left, 1920 + 453 + 18 + 18 + 18, 563
+        ;
+	    MouseMove, 1440, 484
+	    Send {LButton Down}
+	    Sleep 20
+	    MouseMove,  657+ 335, 35 - 70, 2, R
+	    Send {LButton Up}
+        ;-->
+    return
+}
+
+F5::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        ; 170104-ë¶„ë´‰í´ë¦­ì—ì„œ ê° í˜¸ê°€ì°½ ë“œë˜ê·¸ë¡œ ë³€ê²½
+        ;MouseClick, Left, 1920 + 453 + 18 + 18 + 18 + 18, 563
+        
+	    MouseMove, 775, 53
+	    Send {LButton Down}
+	    Sleep 20
+	    MouseMove,  1260+ 335, 470 - 70, 2, R
+	    Send {LButton Up}
+        ;-->
+    return
+}
+
+
+F6::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        ; 170104-ë¶„ë´‰í´ë¦­ì—ì„œ ê° í˜¸ê°€ì°½ ë“œë˜ê·¸ë¡œ ë³€ê²½
+        ;MouseClick, Left, 1920 + 453 + 18 + 18 + 18 + 18 + 18, 563
+    return
+}
+
+F8::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        MouseClick, Left, 1215, 206 
+    return
+}
+
+F7::
+{
+    IfWinExist, ahk_class _KiWoomClass
+        WinActivate
+        MouseClick, Left, 1920 + 1568, 1094
+    return
+}
+
+F12::
+{
+	IfWinExist, ahk_class _KiWoomClass
+		WinActivate
+        ;MsgBox, "í—¤í—¤í—¤" 
+        ;MouseMove, -5000, -5000, R
+        ;MouseMove, 1920 + 1044, 606, R
+        MouseClick, Right, 1920 + 1044 + 20, 606
+        Sleep 10
+        Send {s}
+        Sleep 10
+        Send {s}
+        Sleep 10
+        Send {Enter}
+        ;ì˜¤ë¥˜ê°€ ì¢…ì¢… ìƒê²¨ì„œ ì‹œë®¬ë ˆì´ì…˜ ì„¤ì • ì°½ ëœ° ë•Œê¹Œì§€ ì¶©ë¶„íˆ ê¸°ë‹¤ë ¤ì¤Œ
+        Sleep 300
+
+        ;ì¶”ê°€ + ë²„íŠ¼ í´ë¦­
+        ;MouseClick, Left, 1920 + 58, 683
+        MouseMove, 57, 273, R
+        Send {LButton}
+        Sleep 90
+
+        
+        ; ìƒíƒœìœ ì§€ ë²„íŠ¼ ëˆ„ë¥´ê³ 
+        MouseMove, 55, 116, R
+        Send {LButton}
+        Sleep 30
+
+        
+        ; ë‘ê°œ ìº”ë“¤ ì¶”ê°€ 
+        MouseMove, 178 , 116, R
+        Send {LButton}
+        Sleep 10
+        Send {LButton}
+        Sleep 10
+        
+        MouseMove, 178 + 88, 116, R
+        Sleep 10
+        Send {LButton}
+        Sleep 90
+        
+        
+        ;í™•ì¸ ë²„íŠ¼
+        MouseMove, 514, 319, R
+        Send {LButton}
+        Sleep 20
+        
+        
+         
+        ;MouseClick, Left, 1920 + 354, 627
+        ;Sleep 20
+       ; 
+       ; ;MouseClick, Left, 1920 + 450, 630 
+       ; ;Sleep 20
+       ; MouseClick, Left, 1920 + 516, 726
+       
+
+       ;
+       ; Send {LButton Down}
+       ; Sleep 30
+       ; Send {LButton Up}
+       ; 
+        return
+}
+*/
+
+;Numpad Add ê¸°ëŠ¥ ì‚´ë ¤ë‘ê¸°
 /*
 NumpadAdd::Send {NumpadAdd}
 */
 
 
-;°¡°İµ¥ÀÌÅÍ ½Ã¹Ä·¹ÀÌ¼Ç ÀÏºÀ
+;ê°€ê²©ë°ì´í„° ì‹œë®¬ë ˆì´ì…˜ ì¼ë´‰
+;ì¼ë‹¨ ì¼ë´‰ ì‹œë®¬ë ˆì´ì…˜ì€ ì œê±°, F1ì— í• ë‹¹í•œ ë¶„ë´‰ ì‹œë®¬ë ˆì´ì…˜ì— í• ë‹¹
+/*
 F12::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -455,7 +1797,7 @@ F12::
 	Send {Enter}
 	Sleep 150
 
-	; Ãß°¡+
+	; ì¶”ê°€+
 	MouseMove, -4000, -4000, R
 	Sleep 20
 	;MouseMove, 1298 + 1920, 694, 2, R
@@ -464,7 +1806,7 @@ F12::
 	Send {LButton}
 	Sleep 50
 
-	; »óÅÂÀ¯Áö
+	; ìƒíƒœìœ ì§€
 	MouseMove, -4000, -4000, R
 	Sleep 20
 	;MouseMove, 1482 + 1920, 637, 2, R
@@ -473,7 +1815,7 @@ F12::
 	Send {LButton}
 	Sleep 50
 
-	; ÀÌÆ²Ä¡ Ãß°¡
+	; ì´í‹€ì¹˜ ì¶”ê°€
 	MouseMove, -4000, -4000, R
 	Sleep 20
 	MouseMove, 1920 + 360, 625, 2, R
@@ -484,7 +1826,7 @@ F12::
 	Send {LButton}
 	Sleep 50
 
-	; ´İ±â
+	; ë‹«ê¸°
 	MouseMove, -4000, -4000, R
 	Sleep 20
 	;MouseMove, 1684, 637, 2, R
@@ -493,7 +1835,7 @@ F12::
 	Send {LButton}
 	Sleep 50
 	
-	;È®ÀÎ(´İ±â)
+	;í™•ì¸(ë‹«ê¸°)
 	MouseMove, -4000, -4000, R
 	Sleep 20
 	;MouseMove, 1753, 736, 2, R
@@ -504,27 +1846,28 @@ F12::
 
 	return
 }
-return
 
+*/
 
-;Å¸¿ø±×¸®±â
+;íƒ€ì›ê·¸ë¦¬ê¸°
 /*
 #,::
 */
+/* [í˜¸ê°€ì°½ë§Œìœ¼ë¡œ ê±°ë˜] ë•Œë¬¸ì— ë‹¨ì¶•í‚¤ ì„ì‹œ ì œê±°
 F9::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 100
-	;¿ìÅ¬¸¯
+	;ìš°í´ë¦­
 	Send {RButton}
 	Sleep 500
 	
-	;l ´©¸£±â
+	;l ëˆ„ë¥´ê¸°
 	Send {l}
 	Sleep 50
 
-	;up key ¼¼¹ø
+	;up key ì„¸ë²ˆ
 	Send {Up}
 	Sleep 20	
 	Send {Up}
@@ -534,7 +1877,7 @@ F9::
 	Send {Enter}
 	Sleep 100
 
-	;Á¶±×¸¶ÇÏ°Ô ¿ø µå·¡±×
+	;ì¡°ê·¸ë§ˆí•˜ê²Œ ì› ë“œë˜ê·¸
 	Send {LButton Down}
 	Sleep 20
 	;MouseMove, 35, 35, 5, R
@@ -543,51 +1886,63 @@ F9::
 	Send {LButton Up}
 	Sleep 100
 
-	;¿ìÅ¬¸¯ ´­·¯¼­ Ææ ¸ğµå Ãë¼Ò
+	;ìš°í´ë¦­ ëˆŒëŸ¬ì„œ íœ ëª¨ë“œ ì·¨ì†Œ
 	Send {RButton}
 	
 	return
 }
-return
 
+*/
 
-; Å×½ºÆ®¿ë ÀÓ½Ã ´ÜÃàÅ°
+; testí…ŒìŠ¤íŠ¸ìš© ì„ì‹œ ë‹¨ì¶•í‚¤
 /*
 F7::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
-	Sleep 100
-	MouseClick, Left, 725 + 1920, 1040 
-	Sleep 300
-	MouseClick, Left, 118 + 1920, 1043 
-	Sleep 300
-	MouseClick, Left, 27 + 1920, 902 
-	Sleep 1000
-	Send {Enter}
+    ; 161017 í•˜ë½ì¥ì„¸ì—ì„œ ìê¾¸ ìˆ˜ìµì‹¤í˜„ì„ ëª»í•˜ê³  ê³ ê¾¸ë¼ì§ ë°©ì§€ë¥¼ ìœ„í•´ ìŠ¤íƒ‘ì£¼ë¬¸ì„ ìë™ì‹¤í–‰í•˜ë„ë¡
 
-	Sleep 200
-	MouseClick, Left, 430 + 1920, 1000 
+    Send {LCtrl Down}
+    Sleep 20
+    Send {w Down}
+    
+    Send {LCtrl Up}
+    Sleep 20
+    Send {w up}
+    Sleep 2300
+    MouseClick, Left, 460, 85
+    Sleep 100
+
+    MouseClick, Left, 68, 560
+    Sleep 100
+    MouseClick, Left, 68, 580
+    Sleep 100
+    MouseClick, Left, 68, 600
+
+    Sleep 500
+    MouseClick, Left, 937, 51
+    return
 
 }
-return
+
 */
 
-;ÀÛÀº Å¸¿ø±×¸®±â
+;ì‘ì€ íƒ€ì›ê·¸ë¦¬ê¸°
+/*
 F8::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 100
-	;¿ìÅ¬¸¯
+	;ìš°í´ë¦­
 	Send {RButton}
 	Sleep 500
 	
-	;l ´©¸£±â
+	;l ëˆ„ë¥´ê¸°
 	Send {l}
 	Sleep 50
 
-	;up key ¼¼¹ø
+	;up key ì„¸ë²ˆ
 	Send {Up}
 	Sleep 20	
 	Send {Up}
@@ -597,7 +1952,7 @@ F8::
 	Send {Enter}
 	Sleep 100
 
-	;Á¶±×¸¶ÇÏ°Ô ¿ø µå·¡±×
+	;ì¡°ê·¸ë§ˆí•˜ê²Œ ì› ë“œë˜ê·¸
 	Send {LButton Down}
 	Sleep 20
 	MouseMove, 12, 12, 5, R
@@ -605,28 +1960,29 @@ F8::
 	Send {LButton Up}
 	Sleep 100
 
-	;¿ìÅ¬¸¯ ´­·¯¼­ Ææ ¸ğµå Ãë¼Ò
+	;ìš°í´ë¦­ ëˆŒëŸ¬ì„œ íœ ëª¨ë“œ ì·¨ì†Œ
 	Send {RButton}
 	
 	return
 }
-return
+*/
 
-;»ç°¢Çü±×¸®±â
+/* [í˜¸ê°€ì°½ ë§Œìœ¼ë¡œ ê±°ë˜] ë•Œë¬¸ì— ë‹¨ì¶•í‚¤ ì„ì‹œ ì œê±°
+;ì‚¬ê°í˜•ê·¸ë¦¬ê¸°
 F10::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 100
-	;¿ìÅ¬¸¯
+	;ìš°í´ë¦­
 	Send {RButton}
 	Sleep 500
 	
-	;l ´©¸£±â
+	;l ëˆ„ë¥´ê¸°
 	Send {l}
 	Sleep 50
 
-	;up key ¼¼¹ø
+	;up key ì„¸ë²ˆ
 	Send {Up}
 	Sleep 20	
 	Send {Up}
@@ -638,7 +1994,7 @@ F10::
 	Send {Enter}
 	Sleep 100
 
-	;Á¶±×¸¶ÇÏ°Ô »ç°¢Çü µå·¡±×
+	;ì¡°ê·¸ë§ˆí•˜ê²Œ ì‚¬ê°í˜• ë“œë˜ê·¸
 	Send {LButton Down}
 	Sleep 20
 	;MouseMove, 50, 35, 5, R
@@ -647,89 +2003,98 @@ F10::
 	Send {LButton Up}
 	Sleep 100
 
-	;¿ìÅ¬¸¯ ´­·¯¼­ Ææ ¸ğµå Ãë¼Ò
+	;ìš°í´ë¦­ ëˆŒëŸ¬ì„œ íœ ëª¨ë“œ ì·¨ì†Œ
 	Send {RButton}
 	
 	return
 }
-return
+*/
 
-;¼öÆò¼±±×¸®±â
+;ìˆ˜í‰ì„ ê·¸ë¦¬ê¸°
+/* ì¼ë‹¨F5ë¥¼ ë¶„ë´‰ ìº”ë“¤ ì„ íƒìœ¼ë¡œ ë°”ê¿ˆ
 F5::
+*/
+/*
 XButton2::
+
 {
 
-	IfWinExist, ¿À¹ö¿öÄ¡
-	{
-
-		WinActivate, ¿À¹ö¿öÄ¡
-	
-		;MouseMove, -100, 0, , R
-		Loop, 10
-		{
-			DllCall("mouse_event", uint, 1, int, 303, int, 0, uint, 0, int, 0)
-			Sleep 15	
-		}
-		return
-	
-	}
+    
+	;IfWinExist, ì˜¤ë²„ì›Œì¹˜
+	;{
+;
+;		WinActivate, ì˜¤ë²„ì›Œì¹˜
+;	
+;		;MouseMove, -100, 0, , R
+;		Loop, 10
+;		{
+;			DllCall("mouse_event", uint, 1, int, 303, int, 0, uint, 0, int, 0)
+;			Sleep 15	
+;		}
+;		return
+;	
+;	}
 
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
-	Sleep 100
-	;¿ìÅ¬¸¯
-	Send {RButton}
-	Sleep 500
-	
-	;l ´©¸£±â
-	Send {l}
 	Sleep 50
+	;ìš°í´ë¦­
+	Send {RButton}
+	Sleep 50 
+	
+	;l ëˆ„ë¥´ê¸°
+	Send {l}
+	Sleep 10
 
-	;up key ¼¼¹ø
+	;up key ì„¸ë²ˆ
 	Send {Down}
-	Sleep 20	
+	Sleep 10	
 	Send {Down}
-	Sleep 20	
+	Sleep 10	
 	Send {Enter}
-	Sleep 100
+	Sleep 20
 
-	;Á¶±×¸¶ÇÏ°Ô ¿ø µå·¡±×
-	; »ìÂ¦ ¸¶¿ì½º Èçµé¾îÁÜ. Ä¿¼­°¡ È°¼ºÈ­¾ÈµÇ¼­¸®..
+	;ì¡°ê·¸ë§ˆí•˜ê²Œ ì› ë“œë˜ê·¸
+	; ì‚´ì§ ë§ˆìš°ìŠ¤ í”ë“¤ì–´ì¤Œ. ì»¤ì„œê°€ í™œì„±í™”ì•ˆë˜ì„œë¦¬..
 	MouseMove, -5, -5, 2, R
 	MouseMove, 5, 5, 2, R
 
 	Send {LButton}
-	Sleep 100
+	Sleep 20
 
-	;¿ìÅ¬¸¯ ´­·¯¼­ Ææ ¸ğµå Ãë¼Ò
+	;ìš°í´ë¦­ ëˆŒëŸ¬ì„œ íœ ëª¨ë“œ ì·¨ì†Œ
 	Send {RButton}
 	
 	return
 }
-return
+*/
 
-; Á÷¼±Ãß¼¼¼±
+; ì§ì„ ì¶”ì„¸ì„ 
+/*
 F6::
+*/
+; ë’¤ë¡œê°€ê¸° ë²„íŠ¼ ë§ˆìš°ìŠ¤
+/*
 XButton1::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 80
-	;¿ìÅ¬¸¯
+	;ìš°í´ë¦­
 	Send {RButton}
 	Sleep 50
 	
-	;l ´©¸£±â
+	;l ëˆ„ë¥´ê¸°
 	Send {l}
 	Sleep 30
 
-	;up key ¼¼¹ø
+	;up key ì„¸ë²ˆ
 	Send {Down}
 	Sleep 20	
 	Send {Enter}
 	Sleep 30
 
-	;»ìÂ¦ Ä¿¼­ Èçµé¾îÁÜ
+	;ì‚´ì§ ì»¤ì„œ í”ë“¤ì–´ì¤Œ
 	MouseMove, 5, 5, 2, R
 	MouseMove, -5, -5, 2, R
 
@@ -740,43 +2105,531 @@ XButton1::
 	;Send {LButton Up}
 	;Sleep 100
 
-	;¿ìÅ¬¸¯ ´­·¯¼­ Ææ ¸ğµå Ãë¼Ò
+	;ìš°í´ë¦­ ëˆŒëŸ¬ì„œ íœ ëª¨ë“œ ì·¨ì†Œ
 	;Send {RButton}
 	
 	return
 }
+*/
+
+;[í˜¸ê°€ë§Œìœ¼ë¡œ ê±°ë˜] í˜„ì¬ ìœ„ì¹˜ì˜ í˜¸ê°€ì°½ì„ ë³¸ ì°½ìœ¼ë¡œ ë“œë˜ê·¸ í•œë‹¤
+; ê±°ê¸°ì— 8282 í˜¸ê°€ì°½ ê±°ë˜ì‹œ ì „ì²´ ëª¨ë“œë¡œ ë³€ê²½ë„ ì´ ë‹¨ì¶•í‚¤ë¡œ í•˜ê¸°ë¡œ
+~LButton & RButton::
+{
+    ;MsgBox, ã…ã…ã…
+    Send, {Space}
+    return
+}
+
+; [0999] ê°€ìƒí™”ë©´1<--->ê°€ìƒí™”ë©´3ì„ ìŠ¤ìœ—ì¹­
+MButton::
+{
+    global togglescr
+    
+    ;ê°€ìƒí™”ë©´ 3ì¼ê²½ìš°(ê¸°ë³¸)
+    if(togglescr == 1)
+    {
+        ;Ctrl + 1 ëˆ„ë¦„
+        Send, {LCtrl Down}
+        Sleep 20
+        Send, {1 Down}
+        Sleep 20
+
+        Send, {1 Up}
+        Sleep 20
+        Send, {LCtrl Up}
+
+    }
+    
+    ;ê°€ìƒí™”ë©´ 1ì¼ê²½ìš°
+    else 
+    {
+        ;Ctrl + 3 ëˆ„ë¦„
+        Send, {LCtrl Down}
+        Sleep 20
+        Send, {3 Down}
+        Sleep 20
+
+        Send, {3 Up}
+        Sleep 20
+        Send, {LCtrl Up}
+    }
+
+    ;ê°€ìƒí™”ë©´ 1ì¼ê²½ìš°
+    
+
+    togglescr := togglescr * -1
+    return
+}
+
+; [0999] ê° í˜¸ê°€ì°½ ë‚´ì—ì„œ ë§ˆìš°ìŠ¤ ì•ìœ¼ë¡œ í‚¤ ëˆŒë €ì„ ê²½ìš°, ë¶„<-->í‹± í† ê¸€ ê¸°ëŠ¥ì¶”ê°€
+XButton2::
+{
+    global toggle0101
+
+    ; ë§ˆìš°ìŠ¤ ì»¤ì„œì˜ í¬ì§€ì…˜ì„ êµ¬í•©ë‹ˆë‹¤
+    MouseGetPos, posX, posY
+    Sleep, 10
+    
+    ;í˜„ì¬í˜¸ê°€ì°½ ë²ˆí˜¸ë¥¼ ì¢Œí‘œë¥¼ í†µí•´ ì§€ì •í•©ë‹ˆë‹¤ (1~8ë²ˆ)
+    cur := CheckPos(posX, posY)
+
+    ;ë§Œì•½ ì˜ë¯¸ì—†ëŠ” í¬ì§€ì…˜ì¼ ê²½ìš° ì•„ë¬´ ì•¡ì…˜ë„ í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤
+    if (cur == 0)
+    {
+        return
+    }
+
+    posT := {"x" : 0, "y": 0}
+
+    ;í”Œë˜ê·¸ì— ë”°ë¼ tick ì„ ëˆ„ë¥¼ê±´ì§€ ë¶„ ì„ ëˆ„ë¥¼ ê±´ì§€ ê²°ì •í•©ë‹ˆë‹¤
+    If (toggle0101[cur] == 1)
+    {
+        posT := NumToMinuPos(cur)
+    }
+    else
+    {
+        posT := NumToTickPos(cur)
+    }
+
+    ;í•´ë‹¹ í¬ì§€ì…˜ í´ë¦­ í›„ ë‹¤ì‹œ ì›ë˜ ë§ˆìš°ìŠ¤ í¬ì§€ì…˜ìœ¼ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+    MouseClick, Left, posT.x, posT.y
+    Sleep, 20
+    MouseMove, posX, posY
+
+    ;ë‹¤ìŒ í”Œë˜ê·¸ë¡œ(ë¶„<--->í‹±) ì „í™˜í•´ ë†“ìŠµë‹ˆë‹¤
+    toggle0101[cur] := toggle0101[cur] * -1
+
+    return 
+}
 
 
-;ÅØ½ºÆ® ¹Ú½º ±×¸®±â
+XButton1::
+{
+    ; ë§ˆìš°ìŠ¤ ì»¤ì„œì˜ í¬ì§€ì…˜ì„ êµ¬í•©ë‹ˆë‹¤
+    MouseGetPos, posX, posY
+    Sleep, 10
+
+    ;#####
+    ; [8282] ë¶„í‹±ì°¨íŠ¸ ìœ„ì¹˜ì¼ ê²½ìš°, ë¶„<-->í‹± ìƒí˜¸êµí™˜
+    ;If (posX >= 671) and (posX <= 1193) and (posY >=9) and (posY <= 403)
+    If (posX >= 671 - 1920) and (posX <= 1193 - 1920) and (posY >=9) and (posY <= 403)
+    {
+        global toggle
+
+        toggle := toggle * -1
+        ;cX := 1650
+        cX := 1650 - 1920
+
+        if(toggle == -1) 
+        {
+            ;cX := 1065
+            cX := 1065 - 1920
+        }
+        else
+        {
+            ;cX := 1085
+            cX := 1085 - 1920
+        }
+        
+        MouseClick, Left, cX, 30
+        Sleep, 50
+        MouseMove, posX, posY
+    }
+
+    ;#####
+    ; [8282] í˜¸ê°€ì°½ ì „ì²´ë²„íŠ¼ ëˆ„ë¥´ê¸°
+    ;If (posX >= 1192) and (posX <= 1720) and (posY >=5) and (posY <= 518)
+    If (posX >= 1192 - 1920) and (posX <= 1720 - 1920) and (posY >=5) and (posY <= 518)
+    {
+        ;MouseClick, Left, 1650, 50
+        MouseClick, Left, 1650 - 1920, 50
+        Sleep, 50
+        MouseMove, posX, posY
+    }
+
+    ;###############################################3
+    ;0999ë•Œë¬¸ì— 0998 ë²„ì „ì„ ì£¼ì„ì²˜ë¦¬ í•´ë†“ëŠ”ë‹¤
+    ; ì²« í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš° (0999 ë²„ì „)
+
+    ;If (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
+    If (posX >= 0) and ( posX <= 615) and (posY <= 410)
+    {
+        ;MouseMove, 1920 + 37, 28
+        MouseMove, 37, 28
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 2nd í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;If (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY <= 410)
+    If (posX >= 616) and ( posX <= 1225) and (posY <= 410)
+    {
+        ;MouseMove, 1920 + 37 + 615, 28
+        MouseMove, 37 + 615, 28
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    ; 3rd í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;If (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY <= 410)
+    If (posX >= 1226) and ( posX <= 1841) and (posY <= 410)
+    {
+        ;MouseMove, 1920 + 37 + 1225, 28
+        MouseMove, 37 + 1225, 28
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    ; 4th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;If (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 411) and (posY <= 812)
+    If (posX >= 0) and ( posX <= 615) and (posY >= 411) and (posY <= 812)
+    {
+        ;MouseMove, 1920 + 37, 428
+        MouseMove, 37, 428
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 5th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;If (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY >= 411) and (posY <= 812)
+    If (posX >= 616) and ( posX <= 1225) and (posY >= 411) and (posY <= 812)
+    {
+        ;MouseMove, 1920 + 37 + 615, 428
+        MouseMove, 37 + 615, 428
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 6th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;If (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY >= 411) and (posY <= 812)
+    If (posX >= 1226) and ( posX <= 1841) and (posY >= 411) and (posY <= 812)
+    {
+        ;MouseMove, 1920 + 37 + 1225, 428
+        MouseMove, 37 + 1225, 428
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 7th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;If (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 813)
+    If (posX >= 0) and ( posX <= 615) and (posY >= 813)
+    {
+        ;MouseMove, 1920 + 37, 825
+        MouseMove, 37, 825
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 8th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    ;If (posX >= 1920 + 1226) and (posY >= 813) 
+    If (posX >= 1226) and (posY >= 813) 
+    {
+        ;MouseMove, 1920 + 37 + 1225, 825
+        MouseMove, 37 + 1225, 825
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    ;MouseMove, 1920 - 694, 50, 2 
+	    MouseMove, -694, 50, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+
+
+
+    /*
+    ; ì²« í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    If (posX >= 1920) and ( posX <= 1920+ 320) and (posY <= 474)
+    {
+        MouseMove, 1920 + 37, 60
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 2nd í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    If (posX >= 1920 + 321) and ( posX <= 1920+ 631) and (posY <= 474)
+    {
+        MouseMove, 1920 + 37 + 320, 60
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    ; 3rd í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    If (posX >= 1920 + 632) and ( posX <= 1920+ 948) and (posY <= 474)
+    {
+        MouseMove, 1920 + 37 + 632, 60
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    ; 4th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    If (posX >= 1920 + 949) and ( posX <= 1920+ 1261) and (posY <= 474)
+    {
+        MouseMove, 1920 + 37 + 949, 60
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 5th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    If (posX >= 1920 + 1262) and ( posX <= 1920+ 1576) and (posY <= 474)
+    {
+        MouseMove, 1920 + 37 + 1262, 60
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 6th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    If (posX >= 1920 + 1577) and ( posX <= 1920+ 1891) and (posY <= 474)
+    {
+        MouseMove, 1920 + 37 + 1577, 60
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 7th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    If (posX >= 1920) and ( posX <= 1920+ 320) and (posY >= 475) and (posY <=909)
+    {
+        MouseMove, 1920 + 37, 495
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 8th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    If (posX >= 1920 + 321) and ( posX <= 1920+ 631) and (posY >= 475) and (posY <=909)
+    {
+        MouseMove, 1920 + 37 + 320, 495
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    ; 9th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    If (posX >= 1920 + 632) and ( posX <= 1920+ 948) and (posY >= 475) and (posY <=909)
+    {
+        MouseMove, 1920 + 37 + 632, 495
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+
+    ; 10th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    If (posX >= 1920 + 949) and ( posX <= 1920+ 1261) and (posY >= 475) and (posY <=909)
+    {
+        MouseMove, 1920 + 37 + 949, 495
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 11th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    If (posX >= 1920 + 1262) and ( posX <= 1920+ 1576) and (posY >= 475) and (posY <=909) 
+    {
+        MouseMove, 1920 + 37 + 1262, 495 
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    ; 6th í˜¸ê°€ì°½ ìœ„ì¹˜ì¼ ê²½ìš°
+    If (posX >= 1920 + 1577) and ( posX <= 1920+ 1891) and (posY >= 475) and (posY <=909) 
+    {
+        MouseMove, 1920 + 37 + 1577, 495
+	    Send {LButton Down}
+	    Sleep 20
+	    ;MouseMove, 1585, -180, 2, R
+	    MouseMove, 1920 - 694, 77, 2 
+	    Send {LButton Up}
+
+        Sleep 10
+        ;ë§ˆìš°ìŠ¤ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì›ë˜ ìœ„ì¹˜ë¡œ ë˜ëŒë¦½ë‹ˆë‹¤
+        MouseMove, posX, posY
+        ;-->
+    }
+    */
+
+    return
+}
+
+;í…ìŠ¤íŠ¸ ë°•ìŠ¤ ê·¸ë¦¬ê¸°
+
+/* [í˜¸ê°€ì°½ë§Œìœ¼ë¡œ ê±°ë˜] ë•Œë¬¸ì— ë‹¨ì¶•í‚¤ ì„ì‹œ ì œê±°
 F11::
+*/
 NumpadAdd & Numpad7::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
-	Sleep 100
-	;¿ìÅ¬¸¯
+	;Sleep 100
+	Sleep 30
+	;ìš°í´ë¦­
 	Send {RButton}
-	Sleep 500
+	;Sleep 500
+	Sleep 20
 	
-	;l ´©¸£±â
+	;l ëˆ„ë¥´ê¸°
 	Send {l}
-	Sleep 50
+	;Sleep 50
+	Sleep 8 
 
-	;up key ¼¼¹ø
+	;up key ì„¸ë²ˆ
 	Send {Up}
-	Sleep 20	
+	;Sleep 20	
+	Sleep 8	
 	Send {Up}
-	Sleep 20	
+	;Sleep 20	
+	Sleep 8	
 	Send {Enter}
-	Sleep 100
+	;Sleep 100
+	Sleep 8 
 
-	;Á¶±×¸¶ÇÏ°Ô ¿ø µå·¡±×
+	;ì¡°ê·¸ë§ˆí•˜ê²Œ ì› ë“œë˜ê·¸
 	Send {LButton}
+    return
 	
 }
 #IfWinActive
 
-;½ÅÈ£°Ë»öµÈ Á¾¸ñ Å¬¸¯
+;ì‹ í˜¸ê²€ìƒ‰ëœ ì¢…ëª© í´ë¦­
 #!n::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -795,12 +2648,12 @@ NumpadAdd & Numpad7::
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 30
-	; ¸Ş´º Åø¹Ù º¸ÀÌ±â ¾ğÃ½
+	; ë©”ë‰´ íˆ´ë°” ë³´ì´ê¸° ì–¸ì²µ
 	MouseClick, Right, 2100, 20
 	Sleep 30
 	MouseClick, Left, 2110, 25 
 	Sleep 100
-	; Æ¼Ä¿Åø¹Ù- ½ÅÈ£´ë±â Å¬¸¯
+	; í‹°ì»¤íˆ´ë°”- ì‹ í˜¸ëŒ€ê¸° í´ë¦­
 	MouseMove, 2330, 880
 	Send {LButton down}
 	Send {LButton down}
@@ -846,11 +2699,31 @@ return
 
 #!o::
 {
-	IfWinExist, ahk_class _KiWoomClass
+	;IfWinExist, ahk_class _KiWoomClass
+	IfWinExist, ahk_class _NKHeroMainClass
 		WinActivate
+    Sleep 150 
 
-	Sleep 200
-	MouseClick, Left, 2584, 60 
+    ;ê°€ìƒí™”ë©´ 1ë¡œ ë³€ê²½
+    Send {LCtrl Down}
+    Sleep 10
+    
+    Send {1 Down}
+    Sleep 10
+
+    Send {1 Up}
+    Sleep 10
+
+    Send {LCtrl Up}
+    Sleep 10
+
+
+    ;ê°€ìƒí™”ë©´ ë³€ê²½ í›„ ì•½ê°„ì˜ ì‹œê°„í…€ì„ ì¤€ë‹¤
+    Sleep 150
+    ;íˆ´ë°” ë‚´ë¦¼ìœ¼ë¡œ yì¶• ì˜¬ë¦¼
+	;MouseClick, Left, 2584, 60 
+	;MouseClick, Left, 2584, 60 - 27
+	MouseClick, Left, 2584 - 1920, 60 - 27
 	return
 }
 
@@ -864,9 +2737,9 @@ return
 	Sleep 20
 	Send {LButton Down}
 	Sleep 100
-	; 0995 ¿ë 
+	; 0995 ìš© 
 	;MouseMove, -404, 283, 5, R
-	; »õ·Î¿î 0994 ¿ë
+	; ìƒˆë¡œìš´ 0994 ìš©
 	MouseMove, -1004, 283, 5, R
 	Sleep 20
 	Send {LButton Up}
@@ -874,6 +2747,23 @@ return
 	return
 }
 
+;ì¡°ê±´ê²€ìƒ‰ì‹ ì¤‘ í•˜ë‹¨ìª½ í´ë¦­ë„ ì¶”ê°€
+#!r::
+{
+	IfWinExist, ahk_class _KiWoomClass
+		WinActivate
+
+	Sleep 200
+	;MouseClick, Left, 1600 + 1920, 1114 
+	;ì‚´ì§ìœ—ìª½ìœ¼ë¡œ ë³€ê²½í•©ë‹ˆë‹¤.
+	;MouseClick, Left, 1600 + 1920, 1000 
+	;MouseClick, Left, 1580 + 1920, 1080 
+	MouseClick, Left, 1580 + 1920, 1100 + 45
+
+	return
+}
+
+/*
 #!q::
 {
 	IfWinExist, ahk_class _KiWoomClass
@@ -881,28 +2771,123 @@ return
 
 	Sleep 200
 	;MouseClick, Left, 1600 + 1920, 1114 
-	;»ìÂ¦À­ÂÊÀ¸·Î º¯°æÇÕ´Ï´Ù.
+	;ì‚´ì§ìœ—ìª½ìœ¼ë¡œ ë³€ê²½í•©ë‹ˆë‹¤.
 	;MouseClick, Left, 1600 + 1920, 1000 
-	MouseClick, Left, 1580 + 1920, 1080 
+	;MouseClick, Left, 1580 + 1920, 1080 
+	MouseClick, Left, 1580 + 1920, 1100 - 18 
 
 	return
 }
+*/
 
+;[í˜¸ê°€ì°½ ê±°ë˜] ì›ë˜ ê´€ì‹¬ì¢…ëª© ìƒë‹¨ í´ë¦­ ë‹¨ì¶•í‚¤ì˜€ìœ¼ë‚˜, ê°€ìƒí™”ë©´3ì˜ ì¢…ëª© ì…ë ¥ì¹¸ìœ¼ë¡œ ë³€ê²½
 #!i::
 {
+    /*
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 
 	Sleep 200
 	MouseClick, Left, 530, 836 
 	return
+    */
+	IfWinExist, ahk_class _KiWoomClass
+    {
+		WinActivate
+        Sleep 150 
+    }
+    ;ê°€ìƒí™”ë©´ 3ìœ¼ë¡œ ë³€ê²½
+    Send {LCtrl Down}
+    Sleep 10
+    
+    Send {3 Down}
+    Sleep 10
+
+    Send {3 Up}
+    Sleep 10
+
+    Send {LCtrl Up}
+    Sleep 10
+
+    ;ê°€ìƒí™”ë©´ ë³€ê²½ í›„ ì•½ê°„ì˜ ì‹œê°„í…€ì„ ì¤€ë‹¤
+    Sleep 150
+    ;íˆ´ë°” ë‚´ë¦¼ìœ¼ë¡œ yì¶• ì˜¬ë¦¼    
+	;MouseClick, Left, 1228, 77 
+	MouseClick, Left, 1228, 77 - 27
+    return
+
 }
 
-; ±×³É 1.png ¾÷·Îµå 
+; ê°œë°œí…ŒìŠ¤íŠ¸ìš© ì„ì‹œ ë‹¨ì¶•í‚¤
+#!F2::
+{
+
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
+	;IfWinExist, ahk_class MozillaWindowClass
+	IfWinExist, ahk_class _NKHeroMainClass
+		WinActivate
+	    WinMove, ahk_class _NKHeroMainClass,,0, -1200, 1920, 1200
+	    ;WinMove, ahk_class _NKHeroMainClass,,-1920, 0, 1920 * 2, 1200
+        ;ì €ì¥í™”ë©´ 0989(ì§€ìˆ˜) ë‹¨ì¶•í‚¤ ëˆ„ë¥´ê¸° Ctrl + [
+        Sleep, 1000
+        Send, ^[
+    /*
+	Sleep 100
+	;MouseMove, -4000, -4000, 0, R
+	MouseMove, 2210 - 1920, 700, 5 
+	MouseMove, 779, -120, 2 , R
+    Sleep 1000
+	MouseMove, 2110 - 1920, 600 - 27, 5
+	;Send {LButton}
+    Sleep 1000
+	MouseMove, 899, 377, 5, R
+    */
+	/*
+WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+		WinActivate
+	Sleep 100
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
+	Sleep 2000
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2495, 130, 5, R
+	Send {LButton}
+	Sleep 1200
+
+	;WinWait, blog.upphoto 
+	WinWait, ì—´ê¸°|blog.upphoto
+	;IfWinExist, blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
+		WinActivate
+	Sleep 700
+	
+	Send {1}{.}{p}{n}{g}{Enter}
+	Sleep 800
+
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1957, 17, 5, R
+	Sleep 100
+	Send {LButton}
+	Sleep 500
+
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 2707, 690, 5, R
+	Sleep 100
+	Send {LButton}
+	IfWinExist, ahk_class MozillaWindowClass
+		WinActivate
+	Sleep 800
+	Send {Enter}
+    */
+
+    return
+}
+
+; ê·¸ëƒ¥ 1.png ì—…ë¡œë“œ 
 #!F1::
 {
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
@@ -912,11 +2897,11 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
@@ -924,9 +2909,9 @@ return
 	Sleep 1200
 
 	;WinWait, blog.upphoto 
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
 		WinActivate
 	Sleep 700
 	
@@ -951,14 +2936,264 @@ return
     return
 }
 
-; Áö¼ö Ä¸ÃÄ ¹× ¾÷·Îµå (Ãà¼Ò 70%)
+; ì½”ìŠ¤í”¼/ì½”ìŠ¤ë‹¥ ì§€ìˆ˜ ìº¡ì³ ì—…ë¡œë“œ í”„ë¡œì„¸ìŠ¤
+; [í˜¸ê°€ì°½ ê±°ë˜ë¡œ ë³€ê²½] í•˜ë©´ì„œ ì§€ìˆ˜ ìœ„ì¹˜ ë°”ë€œ
+#^4::
+{
+
+    /* ìƒë‹¨ ëª¨ë‹ˆí„°ì¸ ì˜ì›…ë¬¸ 4 í™”ë©´ìœ¼ë¡œ ë°”ê¿ˆ 
+	IfWinExist, ahk_class _KiWoomClass
+		WinActivate
+	Sleep 500
+
+    ;ê°€ìƒí™”ë©´ 3ìœ¼ë¡œ ë³€ê²½
+    Send {LCtrl Down}
+    Sleep 10
+    
+    Send {3 Down}
+    Sleep 10
+
+    Send {3 Up}
+    Sleep 10
+
+    Send {LCtrl Up}
+    Sleep 10
+    */
+
+
+
+    ;SnagIt ìº¡ì³ ê°€ë™
+	Send {LShift Down}
+	Send {PrintScreen Down}
+	Sleep 50
+	Send {LShift Up}
+	Send {PrintScreen Up}
+	Sleep 700
+
+	;MouseMove, 7, -424, 2
+	MouseMove, 10, -1920 + 10, 2
+    Send {LButton Down}
+    Sleep 100
+	MouseMove, 1900, 470, 2, R
+	Sleep 100 
+	Send {LButton Up}
+
+    /*
+    ;ì˜ì—­ì„ íƒ
+	;MouseMove, -4000, -4000, 0, R 
+	Sleep 20
+	;MouseMove, 12, 69, 2, R
+	MouseMove, 12 - 1920, 69, 2
+	Sleep 20
+    */
+
+    /*
+	Send {LButton Down}
+	Sleep 100
+    ;ì¼ë´‰ ìº¡ì³ ê°€ë¡œí­ ìˆ˜ì •
+	;MouseMove, 779, 764, 5, R
+    ;íˆ´ë°”ë¥¼ í•˜ë‹¨ìœ¼ë¡œ ì˜®ê¸°ë©´ì„œ yì¢Œí‘œê°€ ì˜¬ë¼ê°
+	;MouseMove, 654, 823, 5, R
+	MouseMove, 654, 775, 5, R
+	Sleep 100 
+	Send {LButton Up}
+    */
+	
+	WinWait, Snagit Editor
+		WinActivate
+	Sleep 500
+	;snag it editor ë‚´ì˜ ë¦¬ì‚¬ì´ì¦ˆ ë‹¨ì¶•í‚¤ ëˆ„ë¦„ r
+	Send {r}	
+	Sleep 50
+
+	WinWait, Resize Image
+		WinActivate
+	Sleep 100
+
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+
+    ; ê°€ë¡œë¡œ ë„ˆë¬´ ê¸¸ì­‰í•˜ë‹ˆê¹ 60%ë¡œ ìˆ˜ì •
+	;Send {7}{0}
+	Send {6}{0}
+	Sleep 2000 
+
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Enter}
+	Sleep 200 
+
+	;75%ë¡œ ìƒ¤í”ˆì„ ë•Œë¦¼ ë‹¨ì¶•í‚¤ s
+	Send {s}
+	Sleep 50	
+	WinWait, Sharpen 
+		WinActivate
+	Sleep 200
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {Tab}
+	Sleep 50
+	Send {7}{5}
+	Sleep 50
+	Send {Enter}
+	Sleep 500 
+
+
+	;ì €ì¥ í›„ ì—…ë¡œë“œ í”„ë¡œì„¸ìŠ¤
+	Send {LCtrl Down}
+	Send {s Down}
+	Sleep 50
+	Send {LCtrl Up}
+	Send {s Up}
+
+	WinWait, Save As
+	WinMove, Save As,,0, 0
+	IfWinExist, Save As
+		WinActivate
+	Sleep 500
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2332, 357, 0, R
+	MouseMove, 2332 - 1920, 357, 0
+	Sleep 300
+	Send {LButton Down}
+	Sleep 20
+	MouseMove, -200, 0, 5, R
+	Sleep 100
+	Send {LButton Up}
+	Sleep 100
+
+	Send {1}
+	Sleep 20
+	Send {Enter}
+	Sleep 300
+	Send {Enter}
+
+	Sleep 500
+	Send {LCtrl Down}
+	Sleep 20
+	Send {w Down}
+	Sleep 20
+
+	Send {LCtrl Up}
+	Sleep 20
+	Send {w Up}
+	Sleep 2000 
+
+    ;;;;;;;
+    ;;;;;;;
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
+    ; ìê¾¸ ì—´ê¸° ë²„íŠ¼ì´ ì¢…ì¢… ì•ˆëˆŒë¦°ë‹¤
+	IfWinExist, ahk_class MozillaWindowClass
+		WinActivate
+	Sleep 100
+	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
+	Sleep 100
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2555, 130, 5, R
+	MouseMove, 2555 - 1920, 130, 5
+	Send {LButton}
+
+    ; ìœˆ10
+    Sleep 6000 
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 475, 145, 5, R
+	MouseMove, 475, 145, 5
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    
+
+	WinWait, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+	;WinWait, ì—´ê¸°|blog.upphoto
+	;WinWait, blog.upphoto
+	IfWinExist, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+		WinActivate
+	Sleep 500
+	
+	Send {1}{.}{p}{n}{g}
+
+    ; ì—´ê¸° ë²„íŠ¼ ì•ˆëˆŒë¦¬ëŠ” ë¬¸ì œ í•´ê²°ë²•
+    Sleep, 2000
+    /*
+	IfWinExist, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+		WinActivate
+    Sleep 700
+    Send {Tab}{Tab}{Space}
+    */
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1195, 506, 5, R
+
+    /*
+	MouseMove, 1195, 506, 5
+    Send {LButton} 
+    */
+    ; ì—´ê¸° ë²„íŠ¼ ìœ„ì¹˜ê°€ ë°”ë€Œì–´ì„œ ê·¸ëŸ°ì§€ ìê¾¸ ì•ˆë¼ì„œ í‚¤ë³´ë“œë¡œ ë³€ê²½í•´ë´„
+    Send {Tab}
+    Sleep 300
+    Send {Tab}
+    Sleep 300
+    Send {Enter}
+    ;MouseClick, Left, 1195, 506
+	Sleep 2500
+
+
+    ;ìœˆ10
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1693, 150, 5, R
+	MouseMove, 1693, 150, 5
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    
+    ; ìƒˆíƒ­ìœ¼ë¡œ ì—´ë¦° ì˜¬ë¦¬ê¸° ë²„íŠ¼ ëˆ„ë¥´ê¸°
+    /*
+    Sleep 2400 
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+    */
+
+
+
+	IfWinExist, ahk_class MozillaWindowClass
+		WinActivate
+	Sleep 800
+	Send {Enter}
+
+
+	Sleep 800
+    return 
+}
+
+/* [í˜¸ê°€ì°½ ê±°ë˜ë¡œ ë³€ê²½] í•˜ë©´ì„œ ì§€ìˆ˜ ìœ„ì¹˜ ë°”ë€œ
+; ì§€ìˆ˜ ìº¡ì³ ë° ì—…ë¡œë“œ (ì¶•ì†Œ 70%)
 #!F4::
 {
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
 	
-	;¼±¹°, ÄÚ½º´Ú Ã¢ ÃÖ»óÀ§·Î ¸¸µé±â
+	;ì„ ë¬¼, ì½”ìŠ¤ë‹¥ ì°½ ìµœìƒìœ„ë¡œ ë§Œë“¤ê¸°
 	MouseMove, -4000, -4000, 0, R 
 	Sleep 20
 	MouseMove, 28, 729, 0, R 
@@ -975,7 +3210,7 @@ return
 	Send {LButton}
 	Sleep 100
 
-	;Áö¼ö¿¡¼­ ½ÊÀÚ¼± Áö¿ì±â ÇÁ·Î¼¼½º
+	;ì§€ìˆ˜ì—ì„œ ì‹­ìì„  ì§€ìš°ê¸° í”„ë¡œì„¸ìŠ¤
 	MouseMove, -4000, -4000, 0, R 
 	Sleep 20
 	MouseMove, 543, 555, 2, R
@@ -991,6 +3226,7 @@ return
 	MouseMove, 0, -145, 5, R
 	Sleep 20
 
+    ;SnagIt ìº¡ì³ ê°€ë™
 	Send {LShift Down}
 	Send {PrintScreen Down}
 	Sleep 50
@@ -998,6 +3234,7 @@ return
 	Send {PrintScreen Up}
 	Sleep 700
 
+    ;ì˜ì—­ì„ íƒ
 	MouseMove, -4000, -4000, 0, R 
 	Sleep 20
 	MouseMove, 20, 359, 2, R
@@ -1005,14 +3242,16 @@ return
 
 	Send {LButton Down}
 	Sleep 100
-	MouseMove, 779, 764, 5, R
+    ;ì¼ë´‰ ìº¡ì³ ê°€ë¡œí­ ìˆ˜ì •
+	;MouseMove, 779, 764, 5, R
+	MouseMove, 709, 764, 5, R
 	Sleep 100 
 	Send {LButton Up}
 	
 	WinWait, Snagit Editor
 		WinActivate
 	Sleep 500
-	;snag it editor ³»ÀÇ ¸®»çÀÌÁî ´ÜÃàÅ° ´©¸§ r
+	;snag it editor ë‚´ì˜ ë¦¬ì‚¬ì´ì¦ˆ ë‹¨ì¶•í‚¤ ëˆ„ë¦„ r
 	Send {r}	
 	Sleep 50
 
@@ -1049,7 +3288,7 @@ return
 	Send {Enter}
 	Sleep 200 
 
-	;75%·Î »şÇÂÀ» ¶§¸² ´ÜÃàÅ° s
+	;75%ë¡œ ìƒ¤í”ˆì„ ë•Œë¦¼ ë‹¨ì¶•í‚¤ s
 	Send {s}
 	Sleep 50	
 	WinWait, Sharpen 
@@ -1067,7 +3306,7 @@ return
 	Sleep 500 
 
 
-	;ÀúÀå ÈÄ ¾÷·Îµå ÇÁ·Î¼¼½º
+	;ì €ì¥ í›„ ì—…ë¡œë“œ í”„ë¡œì„¸ìŠ¤
 	Send {LCtrl Down}
 	Send {s Down}
 	Sleep 50
@@ -1106,7 +3345,11 @@ return
 	Send {w Up}
 	Sleep 2000 
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù
+
+
+
+
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
@@ -1116,37 +3359,60 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-		WinActivate
-	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
-	Sleep 2000
+
+    ;<--ìƒˆíƒ­ì— ë„ìš°ê¸°ë¡œ ë°”ë€Œë©´ì„œ ì„ì‹œë¡œ ë³€ê²½
+    ; 
+	;WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	;IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	;	WinActivate
+	;Sleep 100
+	;WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
+	;Sleep 2000
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2495, 130, 5, R
+	;Send {LButton}
+	;Sleep 1200
+    
+    ; ìƒˆíƒ­ìœ¼ë¡œ ì—´ë¦° ì˜¬ë¦¬ê¸° ë²„íŠ¼ ëˆ„ë¥´ê¸°
+    Sleep 2400 
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2495, 130, 5, R
-	Send {LButton}
-	Sleep 1200
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
 
 	;WinWait, blog.upphoto 
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
 		WinActivate
 	Sleep 700
 	
 	Send {1}{.}{p}{n}{g}{Enter}
 	Sleep 800
 
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1957, 17, 5, R
-	Sleep 100
-	Send {LButton}
-	Sleep 500
 
+
+    ;<-- ìƒˆíƒ­ìœ¼ë¡œ ì—´ê¸°ë¡œ ë³€ê²½ë˜ë©´ì„œ ì„ì‹œ êµì²´
+    
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1957, 17, 5, R
+	;Sleep 100
+	;Send {LButton}
+	;Sleep 500
+;
+;	MouseMove, -4000, -4000, 0, R
+;	MouseMove, 2707, 690, 5, R
+;	Sleep 100
+;	Send {LButton}
+    
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2707, 690, 5, R
-	Sleep 100
-	Send {LButton}
+	MouseMove, 1920 + 1190, 732, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+
+
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 800
@@ -1156,32 +3422,34 @@ return
 	Sleep 800
 
 
+
+
 	;;;;;;;;;;;;;;;;;;;;;;;;
-	;Áö¼ö ºĞºÀ ÇÁ·Î¼¼½º
+	;ì§€ìˆ˜ ë¶„ë´‰ í”„ë¡œì„¸ìŠ¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
 	
-	;Áö¼öºĞºÀ¿¡¼­ ½ÊÀÚ¼± Áö¿ì±â ÇÁ·Î¼¼½º
-/*
-	MouseMove, -4000, -4000, 0, R 
-	Sleep 20
-	MouseMove, 521 + 1920 , 1084, 2, R
-	Sleep 20
-	MouseMove, 260, 0, 5, R
-	Sleep 20
-	MouseMove, 0, -100, 5, R
-	Sleep 20
+	;ì§€ìˆ˜ë¶„ë´‰ì—ì„œ ì‹­ìì„  ì§€ìš°ê¸° í”„ë¡œì„¸ìŠ¤
 
-	MouseMove, -4000, -4000, 0, R 
-	Sleep 20
-	MouseMove, 1920 + 1090, 1080, 0, R
-	Sleep 20
-	MouseMove, 220, 0, 2, R
-	Sleep 20
-	MouseMove, 0, -120, 5, R
-	Sleep 20
-*/
+	;MouseMove, -4000, -4000, 0, R 
+	;Sleep 20
+	;MouseMove, 521 + 1920 , 1084, 2, R
+	;Sleep 20
+	;MouseMove, 260, 0, 5, R
+	;Sleep 20
+	;MouseMove, 0, -100, 5, R
+	;Sleep 20
+;
+;	MouseMove, -4000, -4000, 0, R 
+;	Sleep 20
+;	MouseMove, 1920 + 1090, 1080, 0, R
+;	Sleep 20
+;	MouseMove, 220, 0, 2, R
+;	Sleep 20
+;	MouseMove, 0, -120, 5, R
+;	Sleep 20
+
 
 	MouseMove, -4000, -4000, 0, R 
 	Sleep 20
@@ -1201,7 +3469,7 @@ return
 	MouseMove, 0, -120, 5, R
 	Sleep 20
 
-	;Ä¸ÃÄ ½ÃÀÛ
+	;ìº¡ì³ ì‹œì‘
 	Send {LShift Down}
 	Send {PrintScreen Down}
 	Sleep 50
@@ -1209,18 +3477,18 @@ return
 	Send {PrintScreen Up}
 	Sleep 700
 
-	/* ¿ìÃø»ó´ÜÀ¸·Î Áö¼ö ºĞºÀÀ» ¿Å°å±â¿¡ ¼öÁ¤ÇÔ
-	MouseMove, -4000, -4000, 0, R 
-	Sleep 20
-	MouseMove, 1920 + 80, 984, 2, R
-	Sleep 20
-
-	Send {LButton Down}
-	Sleep 100
-	MouseMove, 1013, 172, 5, R
-	Sleep 100 
-	Send {LButton Up}
-	*/
+	; ìš°ì¸¡ìƒë‹¨ìœ¼ë¡œ ì§€ìˆ˜ ë¶„ë´‰ì„ ì˜®ê²¼ê¸°ì— ìˆ˜ì •í•¨
+	;MouseMove, -4000, -4000, 0, R 
+	;Sleep 20
+	;MouseMove, 1920 + 80, 984, 2, R
+	;Sleep 20
+;
+;	Send {LButton Down}
+;	Sleep 100
+;	MouseMove, 1013, 172, 5, R
+;	Sleep 100 
+;	Send {LButton Up}
+	
 
 	MouseMove, -4000, -4000, 0, R 
 	Sleep 20
@@ -1237,7 +3505,7 @@ return
 	WinWait, Snagit Editor
 		WinActivate
 	Sleep 500
-	;snag it editor ³»ÀÇ ¸®»çÀÌÁî ´ÜÃàÅ° ´©¸§ r
+	;snag it editor ë‚´ì˜ ë¦¬ì‚¬ì´ì¦ˆ ë‹¨ì¶•í‚¤ ëˆ„ë¦„ r
 	Send {r}	
 	Sleep 50
 
@@ -1256,7 +3524,7 @@ return
 	Send {Tab}
 	Sleep 50
 	
-	;80%·Î¸¸ Ãà¼Ò
+	;80%ë¡œë§Œ ì¶•ì†Œ
 	Send {8}{0}
 	Sleep 2000 
 
@@ -1275,7 +3543,7 @@ return
 	Send {Enter}
 	Sleep 200 
 
-	;75%·Î »şÇÂÀ» ¶§¸² ´ÜÃàÅ° s
+	;75%ë¡œ ìƒ¤í”ˆì„ ë•Œë¦¼ ë‹¨ì¶•í‚¤ s
 	Send {s}
 	Sleep 50	
 	WinWait, Sharpen 
@@ -1292,7 +3560,7 @@ return
 	Send {Enter}
 	Sleep 500 
 
-	;ÀúÀå ÈÄ ¾÷·Îµå ÇÁ·Î¼¼½º
+	;ì €ì¥ í›„ ì—…ë¡œë“œ í”„ë¡œì„¸ìŠ¤
 	Send {LCtrl Down}
 	Send {s Down}
 	Sleep 50
@@ -1331,7 +3599,7 @@ return
 	Send {w Up}
 	Sleep 2000 
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
@@ -1341,37 +3609,62 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-		WinActivate
-	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
-	Sleep 2000
+
+
+
+
+    ;<--ìƒˆíƒ­ì— ë„ìš°ê¸°ë¡œ ë°”ë€Œë©´ì„œ ì„ì‹œë¡œ ë³€ê²½
+    
+	;WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	;IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	;	WinActivate
+	;Sleep 100
+	;WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
+	;Sleep 2000
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2495, 130, 5, R
+	;Send {LButton}
+	;Sleep 1200
+    
+    ; ìƒˆíƒ­ìœ¼ë¡œ ì—´ë¦° ì˜¬ë¦¬ê¸° ë²„íŠ¼ ëˆ„ë¥´ê¸°
+    Sleep 2400 
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2495, 130, 5, R
-	Send {LButton}
-	Sleep 1200
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+
 
 	;WinWait, blog.upphoto
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto 
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
 		WinActivate
 	Sleep 700
 	
 	Send {1}{.}{p}{n}{g}{Enter}
 	Sleep 800
 
+    ;<-- ìƒˆíƒ­ìœ¼ë¡œ ì—´ê¸°ë¡œ ë³€ê²½ë˜ë©´ì„œ ì„ì‹œ êµì²´
+    
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1957, 17, 5, R
+	;Sleep 100
+	;Send {LButton}
+	;Sleep 500
+;
+;	MouseMove, -4000, -4000, 0, R
+;	MouseMove, 2707, 690, 5, R
+;	Sleep 100
+;	Send {LButton}
+    
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1957, 17, 5, R
-	Sleep 100
-	Send {LButton}
-	Sleep 500
+	MouseMove, 1920 + 1190, 732, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
 
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2707, 690, 5, R
-	Sleep 100
-	Send {LButton}
+
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 800
@@ -1381,27 +3674,28 @@ return
 	return
 }
 
-return
+*/
 
-;Ãß°¡
+
+;ì¶”ê°€
  
-; 15ºĞºÀ ¹× ÀÏºÀ Ãà¼Ò ¾÷·Îµå ½ÃÄö½º ¼¼Æ® (½ºÄ¶ÇÎ ÀÏÁö ¾²¸é¼­ Ãß°¡ÇÔ)
+; 15ë¶„ë´‰ ë° ì¼ë´‰ ì¶•ì†Œ ì—…ë¡œë“œ ì‹œí€€ìŠ¤ ì„¸íŠ¸ (ìŠ¤ìº˜í•‘ ì¼ì§€ ì“°ë©´ì„œ ì¶”ê°€í•¨)
 #!F6::
 {
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;
-	; #!F12 (1ºĞºÀ) ÆÄÆ®
+	; #!F12 (1ë¶„ë´‰) íŒŒíŠ¸
 	;
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 	;F12
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
 
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2210, 700, 5 , R
+	;MouseMove, -4000, -4000, 0, R
+	MouseMove, 2210 - 1920, 700, 5
 	MouseMove, 779, -120, 2 , R
 	
 	Send {LShift Down}
@@ -1411,11 +3705,16 @@ return
 	Send {PrintScreen Up}
 
 	Sleep 700
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2110, 600, 5 , R
+    ;ìº¡ì³ì´ˆê¸°ì¢Œí‘œë¡œ ê°‘ë‹ˆë‹¤
+	;MouseMove, -4000, -4000, 0, R
+    ;íˆ´ë°”ë¥¼ í•˜ë‹¨ìœ¼ë¡œ ë‚´ë¦¬ë©´ì„œ yì¢Œí‘œ ì˜¬ë¦¼
+	;MouseMove, 2110, 600, 5 , R
+	;MouseMove, 2110, 600 - 27, 5 , R
+	MouseMove, 2110 - 1920, 600 - 27, 5
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
+    ;ì‚¬ê°í˜• ì‚¬ì´ì¦ˆ ë“œë˜ê·¸í•´ì¤ë‹ˆë‹¤
 	MouseMove, 899, 377, 5, R
 	Sleep 100
 	Send {LButton Up}
@@ -1436,8 +3735,8 @@ return
 	IfWinExist, Save As
 		WinActivate
 	Sleep 500
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2332, 357, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	MouseMove, 2332 -1920, 357, 5
 
 	Sleep 20
 	Send {LButton Down}
@@ -1469,31 +3768,76 @@ return
 	Sleep 100
 	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
 	Sleep 100
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2555, 130, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	MouseMove, 2555 - 1920, 130, 5
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+
+    ;<--ìƒˆíƒ­ì— ë„ìš°ê¸°ë¡œ ë°”ë€Œë©´ì„œ ì„ì‹œë¡œ ë³€ê²½
+    /*
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
 	Send {LButton}
 	Sleep 1200
+    */
+    ; ìƒˆíƒ­ìœ¼ë¡œ ì—´ë¦° ì˜¬ë¦¬ê¸° ë²„íŠ¼ ëˆ„ë¥´ê¸°
+    /*
+    Sleep 2400 
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+    */
+    ; ìœˆ10
+    Sleep 4000 
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 475, 145, 5, R
+	MouseMove, 475, 145, 5
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    
 
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+	;WinWait, ì—´ê¸°|blog.upphoto
 	;WinWait, blog.upphoto
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+	;IfWinExist, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto
 		WinActivate
-	Sleep 1000
+	Sleep 400
 	
-	Send {1}{.}{p}{n}{g}{Enter}
-	Sleep 800
+	Send {1}{.}{p}{n}{g}
+    /*
+	IfWinExist, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+		WinActivate
+    Sleep 700
+    Send {Tab}{Tab}{Space}
+    */
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1195, 506, 5, R
+	MouseMove, 1195, 506, 5
+    Send {LButton} 
+	;Sleep 1000
+	Sleep 2500
 
+
+    ;ì˜¬ë¦¬ê¸° ë²„íŠ¼ í´ë¦­
+    ;ìœˆ10
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1693, 150, 5, R
+	MouseMove, 1693, 150, 5
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+
+    ;ì´ˆì•ˆ
+    /*
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1957, 17, 5, R
 	Sleep 100
@@ -1504,6 +3848,18 @@ return
 	MouseMove, 2707, 690, 5, R
 	Sleep 100
 	Send {LButton}
+    */
+    ;<-- ìƒˆíƒ­ìœ¼ë¡œ ì—´ê¸°ë¡œ ë³€ê²½ë˜ë©´ì„œ ì„ì‹œ êµì²´
+    /*
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1190, 732, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+    */
+
+
+
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 800
@@ -1517,20 +3873,22 @@ return
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;
-	; #!F5 (Ãà¼Ò 15ºĞºÀ/ÀÏºÀ) ÆÄÆ®
+	; #!F5 (ì¶•ì†Œ 15ë¶„ë´‰/ì¼ë´‰) íŒŒíŠ¸
 	;
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-	;³ĞÀº 15ºĞ Ãà¼ÒÄ¸ÃÄ/¾÷·Îµå
+	;ë„“ì€ 15ë¶„ ì¶•ì†Œìº¡ì³/ì—…ë¡œë“œ
 	;F11
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
-
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1109, 663, 5, R
+    
+    ; ???
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1109, 663, 5, R
+	MouseMove, 1920 + 1109, 663, 5
 	MouseMove, 775, -80, 2, R
 
 	Send {LShift Down}
@@ -1540,23 +3898,30 @@ return
 	Send {PrintScreen Up}
 
 	Sleep 700
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1009 + 350 - 137, 613, 5, R  ;350 ÇÈ¼¿ÁÙÀÓ, ±×¸®°í Ã¼°áÃ¢ ¶§¹®¿¡ ÁÂÃøÀ¸·Î 137¸¸Å­ ÀÌµ¿
+	;MouseMove, -4000, -4000, 0, R
+
+	;MouseMove, 1009 + 350 - 137, 613, 5, R  ;350 í”½ì…€ì¤„ì„, ê·¸ë¦¬ê³  ì²´ê²°ì°½ ë•Œë¬¸ì— ì¢Œì¸¡ìœ¼ë¡œ 137ë§Œí¼ ì´ë™
+	;MouseMove, 1009 + 350 - 137, 516, 5, R  ;350 í”½ì…€ì¤„ì„, ê·¸ë¦¬ê³  ì²´ê²°ì°½ ë•Œë¬¸ì— ì¢Œì¸¡ìœ¼ë¡œ 137ë§Œí¼ ì´ë™ + í˜¸ê°€ì°½ë…¹í™”ë²„ì „ìœ¼ë¡œ ì¸í•´ ìœ„ë¡œ ì¢€ ì˜¬ë¦¼
+    ;íˆ´ë°” ë‚´ë¦¼ìœ¼ë¡œ ì¸í•´ yì¶• ì˜¬ë¦¼
+	;MouseMove, 1920 + 1340 , 580, 5, R  ;í˜¸ê°€ê±°ë˜ ì„¸íŒ…ìœ¼ë¡œì„œ ìš°ì¸¡ ëª¨ë‹ˆí„°ë¡œ ì˜®ê¹€
+	;MouseMove, 1920 + 1340 , 580 - 27, 5, R  ;í˜¸ê°€ê±°ë˜ ì„¸íŒ…ìœ¼ë¡œì„œ ìš°ì¸¡ ëª¨ë‹ˆí„°ë¡œ ì˜®ê¹€
+	MouseMove, 1340 , 580 - 27, 5  ;í˜¸ê°€ê±°ë˜ ì„¸íŒ…ìœ¼ë¡œì„œ ìš°ì¸¡ ëª¨ë‹ˆí„°ë¡œ ì˜®ê¹€
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
-	MouseMove, 895 - 350, 357, 5, R ;350 ÇÈ¼¿ÁÙÀÓ
+    ;ë“œë˜ê·¸
+	MouseMove, 895 - 350, 357, 5, R ;350 í”½ì…€ì¤„ì„
 	Sleep 100
 	Send {LButton Up}
 
-	;Snag It ÀÌ ¶¹À» ¶§ Ctrl S ¸¦ ´­·¯¼­ ÀúÀåÇÏ°í Ctrl W·Î ´İ´Â´Ù
-	; Ãà¼Ò¿Í »şÇÂÀ» Ãß°¡ÇÔ
+	;Snag It ì´ ë–´ì„ ë•Œ Ctrl S ë¥¼ ëˆŒëŸ¬ì„œ ì €ì¥í•˜ê³  Ctrl Wë¡œ ë‹«ëŠ”ë‹¤
+	; ì¶•ì†Œì™€ ìƒ¤í”ˆì„ ì¶”ê°€í•¨
 	;IfWinExist, Snagit Editor
 	WinWait, Snagit Editor
 		WinActivate
 	Sleep 500
 
-	;snag it editor ³»ÀÇ ¸®»çÀÌÁî ´ÜÃàÅ° ´©¸§ r
+	;snag it editor ë‚´ì˜ ë¦¬ì‚¬ì´ì¦ˆ ë‹¨ì¶•í‚¤ ëˆ„ë¦„ r
 	Send {r}	
 	Sleep 50
 
@@ -1593,7 +3958,7 @@ return
 	Send {Enter}
 	Sleep 200 
 
-	;75%·Î »şÇÂÀ» ¶§¸² ´ÜÃàÅ° s
+	;75%ë¡œ ìƒ¤í”ˆì„ ë•Œë¦¼ ë‹¨ì¶•í‚¤ s
 	Send {s}
 	Sleep 50	
 	WinWait, Sharpen 
@@ -1621,8 +3986,9 @@ return
 	IfWinExist, Save As
 		WinActivate
 	Sleep 500
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2332, 357, 0, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2332, 357, 0, R
+	MouseMove, 2332 - 1920, 357, 0
 	Sleep 300
 	Send {LButton Down}
 	Sleep 20
@@ -1648,37 +4014,85 @@ return
 	Send {w Up}
 	Sleep 2000 
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
 	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
 	Sleep 100
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2555, 130, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2555, 130, 5, R
+	MouseMove, 2555 - 1920, 130, 5
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+
+
+
+    ;<--ìƒˆíƒ­ì— ë„ìš°ê¸°ë¡œ ë°”ë€Œë©´ì„œ ì„ì‹œë¡œ ë³€ê²½
+    /*
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
 	Send {LButton}
 	Sleep 1200
+    */
+    /*
+    ; ìƒˆíƒ­ìœ¼ë¡œ ì—´ë¦° ì˜¬ë¦¬ê¸° ë²„íŠ¼ ëˆ„ë¥´ê¸°
+    Sleep 2400 
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+    */
+    ; ìœˆ10
+    Sleep 4000 
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 475, 145, 5, R
+	MouseMove, 475, 145, 5
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    
 
+	WinWait, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+	;WinWait, ì—´ê¸°|blog.upphoto
 	;WinWait, blog.upphoto
-	WinWait, ¿­±â|blog.upphoto
+	IfWinExist, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+	;IfWinExist, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto
-	IfWinExist, ¿­±â|blog.upphoto
+		WinActivate
+	Sleep 400
+	
+	Send {1}{.}{p}{n}{g}
+    /*
+    Sleep 500
+	IfWinExist, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
 		WinActivate
 	Sleep 700
-	
-	Send {1}{.}{p}{n}{g}{Enter}
-	Sleep 800
+    Send {Tab}{Tab}{Space}
+    */
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1195, 506, 5, R
+	MouseMove, 1195, 506, 5
+    Send {LButton} 
+	;Sleep 1300
+	Sleep 2500
 
+
+    ;ì˜¬ë¦¬ê¸° ë²„íŠ¼ í´ë¦­
+    ;ìœˆ10
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1693, 150, 5, R
+	MouseMove, 1693, 150, 5
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;<-- ìƒˆíƒ­ìœ¼ë¡œ ì—´ê¸°ë¡œ ë³€ê²½ë˜ë©´ì„œ ì„ì‹œ êµì²´
+    /*
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1957, 17, 5, R
 	Sleep 100
@@ -1689,11 +4103,20 @@ return
 	MouseMove, 2707, 690, 5, R
 	Sleep 100
 	Send {LButton}
+    */
+    /*
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1190, 732, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+    */
+
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 800
 
-	;¿·¿¡ ÀÏºÀµµ ¿Ã·Á¾ß ÇÏ¹Ç·Î ¶óÀÎÀ» ³Ñ±âÁö ¾Ê´Â´Ù
+	;ì˜†ì— ì¼ë´‰ë„ ì˜¬ë ¤ì•¼ í•˜ë¯€ë¡œ ë¼ì¸ì„ ë„˜ê¸°ì§€ ì•ŠëŠ”ë‹¤
 	;Send {Enter}
 
 
@@ -1702,9 +4125,9 @@ return
 
 
 
-	;F9 ÀÏºÀ ÆÄÆ®
+	;F9 ì¼ë´‰ íŒŒíŠ¸
 
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
@@ -1720,25 +4143,28 @@ return
 	Send {PrintScreen Up}
 
 	Sleep 700
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2490 + 200, 50, 5, R ; 200ÇÈ¼¿ °¡·Î ÁÙÀÓ
+	;MouseMove, -4000, -4000, 0, R
+    ;íˆ´ë°” ë‚´ë¦¼ìœ¼ë¡œ ì¸í•´ yì¶• ì˜¬ë¦¼
+	;MouseMove, 2490 + 200, 50, 5, R ; 200í”½ì…€ ê°€ë¡œ ì¤„ì„
+	;MouseMove, 2490 + 200, 50 - 27, 5, R ; 200í”½ì…€ ê°€ë¡œ ì¤„ì„
+	MouseMove, 2490 + 200 - 1920, 50 - 27, 5 ; 200í”½ì…€ ê°€ë¡œ ì¤„ì„
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
-	MouseMove, 899 - 200, 463, 5, R ; °¡·Î 200ÇÈ¼¿ ÁÙÀÓ
+	MouseMove, 899 - 200, 463, 5, R ; ê°€ë¡œ 200í”½ì…€ ì¤„ì„
 	Sleep 100
 	Send {LButton Up}
 
 
 
-	;Snag It ÀÌ ¶¹À» ¶§ Ctrl S ¸¦ ´­·¯¼­ ÀúÀåÇÏ°í Ctrl W·Î ´İ´Â´Ù
-	; Ãà¼Ò¿Í »şÇÂÀ» Ãß°¡ÇÔ
+	;Snag It ì´ ë–´ì„ ë•Œ Ctrl S ë¥¼ ëˆŒëŸ¬ì„œ ì €ì¥í•˜ê³  Ctrl Wë¡œ ë‹«ëŠ”ë‹¤
+	; ì¶•ì†Œì™€ ìƒ¤í”ˆì„ ì¶”ê°€í•¨
 	;IfWinExist, Snagit Editor
 	WinWait, Snagit Editor
 		WinActivate
 	Sleep 500
 
-	;snag it editor ³»ÀÇ ¸®»çÀÌÁî ´ÜÃàÅ° ´©¸§ r
+	;snag it editor ë‚´ì˜ ë¦¬ì‚¬ì´ì¦ˆ ë‹¨ì¶•í‚¤ ëˆ„ë¦„ r
 	Send {r}	
 	Sleep 50
 
@@ -1775,7 +4201,7 @@ return
 	Send {Enter}
 	Sleep 200 
 
-	;75%·Î »şÇÂÀ» ¶§¸² ´ÜÃàÅ° s
+	;75%ë¡œ ìƒ¤í”ˆì„ ë•Œë¦¼ ë‹¨ì¶•í‚¤ s
 	Send {s}
 	Sleep 50	
 	WinWait, Sharpen 
@@ -1793,7 +4219,7 @@ return
 	Sleep 500 
 
 
-	;Snag It ÀÌ ¶¹À» ¶§ Ctrl S ¸¦ ´­·¯¼­ ÀúÀåÇÏ°í Ctrl W·Î ´İ´Â´Ù
+	;Snag It ì´ ë–´ì„ ë•Œ Ctrl S ë¥¼ ëˆŒëŸ¬ì„œ ì €ì¥í•˜ê³  Ctrl Wë¡œ ë‹«ëŠ”ë‹¤
 	;IfWinExist, Snagit Editor
 	Send {LCtrl Down}
 	Send {s Down}
@@ -1806,8 +4232,9 @@ return
 	IfWinExist, Save As
 		WinActivate
 	Sleep 500
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2332, 357, 0, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2332, 357, 0, R
+	MouseMove, 2332 - 1920, 357, 0
 	Sleep 300
 	Send {LButton Down}
 	Sleep 20
@@ -1833,37 +4260,81 @@ return
 	Send {w Up}
 	Sleep 2000 
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
 	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
 	Sleep 100
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2555, 130, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2555, 130, 5, R
+	MouseMove, 2555 - 1920, 130, 5
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+
+
+
+
+    ;<--ìƒˆíƒ­ì— ë„ìš°ê¸°ë¡œ ë°”ë€Œë©´ì„œ ì„ì‹œë¡œ ë³€ê²½
+    /*
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
 	Send {LButton}
 	Sleep 1200
+    */
+    /* 
+    ; ìƒˆíƒ­ìœ¼ë¡œ ì—´ë¦° ì˜¬ë¦¬ê¸° ë²„íŠ¼ ëˆ„ë¥´ê¸°
+    Sleep 2400 
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+    */
+    ; ìœˆ10
+    Sleep 4000 
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 475, 145, 5, R
+	MouseMove, 475, 145, 5
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    
 
+	WinWait, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+	;WinWait, ì—´ê¸°|blog.upphoto
 	;WinWait, blog.upphoto
-	WinWait, ¿­±â|blog.upphoto
-	;IfWinExist, blog.upphoto 
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+	;IfWinExist, ì—´ê¸°|blog.upphoto
+	;IfWinExist, blog.upphoto
 		WinActivate
-	Sleep 700
+	Sleep 400
 	
-	Send {1}{.}{p}{n}{g}{Enter}
-	Sleep 800
+	Send {1}{.}{p}{n}{g}
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1195, 506, 5, R
+	MouseMove, 1195, 506, 5
+    Send {LButton} 
+	;Sleep 1300
+	Sleep 2500
 
+
+
+    ;ì˜¬ë¦¬ê¸° ë²„íŠ¼ í´ë¦­
+    ;ìœˆ10
+	;MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1693, 150, 5, R
+	MouseMove, 1693, 150, 5
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+
+    ;<-- ìƒˆíƒ­ìœ¼ë¡œ ì—´ê¸°ë¡œ ë³€ê²½ë˜ë©´ì„œ ì„ì‹œ êµì²´
+    /*
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1957, 17, 5, R
 	Sleep 100
@@ -1874,6 +4345,15 @@ return
 	MouseMove, 2707, 690, 5, R
 	Sleep 100
 	Send {LButton}
+    */
+    /*
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1190, 732, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+    */
+
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 800
@@ -1881,16 +4361,19 @@ return
 
 	Sleep 800
 
+    Send {Enter}
+
 	return
+
 }
 	
-;Ãß°¡
-; 15ºĞºÀ ¹× ÀÏºÀ Ãà¼Ò ¾÷·Îµå ½ÃÄö½º ¼¼Æ® (½ºÄ¶ÇÎ ÀÏÁö ¾²¸é¼­ Ãß°¡ÇÔ)
+;ì¶”ê°€
+; 15ë¶„ë´‰ ë° ì¼ë´‰ ì¶•ì†Œ ì—…ë¡œë“œ ì‹œí€€ìŠ¤ ì„¸íŠ¸ (ìŠ¤ìº˜í•‘ ì¼ì§€ ì“°ë©´ì„œ ì¶”ê°€í•¨)
 #!F5::
 {
-	;³ĞÀº 15ºĞ Ãà¼ÒÄ¸ÃÄ/¾÷·Îµå
+	;ë„“ì€ 15ë¶„ ì¶•ì†Œìº¡ì³/ì—…ë¡œë“œ
 	;F11
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
@@ -1907,22 +4390,23 @@ return
 
 	Sleep 700
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1009 + 350 - 137, 613, 5, R  ;350 ÇÈ¼¿ÁÙÀÓ, ±×¸®°í Ã¼°áÃ¢ ¶§¹®¿¡ ÁÂÃøÀ¸·Î 137¸¸Å­ ÀÌµ¿
+	;MouseMove, 1009 + 350 - 137, 613, 5, R  ;350 í”½ì…€ì¤„ì„, ê·¸ë¦¬ê³  ì²´ê²°ì°½ ë•Œë¬¸ì— ì¢Œì¸¡ìœ¼ë¡œ 137ë§Œí¼ ì´ë™
+	MouseMove, 1920 + 1340 , 580, 5, R  ;í˜¸ê°€ê±°ë˜ ì„¸íŒ…ìœ¼ë¡œì„œ ìš°ì¸¡ ëª¨ë‹ˆí„°ë¡œ ì˜®ê¹€
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
-	MouseMove, 895 - 350, 357, 5, R ;350 ÇÈ¼¿ÁÙÀÓ
+	MouseMove, 895 - 350, 357, 5, R ;350 í”½ì…€ì¤„ì„
 	Sleep 100
 	Send {LButton Up}
 
-	;Snag It ÀÌ ¶¹À» ¶§ Ctrl S ¸¦ ´­·¯¼­ ÀúÀåÇÏ°í Ctrl W·Î ´İ´Â´Ù
-	; Ãà¼Ò¿Í »şÇÂÀ» Ãß°¡ÇÔ
+	;Snag It ì´ ë–´ì„ ë•Œ Ctrl S ë¥¼ ëˆŒëŸ¬ì„œ ì €ì¥í•˜ê³  Ctrl Wë¡œ ë‹«ëŠ”ë‹¤
+	; ì¶•ì†Œì™€ ìƒ¤í”ˆì„ ì¶”ê°€í•¨
 	;IfWinExist, Snagit Editor
 	WinWait, Snagit Editor
 		WinActivate
 	Sleep 500
 
-	;snag it editor ³»ÀÇ ¸®»çÀÌÁî ´ÜÃàÅ° ´©¸§ r
+	;snag it editor ë‚´ì˜ ë¦¬ì‚¬ì´ì¦ˆ ë‹¨ì¶•í‚¤ ëˆ„ë¦„ r
 	Send {r}	
 	Sleep 50
 
@@ -1959,7 +4443,7 @@ return
 	Send {Enter}
 	Sleep 200 
 
-	;75%·Î »şÇÂÀ» ¶§¸² ´ÜÃàÅ° s
+	;75%ë¡œ ìƒ¤í”ˆì„ ë•Œë¦¼ ë‹¨ì¶•í‚¤ s
 	Send {s}
 	Sleep 50	
 	WinWait, Sharpen 
@@ -2014,7 +4498,7 @@ return
 	Send {w Up}
 	Sleep 2000 
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
@@ -2024,11 +4508,11 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
@@ -2036,9 +4520,9 @@ return
 	Sleep 1200
 
 	;WinWait, blog.upphoto
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
 		WinActivate
 	Sleep 700
 	
@@ -2059,7 +4543,7 @@ return
 		WinActivate
 	Sleep 800
 
-	;¿·¿¡ ÀÏºÀµµ ¿Ã·Á¾ß ÇÏ¹Ç·Î ¶óÀÎÀ» ³Ñ±âÁö ¾Ê´Â´Ù
+	;ì˜†ì— ì¼ë´‰ë„ ì˜¬ë ¤ì•¼ í•˜ë¯€ë¡œ ë¼ì¸ì„ ë„˜ê¸°ì§€ ì•ŠëŠ”ë‹¤
 	;Send {Enter}
 
 
@@ -2068,9 +4552,9 @@ return
 
 
 
-	;F9 ÀÏºÀ ÆÄÆ®
+	;F9 ì¼ë´‰ íŒŒíŠ¸
 
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
@@ -2087,24 +4571,24 @@ return
 
 	Sleep 700
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2490 + 200, 50, 5, R ; 200ÇÈ¼¿ °¡·Î ÁÙÀÓ
+	MouseMove, 2490 + 200, 50, 5, R ; 200í”½ì…€ ê°€ë¡œ ì¤„ì„
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
-	MouseMove, 899 - 200, 463, 5, R ; °¡·Î 200ÇÈ¼¿ ÁÙÀÓ
+	MouseMove, 899 - 200, 463, 5, R ; ê°€ë¡œ 200í”½ì…€ ì¤„ì„
 	Sleep 100
 	Send {LButton Up}
 
 
 
-	;Snag It ÀÌ ¶¹À» ¶§ Ctrl S ¸¦ ´­·¯¼­ ÀúÀåÇÏ°í Ctrl W·Î ´İ´Â´Ù
-	; Ãà¼Ò¿Í »şÇÂÀ» Ãß°¡ÇÔ
+	;Snag It ì´ ë–´ì„ ë•Œ Ctrl S ë¥¼ ëˆŒëŸ¬ì„œ ì €ì¥í•˜ê³  Ctrl Wë¡œ ë‹«ëŠ”ë‹¤
+	; ì¶•ì†Œì™€ ìƒ¤í”ˆì„ ì¶”ê°€í•¨
 	;IfWinExist, Snagit Editor
 	WinWait, Snagit Editor
 		WinActivate
 	Sleep 500
 
-	;snag it editor ³»ÀÇ ¸®»çÀÌÁî ´ÜÃàÅ° ´©¸§ r
+	;snag it editor ë‚´ì˜ ë¦¬ì‚¬ì´ì¦ˆ ë‹¨ì¶•í‚¤ ëˆ„ë¦„ r
 	Send {r}	
 	Sleep 50
 
@@ -2141,7 +4625,7 @@ return
 	Send {Enter}
 	Sleep 200 
 
-	;75%·Î »şÇÂÀ» ¶§¸² ´ÜÃàÅ° s
+	;75%ë¡œ ìƒ¤í”ˆì„ ë•Œë¦¼ ë‹¨ì¶•í‚¤ s
 	Send {s}
 	Sleep 50	
 	WinWait, Sharpen 
@@ -2159,7 +4643,7 @@ return
 	Sleep 500 
 
 
-	;Snag It ÀÌ ¶¹À» ¶§ Ctrl S ¸¦ ´­·¯¼­ ÀúÀåÇÏ°í Ctrl W·Î ´İ´Â´Ù
+	;Snag It ì´ ë–´ì„ ë•Œ Ctrl S ë¥¼ ëˆŒëŸ¬ì„œ ì €ì¥í•˜ê³  Ctrl Wë¡œ ë‹«ëŠ”ë‹¤
 	;IfWinExist, Snagit Editor
 	Send {LCtrl Down}
 	Send {s Down}
@@ -2199,7 +4683,7 @@ return
 	Send {w Up}
 	Sleep 2000 
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
@@ -2209,11 +4693,11 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
@@ -2221,9 +4705,9 @@ return
 	Sleep 1200
 
 	;WinWait, blog.upphoto
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto 
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
 		WinActivate
 	Sleep 700
 	
@@ -2251,11 +4735,11 @@ return
 	return
 
 }
-; ÀÏ15ºĞ1ºĞ ¸ğµç ºÀ Ä¸ÃÄ ¾÷·Îµå ½ÃÄö½º ¼¼Æ®
+; ì¼15ë¶„1ë¶„ ëª¨ë“  ë´‰ ìº¡ì³ ì—…ë¡œë“œ ì‹œí€€ìŠ¤ ì„¸íŠ¸
 #!F8::
 {
 	;F9
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
@@ -2281,7 +4765,7 @@ return
 	Send {LButton Up}
 
 
-	;Snag It ÀÌ ¶¹À» ¶§ Ctrl S ¸¦ ´­·¯¼­ ÀúÀåÇÏ°í Ctrl W·Î ´İ´Â´Ù
+	;Snag It ì´ ë–´ì„ ë•Œ Ctrl S ë¥¼ ëˆŒëŸ¬ì„œ ì €ì¥í•˜ê³  Ctrl Wë¡œ ë‹«ëŠ”ë‹¤
 	;IfWinExist, Snagit Editor
 	WinWait, Snagit Editor
 		WinActivate
@@ -2324,7 +4808,7 @@ return
 	Send {w Up}
 	Sleep 2000 
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
@@ -2334,11 +4818,11 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
@@ -2346,9 +4830,9 @@ return
 	Sleep 1200
 
 	;WinWait, blog.upphoto
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto 
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
 		WinActivate
 	Sleep 700
 	
@@ -2378,7 +4862,7 @@ return
 
 
 	;F10
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
@@ -2403,7 +4887,7 @@ return
 	Sleep 100
 	Send {LButton Up}
 
-	;Snag It ÀÌ ¶¹À» ¶§ Ctrl S ¸¦ ´­·¯¼­ ÀúÀåÇÏ°í Ctrl W·Î ´İ´Â´Ù
+	;Snag It ì´ ë–´ì„ ë•Œ Ctrl S ë¥¼ ëˆŒëŸ¬ì„œ ì €ì¥í•˜ê³  Ctrl Wë¡œ ë‹«ëŠ”ë‹¤
 	;IfWinExist, Snagit Editor
 	WinWait, Snagit Editor
 		WinActivate
@@ -2447,7 +4931,7 @@ return
 	Send {w Up}
 	Sleep 2000 
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù	
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤	
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
@@ -2457,11 +4941,11 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
@@ -2470,9 +4954,9 @@ return
 
 	
 	;WinWait, blog.upphoto
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
 		WinActivate
 	Sleep 700
 	
@@ -2501,7 +4985,7 @@ return
 
 
 	;F11
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
@@ -2526,7 +5010,7 @@ return
 	Sleep 100
 	Send {LButton Up}
 
-	;Snag It ÀÌ ¶¹À» ¶§ Ctrl S ¸¦ ´­·¯¼­ ÀúÀåÇÏ°í Ctrl W·Î ´İ´Â´Ù
+	;Snag It ì´ ë–´ì„ ë•Œ Ctrl S ë¥¼ ëˆŒëŸ¬ì„œ ì €ì¥í•˜ê³  Ctrl Wë¡œ ë‹«ëŠ”ë‹¤
 	;IfWinExist, Snagit Editor
 	WinWait, Snagit Editor
 		WinActivate
@@ -2569,7 +5053,7 @@ return
 	Send {w Up}
 	Sleep 2000 
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
@@ -2579,11 +5063,11 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
@@ -2591,9 +5075,9 @@ return
 	Sleep 1200
 
 	;WinWait, blog.upphoto
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
 		WinActivate
 	Sleep 700
 	
@@ -2622,7 +5106,7 @@ return
 
 
 	;F12
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
@@ -2700,11 +5184,11 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
@@ -2712,9 +5196,9 @@ return
 	Sleep 1200
 
 	;WinWait, blog.upphoto
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
 		WinActivate
 	Sleep 1000
 	
@@ -2743,7 +5227,7 @@ return
 #!F9::
 {
 	;F9
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
@@ -2769,7 +5253,7 @@ return
 	Send {LButton Up}
 
 
-	;Snag It ÀÌ ¶¹À» ¶§ Ctrl S ¸¦ ´­·¯¼­ ÀúÀåÇÏ°í Ctrl W·Î ´İ´Â´Ù
+	;Snag It ì´ ë–´ì„ ë•Œ Ctrl S ë¥¼ ëˆŒëŸ¬ì„œ ì €ì¥í•˜ê³  Ctrl Wë¡œ ë‹«ëŠ”ë‹¤
 	;IfWinExist, Snagit Editor
 	WinWait, Snagit Editor
 		WinActivate
@@ -2812,7 +5296,7 @@ return
 	Send {w Up}
 	Sleep 2000 
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
@@ -2822,11 +5306,11 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
@@ -2834,9 +5318,9 @@ return
 	Sleep 1200
 
 	;WinWait, blog.upphoto
-	WinWait, ¿­±â|blog.upphoto 
+	WinWait, ì—´ê¸°|blog.upphoto 
 	;IfWinExist, blog.upphoto
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
 		WinActivate
 	Sleep 700
 	
@@ -2868,7 +5352,7 @@ return
 {
 
 	;F10
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
@@ -2893,7 +5377,7 @@ return
 	Sleep 100
 	Send {LButton Up}
 
-	;Snag It ÀÌ ¶¹À» ¶§ Ctrl S ¸¦ ´­·¯¼­ ÀúÀåÇÏ°í Ctrl W·Î ´İ´Â´Ù
+	;Snag It ì´ ë–´ì„ ë•Œ Ctrl S ë¥¼ ëˆŒëŸ¬ì„œ ì €ì¥í•˜ê³  Ctrl Wë¡œ ë‹«ëŠ”ë‹¤
 	;IfWinExist, Snagit Editor
 	WinWait, Snagit Editor
 		WinActivate
@@ -2937,7 +5421,7 @@ return
 	Send {w Up}
 	Sleep 2000 
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù	
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤	
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
@@ -2947,20 +5431,20 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
 	Send {LButton}
 	Sleep 1200
 
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, ì—´ê¸°|blog.upphoto
 	;WinWait, blog.upphoto
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto
 		WinActivate
 	Sleep 700
@@ -2991,7 +5475,7 @@ return
 {
 
 	;F11
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
@@ -3008,7 +5492,8 @@ return
 
 	Sleep 700
 	MouseMove, -4000, -4000, 0, R
-	MouseMove, 1009, 613, 5, R
+	;MouseMove, 1009, 613, 5, R
+	MouseMove, 1920 + 1340 , 580, 5, R  ;í˜¸ê°€ê±°ë˜ ì„¸íŒ…ìœ¼ë¡œì„œ ìš°ì¸¡ ëª¨ë‹ˆí„°ë¡œ ì˜®ê¹€
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
@@ -3016,7 +5501,7 @@ return
 	Sleep 100
 	Send {LButton Up}
 
-	;Snag It ÀÌ ¶¹À» ¶§ Ctrl S ¸¦ ´­·¯¼­ ÀúÀåÇÏ°í Ctrl W·Î ´İ´Â´Ù
+	;Snag It ì´ ë–´ì„ ë•Œ Ctrl S ë¥¼ ëˆŒëŸ¬ì„œ ì €ì¥í•˜ê³  Ctrl Wë¡œ ë‹«ëŠ”ë‹¤
 	;IfWinExist, Snagit Editor
 	WinWait, Snagit Editor
 		WinActivate
@@ -3059,7 +5544,7 @@ return
 	Send {w Up}
 	Sleep 2000 
 
-	;ÆÄÆøÀ¸·Î ÀüÈ¯ÇÏ¿© »çÁø/¿­±â 1.png / ¿Ã¸®±â ¸¦ ´©¸¥´Ù
+	;íŒŒí­ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ì‚¬ì§„/ì—´ê¸° 1.png / ì˜¬ë¦¬ê¸° ë¥¼ ëˆ„ë¥¸ë‹¤
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 100
@@ -3069,20 +5554,20 @@ return
 	MouseMove, 2555, 130, 5, R
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
 	Send {LButton}
 	Sleep 1200
 
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, ì—´ê¸°|blog.upphoto
 	;WinWait, blog.upphoto
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto
 		WinActivate
 	Sleep 700
@@ -3115,13 +5600,14 @@ return
 {
 
 	;F12
-	;Ä¸ÃÄ ¹öÆ°À» ´©¸£°í ¿µ¿ª ¼±ÅÃÀ» ÇÑ´Ù
+	;ìº¡ì³ ë²„íŠ¼ì„ ëˆ„ë¥´ê³  ì˜ì—­ ì„ íƒì„ í•œë‹¤
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate
 	Sleep 50
 
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2210, 700, 5 , R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2210, 700, 5 , R
+	MouseMove, 2210 - 1920, 700, 5
 	MouseMove, 779, -120, 2 , R
 	
 	Send {LShift Down}
@@ -3131,8 +5617,11 @@ return
 	Send {PrintScreen Up}
 
 	Sleep 700
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2110, 600, 5 , R
+	;MouseMove, -4000, -4000, 0, R
+    ;íˆ´ë°” ë‚´ë¦¼ìœ¼ë¡œ ì¸í•´ yì¶• ì˜¬ë¦¼
+	;MouseMove, 2110, 600, 5 , R
+	;MouseMove, 2110, 600 - 27, 5 , R
+	MouseMove, 2110 - 1920, 600 - 27, 5
 	Sleep 100
 	Send {LButton Down}
 	Sleep 100
@@ -3156,8 +5645,9 @@ return
 	IfWinExist, Save As
 		WinActivate
 	Sleep 500
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2332, 357, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2332, 357, 5, R
+	MouseMove, 2332 - 1920, 357, 5
 
 	Sleep 20
 	Send {LButton Down}
@@ -3189,31 +5679,76 @@ return
 	Sleep 100
 	WinMove, ahk_class MozillaWindowClass,,400, 0, 1400, 1050
 	Sleep 100
-	MouseMove, -4000, -4000, 0, R
-	MouseMove, 2555, 130, 5, R
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 2555, 130, 5, R
+	MouseMove, 2555 - 1920, 130, 5
 	Send {LButton}
 
-	WinWait, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
-	IfWinExist, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox
+    ;<--ìƒˆíƒ­ì— ë„ìš°ê¸°ë¡œ ë°”ë€Œë©´ì„œ ì„ì‹œë¡œ ë³€ê²½
+    /*
+	WinWait, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
+	IfWinExist, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox
 		WinActivate
 	Sleep 100
-	WinMove, ³×ÀÌ¹ö Æ÷Åä¾÷·Î´õ - Mozilla Firefox, 0, 0 
+	WinMove, ë„¤ì´ë²„ í¬í† ì—…ë¡œë” - Mozilla Firefox, 0, 0 
 	Sleep 2000
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 2495, 130, 5, R
 	Send {LButton}
 	Sleep 1200
+    */
+    ; ìƒˆíƒ­ìœ¼ë¡œ ì—´ë¦° ì˜¬ë¦¬ê¸° ë²„íŠ¼ ëˆ„ë¥´ê¸°
+    /*
+    Sleep 2400 
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 977, 175, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+    */
+    ; ìœˆ10
+    Sleep 4000 
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 475, 145, 5, R
+	MouseMove, 475, 145, 5
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    
 
-	WinWait, ¿­±â|blog.upphoto
+	WinWait, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+	;WinWait, ì—´ê¸°|blog.upphoto
 	;WinWait, blog.upphoto
-	IfWinExist, ¿­±â|blog.upphoto
+	IfWinExist, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+	;IfWinExist, ì—´ê¸°|blog.upphoto
 	;IfWinExist, blog.upphoto
 		WinActivate
-	Sleep 1000
+	Sleep 400
 	
-	Send {1}{.}{p}{n}{g}{Enter}
-	Sleep 800
+	Send {1}{.}{p}{n}{g}
+    /*
+	IfWinExist, íŒŒì¼ ì—…ë¡œë“œ|ì—´ê¸°|blog.upphoto
+		WinActivate
+    Sleep 700
+    Send {Tab}{Tab}{Space}
+    */
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1195, 506, 5, R
+	MouseMove, 1195, 506, 5
+    Send {LButton} 
+	;Sleep 1000
+	Sleep 2500
 
+
+    ;ì˜¬ë¦¬ê¸° ë²„íŠ¼ í´ë¦­
+    ;ìœˆ10
+	;MouseMove, -4000, -4000, 0, R
+	;MouseMove, 1920 + 1693, 150, 5, R
+	MouseMove, 1693, 150, 5
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+
+    ;ì´ˆì•ˆ
+    /*
 	MouseMove, -4000, -4000, 0, R
 	MouseMove, 1957, 17, 5, R
 	Sleep 100
@@ -3224,6 +5759,18 @@ return
 	MouseMove, 2707, 690, 5, R
 	Sleep 100
 	Send {LButton}
+    */
+    ;<-- ìƒˆíƒ­ìœ¼ë¡œ ì—´ê¸°ë¡œ ë³€ê²½ë˜ë©´ì„œ ì„ì‹œ êµì²´
+    /*
+	MouseMove, -4000, -4000, 0, R
+	MouseMove, 1920 + 1190, 732, 5, R
+    ;MouseClick, Left, 977, 175
+    Send {LButton} 
+    ;-->
+    */
+
+
+
 	IfWinExist, ahk_class MozillaWindowClass
 		WinActivate
 	Sleep 800
@@ -3236,7 +5783,7 @@ return
 
 /*
 ^!F2::
-{	;F2 / ÀÏ
+{	;F2 / ì¼
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate 
 	Sleep 200
@@ -3258,7 +5805,7 @@ return
 return
 
 ^!F3::
-{	;F3 / ºĞ
+{	;F3 / ë¶„
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate 
 	Sleep 200
@@ -3280,7 +5827,7 @@ return
 return
 
 ^!F7::
-{	;F7 / ÀÜ°í
+{	;F7 / ì”ê³ 
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate 
 	Sleep 200
@@ -3302,7 +5849,7 @@ return
 return
 
 ^!F8::
-{	;F8 / ´Ù¿ì
+{	;F8 / ë‹¤ìš°
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate 
 	Sleep 200
@@ -3324,7 +5871,7 @@ return
 return
 
 ^!F9::
-{	;F9 / ¼±¹°
+{	;F9 / ì„ ë¬¼
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate 
 	Sleep 200
@@ -3346,7 +5893,7 @@ return
 return
 
 ^!F10::
-{	;F10 / ÄÚ½º´Ú
+{	;F10 / ì½”ìŠ¤ë‹¥
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate 
 	Sleep 200
@@ -3368,7 +5915,7 @@ return
 return
 
 ^!F5::
-{	;F5 / ´çÀÏÃßÀÌ
+{	;F5 / ë‹¹ì¼ì¶”ì´
 	IfWinExist, ahk_class _KiWoomClass
 		WinActivate 
 	Sleep 200
@@ -3390,7 +5937,7 @@ return
 return
 
 ^!/::
-{	;/ / °Ô½Ã
+{	;/ / ê²Œì‹œ
 	Send {LCtrl down}
 	Sleep 100
 	Send {LAlt down}
