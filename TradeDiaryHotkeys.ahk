@@ -8,6 +8,26 @@
 Coordmode, Mouse, Screen
 ;CoordMode, ToolTip|Pixel|Mouse|Caret|Menu [, Screen|Window|Client]
 
+
+
+; 8282호가창에서 클릭지점 오류가 자꾸 나서 보완장치를 마련하기로 했습니다.
+; 제대로 된 위치 위로 올라가면 빨간, 혹은 파란 세로선이 가격 양쪽으로 나타납니다
+Gui,  -Caption +ToolWindow +AlwaysOnTop
+;Gui, Color, Red
+;Gui, Show, Hide NA x-473 y134 h300 w5
+;1684 - 1920
+;1920 - 1447, 134, 1452, 432
+
+/*
+;Gui, New, ,Blues
+Gui, New, -Caption +ToolWindow +AlwaysOnTop, Blues
+Gui, Color, Blue
+Gui, Show, Hide NA x-747 y180 h210 w25, Blues
+*/
+
+
+SetTimer, timer_proc, 100
+
 ; S 버튼을 스페셜 커맨드 키로 사용하기 위한 플래그
 s_toggle := 0
 
@@ -407,7 +427,6 @@ LAlt & ~1::
 
 	return
 }
-return
 
 ;마우스 스크롤 휠 라인수 수정 1 --> 5
 #!Down::
@@ -426,6 +445,7 @@ return
 	Send, {5}
 	Sleep 100
 	Send, {Enter}
+    return
 	
 /*
 	;한영키가 눌린지 안눌린지 모르니 영어 한글 두번 반복하면 됨
@@ -469,7 +489,6 @@ return
 	return
 */
 }
-return
 
 ;일봉차트 사이즈 유타일리식 디폴트화
 #!Left::
@@ -522,7 +541,6 @@ return
 	Send {Enter}
 	return
 }
-return
 
 ; win10 으로 업데이트후 할 필요없어보여 임시제거 
 
@@ -534,7 +552,6 @@ LWin & E::
 }
 
 
-return
 ; 관심종목 1
 #!z::
 {
@@ -550,7 +567,6 @@ return
 	;MouseClick, Left, 2058, 81
 	return
 }
-return
 
 ; 관심종목 2
 #!x::
@@ -568,7 +584,6 @@ return
 	;MouseClick, Left, 2095, 81 
 	return
 }
-return
 
 ; 잔고보기
 #!a::
@@ -579,7 +594,7 @@ return
 	MouseClick, Left, 875, 53
 	return
 }
-return
+
 ; 미체결보기
 #!s::
 {
@@ -590,7 +605,6 @@ return
 	return
 }
 
-return
 ; 당일매매보기
 #!d::
 {
@@ -601,7 +615,6 @@ return
 	return
 }
 
-return
 
 
 ; 선물지수보기
@@ -1220,20 +1233,25 @@ CheckPos(posX, posY)
     }
 
 
+
+
     ;--------------------------
 
     ;첫번째 호가 위치일 경우  
     ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
     ;else if (posX >= 0) and ( posX <= 615) and (posY <= 410)
     ;굵은폰트 및 호가창 몰아놓음으로 바뀐 좌표에 따라 로직 변경
-    else if (posX >= 627) and ( posX <= 935) and (posY <= 430)
+    ;else if (posX >= 627) and ( posX <= 935) and (posY <= 430)
+    ; 0998 순수체결거래 템플릿
+    else if (posX >= 628) and ( posX <= 890) and (posY <= 428)
     {
         ret := 1
     }
     ; 2nd 호가창 위치일 경우
     ;else if (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY <= 410)
     ;else if (posX >= 616) and ( posX <= 1225) and (posY <= 410)
-    else if (posX >= 936) and ( posX <= 1230) and (posY <= 430)
+    ;else if (posX >= 936) and ( posX <= 1230) and (posY <= 430)
+    else if (posX >= 930) and ( posX <= 1190) and (posY <= 428)
     {
         ret := 2
     }
@@ -1241,7 +1259,8 @@ CheckPos(posX, posY)
     ; 3rd 호가창 위치일 경우
     ;else if (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY <= 410)
     ;else if (posX >= 1226) and ( posX <= 1841) and (posY <= 410)
-    else if (posX >= 1231) and ( posX <= 1540) and (posY <= 430)
+    ;else if (posX >= 1231) and ( posX <= 1540) and (posY <= 430)
+    else if (posX >= 1235) and ( posX <= 1500) and (posY <= 428)
     {
         ;-->
         ret := 3
@@ -1250,15 +1269,20 @@ CheckPos(posX, posY)
     ; 4th 호가창 위치일 경우
     ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 411) and (posY <= 812)
     ;else if (posX >= 0) and ( posX <= 615) and (posY >= 411) and (posY <= 812)
-    else if (posX >= 1541) and ( posX <= 1848) and (posY <= 430)
+    ;else if (posX >= 1541) and ( posX <= 1848) and (posY <= 430)
+    else if (posX >= 1542) and ( posX <= 1805) and (posY <= 428)
     {
         ;-->
         ret := 4
     }
+
+
+
     ; 5th 호가창 위치일 경우
     ;else if (posX >= 1920 + 616) and ( posX <= 1920+ 1225) and (posY >= 411) and (posY <= 812)
     ;else if (posX >= 616) and ( posX <= 1225) and (posY >= 411) and (posY <= 812)
-    else if (posX >= 627) and ( posX <= 935) and (posY >= 431) and (posY <= 857)
+    ;else if (posX >= 627) and ( posX <= 935) and (posY >= 431) and (posY <= 857)
+    else if (posX >= 628) and ( posX <= 890) and (posY >= 433) and (posY <= 867)
     {
         ;-->
         ret := 5
@@ -1266,7 +1290,8 @@ CheckPos(posX, posY)
     ; 6th 호가창 위치일 경우
     ;else if (posX >= 1920 + 1226) and ( posX <= 1920+ 1841) and (posY >= 411) and (posY <= 812)
     ;else if (posX >= 1226) and ( posX <= 1841) and (posY >= 411) and (posY <= 812)
-    else if (posX >= 936) and ( posX <= 1230) and (posY >= 431) and (posY <= 857)
+    ;else if (posX >= 936) and ( posX <= 1230) and (posY >= 431) and (posY <= 857)
+    else if (posX >= 927) and ( posX <= 1190) and (posY >= 433) and (posY <= 867)
     {
         ;-->
         ret := 6
@@ -1274,7 +1299,8 @@ CheckPos(posX, posY)
     ; 7th 호가창 위치일 경우
     ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY >= 813)
     ;else if (posX >= 0) and ( posX <= 615) and (posY >= 813)
-    else if (posX >= 1231) and ( posX <= 1540) and (posY >= 431) and (posY <= 857)
+    ;else if (posX >= 1231) and ( posX <= 1540) and (posY >= 431) and (posY <= 857)
+    else if (posX >= 1234) and ( posX <= 1492) and (posY >= 433) and (posY <= 865)
     {
         ;-->
         ret := 7
@@ -1282,7 +1308,8 @@ CheckPos(posX, posY)
     ; 8th 호가창 위치일 경우
     ;else if (posX >= 1920 + 1226) and (posY >= 813) 
     ;else if (posX >= 1226) and (posY >= 813) 
-    else if (posX >= 1541) and ( posX <= 1848) and (posY >= 431) and (posY <= 857)
+    ;else if (posX >= 1541) and ( posX <= 1848) and (posY >= 431) and (posY <= 857)
+    else if (posX >= 1545) and ( posX <= 1803) and (posY >= 438) and (posY <= 870)
     {
         ;-->
         ret := 8
@@ -1317,6 +1344,7 @@ NumToRightUpPos(N)
 }
 
 ; [0999] 호가넘버를 전달받으면 해당 호가의 종목코드 위치의 x, y 좌표셋을 반납합니다
+; [0998] 순수체결창거래 템플릿에 따라 체결창으로 인해 종목명 위치 바뀜
 NumToSubjectPos(N)
 {
     Pos := {"x" : 0, "y" :0}
@@ -1324,35 +1352,43 @@ NumToSubjectPos(N)
     if (N == 1) 
         ;Pos := {"x" : 1920 + 30, "y" : 25}
         ;Pos := {"x" : 30, "y" : 25}
-        Pos := {"x" : 656, "y" : 23}
+        ;Pos := {"x" : 656, "y" : 23}
+        Pos := {"x" : 720, "y" : 28}
     else if (N == 2)
         ;Pos := {"x" : 1920 + 642, "y" : 25}
         ;Pos := {"x" : 642, "y" : 25}
-        Pos := {"x" : 961, "y" : 23}
+        ;Pos := {"x" : 961, "y" : 23}
+        Pos := {"x" : 1020, "y" : 28}
     else if (N == 3)
         ;Pos := {"x" : 1920 + 1260, "y" : 25}
         ;Pos := {"x" : 1260, "y" : 25}
-        Pos := {"x" : 1258, "y" : 23}
+        ;Pos := {"x" : 1258, "y" : 23}
+        Pos := {"x" : 1326, "y" : 28}
     else if (N == 4)
         ;Pos := {"x" : 1920 + 30, "y" : 425}
         ;Pos := {"x" : 30, "y" : 425}
-        Pos := {"x" : 1572, "y" : 23}
+        ;Pos := {"x" : 1572, "y" : 23}
+        Pos := {"x" : 1635, "y" : 28}
     else if (N == 5) 
         ;Pos := {"x" : 1920 + 642, "y" : 425}
         ;Pos := {"x" : 642, "y" : 425}
-        Pos := {"x" : 656, "y" : 450}
+        ;Pos := {"x" : 656, "y" : 450}
+        Pos := {"x" : 720, "y" : 447}
     else if (N == 6) 
         ;Pos := {"x" : 1920 + 1260, "y" : 425}
         ;Pos := {"x" : 1260, "y" : 425}
-        Pos := {"x" : 961, "y" : 450}
+        ;Pos := {"x" : 961, "y" : 450}
+        Pos := {"x" : 1020, "y" : 447}
     else if (N == 7) 
         ;Pos := {"x" : 1920 + 30, "y" : 825}
         ;Pos := {"x" : 30, "y" : 825}
-        Pos := {"x" : 1258, "y" : 450}
+        ;Pos := {"x" : 1258, "y" : 450}
+        Pos := {"x" : 1325, "y" : 450}
     else if (N == 8) 
         ;Pos := {"x" : 1920 + 1260, "y" : 825}
         ;Pos := {"x" : 1260, "y" : 825}
-        Pos := {"x" : 1572, "y" : 450}
+        ;Pos := {"x" : 1572, "y" : 450}
+        Pos := {"x" : 1630, "y" : 447}
     ;좌측상단 검색연동 현재가창
     else if (N == 88) 
         Pos := {"x" : 35, "y" : 27}
@@ -6131,3 +6167,28 @@ return
 }
 return
 */
+
+
+timer_proc:
+if (WinActive("ahk_class _NKHeroMainClass"))
+{
+    MouseGetPos, X, Y
+    if (X >= 1624 - 1920) and (X <= 1678 - 1920) and (Y >= 88) and (Y <= 463)
+    {
+        ;Gui, Show, NA
+        Gui, Color, Red
+        Gui, Show, Hide NA x-473 y134 h300 w5
+    }
+    else if (X >= 1200 - 1920) and (X <= 1252 - 1920) and (Y >= 120) and (Y <= 461)
+    {
+        Gui, Color, Blue
+        Gui, Show, Hide NA x-540 y134 h300 w5
+    }
+    else
+    {
+        Gui, Show, Hide
+    }
+}
+
+return
+

@@ -37,6 +37,8 @@ IfWinExist, ahk_class _NKHeroMainClass
 
 Sleep 5000
 
+Send, ^1
+
 
 
 
@@ -72,10 +74,29 @@ IfWinExist, ahk_class _NKHeroMainClass
     ;WinMove, ahk_class _NKHeroMainClass,,0, -1200, 1920, 1200
     Sleep 2000
 
+    ;ControlSend, , {Ctrl Down}{a}{Ctrl Up} , Utylee Asset
+    ;Send, ^a
+
+    /* 키움 종료 에러 때문에 멈춘상태동안 키떼는 UP입력이 들어가서 인지 아니면 너무 키입력이 빨라서인지
+    몰라서 일단 사람처럼 좀 느리게 하기로
+    */
+    Send, {Ctrl Down}
+    Sleep 200
+    Send, {] Down}
+    Sleep 200
+
+    Sleep 43000
+
+    Send, {] up}
+    Sleep 200
+    Send, {Ctrl up}
+    Sleep 200
+
 /*  에러때문에 여기서 정지하기로..
     SendInput, ^]
 
     Sleep 40000
+*/
 
 IfWinExist, ahk_class _NKHeroMainClass
 	WinActivate
@@ -93,13 +114,13 @@ Sleep 100
 
 ;1,2,3 조건 순차적으로 클릭
 ;영웅문4
+;익절 클릭
 MouseClick, Left, 60 - 1920, 541
 Sleep 100
 ; 잠시후 스탑로스 설정 창 닫기
 Sleep 500
 ;영웅문4
-MouseClick, Left, 942 - 1920, 22
+MouseClick, Left, 941 - 1920, 20
 
-*/
 
 
