@@ -6172,17 +6172,28 @@ return
 timer_proc:
 if (WinActive("ahk_class _NKHeroMainClass"))
 {
-    MouseGetPos, X, Y
-    if (X >= 1624 - 1920) and (X <= 1678 - 1920) and (Y >= 88) and (Y <= 463)
+    MouseGetPos, iX, iY
+    ;if (X >= 1624 - 1920) and (X <= 1678 - 1920) and (Y >= 88) and (Y <= 463)
+    if (iX >= 1600 - 1920) and (iX <= 1653 - 1920) and (iY >= 100) and (iY <= 457)
     {
         ;Gui, Show, NA
         Gui, Color, Red
-        Gui, Show, Hide NA x-473 y134 h300 w5
+        ;Gui, Show, Hide NA x-473 y134 h300 w5
+        ;newX := iX - 205
+        newX := iX - 161
+        ;Gui, Show, Hide NA x-495 y130 h300 w5
+        Gui, Show, Hide NA x%newX% y130 h300 w5
+        ;1920 - 1425,130, x, 428
     }
-    else if (X >= 1200 - 1920) and (X <= 1252 - 1920) and (Y >= 120) and (Y <= 461)
+    ;else if (X >= 1200 - 1920) and (X <= 1252 - 1920) and (Y >= 120) and (Y <= 461)
+    else if (iX >= 1175 - 1920) and (iX <= 1227 - 1920) and (iY >= 100) and (iY <= 457)
     {
         Gui, Color, Blue
-        Gui, Show, Hide NA x-540 y134 h300 w5
+        ;Gui, Show, Hide NA x-540 y134 h300 w5
+        newX := iX + 157
+        ;Gui, Show, Hide NA x-564 y130 h300 w5
+        Gui, Show, Hide NA x%newX% y130 h300 w5
+        ;1920 - 1356,130, x, 428
     }
     else
     {
