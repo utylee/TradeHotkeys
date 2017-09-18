@@ -15,6 +15,9 @@ s_toggle := 0
 slash_toggle := 0
 question_toggle := 0
 wintab_toggle := 0
+;lbutton 드래그 만으로 호가창 swap을 위한 변수들
+lbutton_down := 0
+clicked_num := 0
 
 ; 분봉<-->틱봉 간의 교환을 위한 변수
 toggle := 1
@@ -1210,6 +1213,8 @@ CheckPos(posX, posY)
         ret := 99
     }
 
+    ;--------------------------
+
     ;첫번째 호가 위치일 경우  
     ;else if (posX >= 1920) and ( posX <= 1920+ 615) and (posY <= 410)
     ;else if (posX >= 0) and ( posX <= 615) and (posY <= 410)
@@ -1462,6 +1467,52 @@ SwapWinProc(A, B)
     DragProc(pos_temp, pos_B)
     Sleep 20
 
+}
+
+;LButton 하나의 드래그 만으로 종목 스왑에 대해 리서치
+~LButton::
+{
+    MouseGetPos, posX, posY
+
+    cur := CheckPos(posX, posY)
+
+    if (cur == 0)
+    {
+        clicked_num := 0
+        return
+    }
+
+    clicked_num := cur
+    lbutton_down := 1
+
+    return
+}
+
+LButton Up::
+{
+    if (lbutton_down == 1)
+    {
+        ;MsgBox, lbutton_down
+        MouseGetPos, posX, posY
+        cur_num := CheckPos(posX, posY)
+
+        if (cur_num == 0 || clicked_num == 0)
+        {
+            clicked_num := 0
+            lbutton_down := 0
+            return
+        }
+
+        if (cur_num != clicked_num)
+        {
+            SwapWinProc(cur_num, clicked_num)
+        }
+
+    }
+    clicked_num := 0
+    lbutton_down := 0
+
+    return
 }
 
 LAlt & ~LButton::
