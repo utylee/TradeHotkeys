@@ -1526,6 +1526,8 @@ LButton Up::
             else
             {
                 SwapWinProc(cur_num, clicked_num)
+                Sleep 20
+                MouseMove, posX, posY
             }
         }
 
