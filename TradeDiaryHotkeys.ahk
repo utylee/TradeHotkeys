@@ -1213,6 +1213,13 @@ CheckPos(posX, posY)
         ret := 99
     }
 
+    ;(추가) 좌측상단 검색식 연동 차트를 우측 호가로 이동할 때를 대비해 그 창 포지션도 인식하도록 추가
+    else if (posX >= 5) and (posX <= 625) and (posY >= 10) and (posY <= 410)
+    {
+        ret := 88
+    }
+
+
     ;--------------------------
 
     ;첫번째 호가 위치일 경우  
@@ -1346,6 +1353,9 @@ NumToSubjectPos(N)
         ;Pos := {"x" : 1920 + 1260, "y" : 825}
         ;Pos := {"x" : 1260, "y" : 825}
         Pos := {"x" : 1572, "y" : 450}
+    ;좌측상단 검색연동 현재가창
+    else if (N == 88) 
+        Pos := {"x" : 35, "y" : 27}
 
     return Pos
 }
@@ -1505,7 +1515,18 @@ LButton Up::
 
         if (cur_num != clicked_num)
         {
-            SwapWinProc(cur_num, clicked_num)
+            ; 검색연동 현재가창을 드래그할 경우 스왑이 아닌 드래그를 실행
+            if (clicked_num == 88)
+            {
+                start := NumToSubjectPos(88)
+                target := NumToSubjectPos(cur_num)
+
+                DragProc(start, target)
+            }
+            else
+            {
+                SwapWinProc(cur_num, clicked_num)
+            }
         }
 
     }
